@@ -3,20 +3,6 @@
 #include <string.h>
 #include <math.h>
 
-const static struct {
-  const char *name;
-  ret_codes (*func)(void);
-
-} calc_operations [] = {
-    {"\n"   , duplicate } , // Blank entry duplicates the last item on the stack
-    {"drop" , drop      } , // Removes the last entry on the stack
-    {"+"    , plus      } , // Adds the last two stack entries together
-    {"-"    , minus     } , // Subtracts the last two stack entries together
-    {"*"    , multiply  } , // Multiplies the last two stack entries together
-    {"/"    , divide    } , // Divides the last two stack entries together
-    {"sqrt" , my_sqrt   } , // Square Roots the last stack entry
-  };
-
 static ret_codes duplicate() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -90,6 +76,20 @@ static ret_codes my_sqrt() {
   }
   return FAILED_OPERATION;
 }
+
+const static struct {
+  const char *name;
+  ret_codes (*func)(void);
+
+} calc_operations [] = {
+    {"\n"   , duplicate } , // Blank entry duplicates the last item on the stack
+    {"drop" , drop      } , // Removes the last entry on the stack
+    {"+"    , plus      } , // Adds the last two stack entries together
+    {"-"    , minus     } , // Subtracts the last two stack entries together
+    {"*"    , multiply  } , // Multiplies the last two stack entries together
+    {"/"    , divide    } , // Divides the last two stack entries together
+    {"sqrt" , my_sqrt   } , // Square Roots the last stack entry
+  };
 
 // returns the index of the operation
 int whichOperation(char *s) {
