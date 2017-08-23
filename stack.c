@@ -26,6 +26,15 @@ int isNumber(char *s, int s_len) {
 }
 
 void add_to_stack(float f) {
+  // first check that we haven't maxed out the stack already.
+  // If we have already reached MAX_STK then drop the element at the bottom of
+  // the stack, and move all elements down to make room for a new one.
+  if (s.top == MAX_STK - 1) {
+    for (int i = 1; i < MAX_STK; i++) {
+      s.stk[i-1] = s.stk[i];
+    }
+    s.top--;
+  }
   s.top++;
   s.stk[s.top] = f;
 }
