@@ -8,14 +8,14 @@ const static struct {
   ret_codes (*func)(void);
 
 } calc_operations [] = {
-  {"\n"   , duplicate } ,
-  {"drop" , drop      } ,
-  {"+"    , plus      } ,
-  {"-"    , minus     } ,
-  {"*"    , multiply  } ,
-  {"/"    , divide    } ,
-  {"sqrt" , my_sqrt   } ,
-};
+    {"\n"   , duplicate } , // Blank entry duplicates the last item on the stack
+    {"drop" , drop      } , // Removes the last entry on the stack
+    {"+"    , plus      } , // Adds the last two stack entries together
+    {"-"    , minus     } , // Subtracts the last two stack entries together
+    {"*"    , multiply  } , // Multiplies the last two stack entries together
+    {"/"    , divide    } , // Divides the last two stack entries together
+    {"sqrt" , my_sqrt   } , // Square Roots the last stack entry
+  };
 
 ret_codes duplicate() {
   // Make sure there are at least 1 elements on the stack
