@@ -8,6 +8,8 @@ int main() {
   stack_init();
 
   char input[128];
+
+  printf("The calculator is now running. Do some stuff!\n");
   while(1) {
     fgets(input, sizeof(input), stdin);
     if (input[0] != '\n') {
