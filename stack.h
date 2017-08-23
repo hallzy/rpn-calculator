@@ -4,14 +4,6 @@
 #define MAX_STK 128
 
 typedef enum {
-  FLOAT,
-  PLUS,
-  MINUS,
-  MULT,
-  DIV
-} input_type;
-
-typedef enum {
   SUCCESS,
   NOTHING_TO_PUSH,
   FAILED_TO_PUSH,
@@ -30,6 +22,5 @@ float  pop();
 void stack_init();
 void add_to_stack(float f);
 void print_stack();
-/* int isNumber(char *s, int s_len); */
 
 #endif // _STACK_H_

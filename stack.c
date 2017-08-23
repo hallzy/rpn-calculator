@@ -54,8 +54,7 @@ float pop() {
 }
 
 void print_stack() {
-  printf("s.top = %d\n\n", s.top);
   for (int i = 0; i <= s.top; i++) {
-    printf("%d = %f\n", i, s.stk[i]);
+    printf("%d:  %f\n", i+1, s.stk[i]);
   }
 }
