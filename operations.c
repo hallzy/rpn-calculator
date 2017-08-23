@@ -17,7 +17,7 @@ const static struct {
     {"sqrt" , my_sqrt   } , // Square Roots the last stack entry
   };
 
-ret_codes duplicate() {
+static ret_codes duplicate() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
     float num1 = pop();
@@ -28,7 +28,7 @@ ret_codes duplicate() {
   return FAILED_OPERATION;
 }
 
-ret_codes drop() {
+static ret_codes drop() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
     pop();
@@ -37,7 +37,7 @@ ret_codes drop() {
   return FAILED_OPERATION;
 }
 
-ret_codes plus() {
+static ret_codes plus() {
   // Make sure there are at least 2 elements on the stack
   if (s.top >= 1) {
     float num2 = pop();
@@ -48,7 +48,7 @@ ret_codes plus() {
   return FAILED_OPERATION;
 }
 
-ret_codes minus() {
+static ret_codes minus() {
   // Make sure there are at least 2 elements on the stack
   if (s.top >= 1) {
     float num2 = pop();
@@ -59,7 +59,7 @@ ret_codes minus() {
   return FAILED_OPERATION;
 }
 
-ret_codes multiply() {
+static ret_codes multiply() {
   // Make sure there are at least 2 elements on the stack
   if (s.top >= 1) {
     float num2 = pop();
@@ -70,7 +70,7 @@ ret_codes multiply() {
   return FAILED_OPERATION;
 }
 
-ret_codes divide() {
+static ret_codes divide() {
   // Make sure there are at least 2 elements on the stack
   if (s.top >= 1) {
     float num2 = pop();
@@ -81,7 +81,7 @@ ret_codes divide() {
   return FAILED_OPERATION;
 }
 
-ret_codes my_sqrt() {
+static ret_codes my_sqrt() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
     float num = pop();

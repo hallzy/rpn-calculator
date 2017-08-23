@@ -9,7 +9,7 @@ void stack_init() {
   s.top = -1;
 }
 
-int isNumber(char *s, int s_len) {
+static int isNumber(char *s, int s_len) {
   int already_has_decimal=0;
   for (int i = 0; i < s_len; i++) {
     if (isdigit(s[i])) {
