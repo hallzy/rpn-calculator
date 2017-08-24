@@ -1,13 +1,17 @@
 #include "itoa.h"
 
-// int to ascii -- Used to display binary data
+// int to ascii -- I use it to display binary data in the stack, but it can be
+// used for many other bases
 char* itoa(int value, char* result, int base) {
-  // check that the base if valid
+  // check that the base is valid
   if (base < 2 || base > 36) {
-    *result = '\0'; return result;
+    *result = '\0';
+    return result;
   }
 
-  char* ptr = result, *ptr1 = result, tmp_char;
+  char *ptr = result;
+  char *ptr1 = result;
+  char tmp_char;
   int tmp_value;
 
   do {

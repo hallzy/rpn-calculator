@@ -412,6 +412,10 @@ static ret_codes my_e() {
 
 // -----------------------------------------------------------------------------
 
+// Here I am mapping the user input string associated with an operation to the
+// operations function name. In this way, I can accept the user input and
+// directly map it to a funciton to execute using a function pointer. Makes it
+// less for me to do in order to add more operations later.
 const static struct {
   const char *name;
   ret_codes (*func)(void);
@@ -472,7 +476,10 @@ const static struct {
     {"e"   , my_e      } ,
   };
 
-// returns the index of the operation
+// This is called from stack.c when we are trying to find out if the user input
+// is an operation. This functions is what determines if it is an operation or
+// not. If it is, it returns the index of the opreation from the operation
+// mapping above, otherwise returns -1
 int whichOperation(char *s) {
   int num_of_operations = sizeof(calc_operations)/sizeof(calc_operations[0]);
 
@@ -484,6 +491,7 @@ int whichOperation(char *s) {
   return -1;
 }
 
+// Execute the operation function defined by the index input "op"
 ret_codes performOperation(int op) {
   return calc_operations[op].func();
 }
