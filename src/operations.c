@@ -28,6 +28,27 @@ static ret_codes rpn_calc_drop() {
   return FAILED_OPERATION;
 }
 
+// Removes the xth entry on the stack
+static ret_codes rpn_calc_dropx() {
+  // Make sure there are at least 1 elements on the stack so I know that I can
+  // pop something.
+  if (stack_size() >= 1) {
+    float entry = pop();
+    // Make sure that the xth entry actually exists
+    if (stack_size() >= entry) {
+      // 1 less than entry to make it an index
+      remove_from_stack_index(entry-1);
+      return SUCCESS;
+    }
+    // Put the last entry back on the stack because of the error
+    add_to_stack(entry);
+    printf("ERROR: The specified stack entry does not exist\n");
+    return FAILED_OPERATION;
+  }
+  printf("ERROR: There is not enough stack data to perform this operation\n");
+  return FAILED_OPERATION;
+}
+
 // Swap the order of the last two stack entries
 static ret_codes rpn_calc_swap() {
   // Make sure there are at least 2 elements on the stack
@@ -572,6 +593,8 @@ const static struct {
     {"\n"        , rpn_calc_duplicate        } ,
     {"drop"      , rpn_calc_drop             } ,
     {"d"         , rpn_calc_drop             } ,
+    {"dropx"     , rpn_calc_dropx            } ,
+    {"dx"        , rpn_calc_dropx            } ,
     {"s"         , rpn_calc_swap             } ,
     {"swap"      , rpn_calc_swap             } ,
     {"clear"     , rpn_calc_clear            } ,

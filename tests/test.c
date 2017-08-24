@@ -46,6 +46,34 @@ static int test_rpn_calc_drop() {
   return 1;
 }
 
+static int test_rpn_calc_dropx() {
+  char input[input_size];
+
+  strncpy(input, "5.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "6.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "7.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "8.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "2.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "dropx", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 3 && s.stk[0] == 5.0 && s.stk[1] == 7.0 &&
+      s.stk[2] == 8.0) {
+    return 0;
+  }
+  return 1;
+}
+
 static int test_rpn_calc_swap() {
   char input[input_size];
 
@@ -856,6 +884,7 @@ const static struct {
     // --- STACK MANIPULATION FUNCTIONS ---
     {"test_rpn_calc_duplicate"         , test_rpn_calc_duplicate         } ,
     {"test_rpn_calc_drop"              , test_rpn_calc_drop              } ,
+    {"test_rpn_calc_dropx"             , test_rpn_calc_dropx             } ,
     {"test_rpn_calc_swap"              , test_rpn_calc_swap              } ,
     {"test_rpn_calc_clear"             , test_rpn_calc_clear             } ,
     {"test_rpn_calc_clearx"            , test_rpn_calc_clearx            } ,
