@@ -67,6 +67,37 @@ static ret_codes divide() {
   return FAILED_OPERATION;
 }
 
+static ret_codes my_pow() {
+  // Make sure there are at least 1 elements on the stack
+  if (s.top >= 0) {
+    float num2 = pop();
+    float num1 = pop();
+    add_to_stack(pow(num1, num2));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes squared() {
+  // Make sure there are at least 1 elements on the stack
+  if (s.top >= 0) {
+    float num = pop();
+    add_to_stack(pow(num, 2));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes cubed() {
+  // Make sure there are at least 1 elements on the stack
+  if (s.top >= 0) {
+    float num = pop();
+    add_to_stack(pow(num, 3));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
 static ret_codes my_sqrt() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -88,6 +119,9 @@ const static struct {
     {"-"    , minus     } , // Subtracts the last two stack entries together
     {"*"    , multiply  } , // Multiplies the last two stack entries together
     {"/"    , divide    } , // Divides the last two stack entries together
+    {"pow"  , my_pow    } , // x to the power of y
+    {"**2"  , squared   } , // squared
+    {"**3"  , cubed     } , // cubed
     {"sqrt" , my_sqrt   } , // Square Roots the last stack entry
   };
 
