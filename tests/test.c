@@ -13,7 +13,7 @@ static float actual_result() {
 
 // --- STACK MANIPULATION FUNCTIONS ---
 
-static int test_duplicate() {
+static int test_rpn_calc_duplicate() {
   char input[input_size];
 
   strncpy(input, "5.5", input_size);
@@ -28,7 +28,7 @@ static int test_duplicate() {
   return 1;
 }
 
-static int test_drop() {
+static int test_rpn_calc_drop() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -46,7 +46,7 @@ static int test_drop() {
   return 1;
 }
 
-static int test_swap() {
+static int test_rpn_calc_swap() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -66,7 +66,7 @@ static int test_swap() {
 
 // --- MATHEMATICAL OPERATORS ---
 
-static int test_plus() {
+static int test_rpn_calc_plus() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -84,7 +84,7 @@ static int test_plus() {
   return 1;
 }
 
-static int test_minus() {
+static int test_rpn_calc_minus() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -102,7 +102,7 @@ static int test_minus() {
   return 1;
 }
 
-static int test_neg() {
+static int test_rpn_calc_neg() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -120,7 +120,7 @@ static int test_neg() {
   return 1;
 }
 
-static int test_multiply() {
+static int test_rpn_calc_multiply() {
   char input[input_size];
 
   strncpy(input, "3.0", input_size);
@@ -138,7 +138,7 @@ static int test_multiply() {
   return 1;
 }
 
-static int test_divide() {
+static int test_rpn_calc_divide() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -156,7 +156,7 @@ static int test_divide() {
   return 1;
 }
 
-static int test_my_pow() {
+static int test_rpn_calc_pow() {
   char input[input_size];
 
   strncpy(input, "2.0", input_size);
@@ -174,7 +174,7 @@ static int test_my_pow() {
   return 1;
 }
 
-static int test_squared() {
+static int test_rpn_calc_squared() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -192,7 +192,7 @@ static int test_squared() {
   return 1;
 }
 
-static int test_cubed() {
+static int test_rpn_calc_cubed() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -210,7 +210,7 @@ static int test_cubed() {
   return 1;
 }
 
-static int test_my_sqrt() {
+static int test_rpn_calc_sqrt() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -228,7 +228,7 @@ static int test_my_sqrt() {
   return 1;
 }
 
-static int test_my_cbrt() {
+static int test_rpn_calc_cbrt() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -246,7 +246,7 @@ static int test_my_cbrt() {
   return 1;
 }
 
-static int test_xrt() {
+static int test_rpn_calc_xrt() {
   char input[input_size];
 
   strncpy(input, "32.0", input_size);
@@ -264,7 +264,7 @@ static int test_xrt() {
   return 1;
 }
 
-static int test_my_abs() {
+static int test_rpn_calc_abs() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -282,7 +282,7 @@ static int test_my_abs() {
   return 1;
 }
 
-static int test_inv() {
+static int test_rpn_calc_inv() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
@@ -301,7 +301,7 @@ static int test_inv() {
   return 1;
 }
 
-static int test_sine_deg() {
+static int test_rpn_calc_sin_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
@@ -319,7 +319,7 @@ static int test_sine_deg() {
   return 1;
 }
 
-static int test_sine_rad() {
+static int test_rpn_calc_sin_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
@@ -344,7 +344,7 @@ static int test_sine_rad() {
   return 1;
 }
 
-static int test_cosine_deg() {
+static int test_rpn_calc_cos_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
@@ -362,7 +362,7 @@ static int test_cosine_deg() {
   return 1;
 }
 
-static int test_cosine_rad() {
+static int test_rpn_calc_cos_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
@@ -387,7 +387,7 @@ static int test_cosine_rad() {
   return 1;
 }
 
-static int test_tangent_deg() {
+static int test_rpn_calc_tan_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
@@ -405,7 +405,7 @@ static int test_tangent_deg() {
   return 1;
 }
 
-static int test_tangent_rad() {
+static int test_rpn_calc_tan_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
@@ -429,7 +429,7 @@ static int test_tangent_rad() {
   return 1;
 }
 
-static int test_asine_deg() {
+static int test_rpn_calc_asin_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
@@ -447,7 +447,7 @@ static int test_asine_deg() {
   return 1;
 }
 
-static int test_asine_rad() {
+static int test_rpn_calc_asin_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
@@ -466,7 +466,7 @@ static int test_asine_rad() {
   return 1;
 }
 
-static int test_acosine_deg() {
+static int test_rpn_calc_acos_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
@@ -484,7 +484,7 @@ static int test_acosine_deg() {
   return 1;
 }
 
-static int test_acosine_rad() {
+static int test_rpn_calc_acos_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
@@ -503,7 +503,7 @@ static int test_acosine_rad() {
   return 1;
 }
 
-static int test_atangent_deg() {
+static int test_rpn_calc_atan_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
@@ -521,7 +521,7 @@ static int test_atangent_deg() {
   return 1;
 }
 
-static int test_atangent_rad() {
+static int test_rpn_calc_atan_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
@@ -542,7 +542,7 @@ static int test_atangent_rad() {
 
 // --- BITWISE OPERATIONS ---
 
-static int test_bit_and() {
+static int test_rpn_calc_bit_and() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
@@ -560,7 +560,7 @@ static int test_bit_and() {
   return 1;
 }
 
-static int test_bit_or() {
+static int test_rpn_calc_bit_or() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
@@ -578,7 +578,7 @@ static int test_bit_or() {
   return 1;
 }
 
-static int test_bit_xor() {
+static int test_rpn_calc_bit_xor() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
@@ -596,7 +596,7 @@ static int test_bit_xor() {
   return 1;
 }
 
-static int test_bit_left_shift() {
+static int test_rpn_calc_bit_left_shift() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
@@ -614,7 +614,7 @@ static int test_bit_left_shift() {
   return 1;
 }
 
-static int test_bit_right_shift() {
+static int test_rpn_calc_bit_right_shift() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
@@ -632,7 +632,7 @@ static int test_bit_right_shift() {
   return 1;
 }
 
-static int test_bit_left_shift1() {
+static int test_rpn_calc_bit_left_shift1() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
@@ -647,7 +647,7 @@ static int test_bit_left_shift1() {
   return 1;
 }
 
-static int test_bit_right_shift1() {
+static int test_rpn_calc_bit_right_shift1() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
@@ -669,42 +669,51 @@ const static struct {
   int (*func)(void);
 
 } test_functions [] = {
-  // Stack Manipulations
-    {"test_duplicate"         , test_duplicate         } ,
-    {"test_drop"              , test_drop              } ,
-    {"test_swap"              , test_swap              } ,
-    {"test_plus"              , test_plus              } ,
-    {"test_minus"             , test_minus             } ,
-    {"test_neg"               , test_neg               } ,
-    {"test_multiply"          , test_multiply          } ,
-    {"test_divide"            , test_divide            } ,
-    {"test_my_pow"            , test_my_pow            } ,
-    {"test_squared"           , test_squared           } ,
-    {"test_cubed"             , test_cubed             } ,
-    {"test_my_sqrt"           , test_my_sqrt           } ,
-    {"test_my_cbrt"           , test_my_cbrt           } ,
-    {"test_xrt"               , test_xrt               } ,
-    {"test_my_abs"            , test_my_abs            } ,
-    {"test_inv"               , test_inv               } ,
-    {"test_sine_deg"          , test_sine_deg          } ,
-    {"test_sine_rad"          , test_sine_rad          } ,
-    {"test_cosine_deg"        , test_cosine_deg        } ,
-    {"test_cosine_rad"        , test_cosine_rad        } ,
-    {"test_tangent_deg"       , test_tangent_deg       } ,
-    {"test_tangent_rad"       , test_tangent_rad       } ,
-    {"test_asine_deg"         , test_asine_deg         } ,
-    {"test_asine_rad"         , test_asine_rad         } ,
-    {"test_acosine_deg"       , test_acosine_deg       } ,
-    {"test_acosine_rad"       , test_acosine_rad       } ,
-    {"test_atangent_deg"      , test_atangent_deg      } ,
-    {"test_atangent_rad"      , test_atangent_rad      } ,
-    {"test_bit_and"           , test_bit_and           } ,
-    {"test_bit_or"            , test_bit_or            } ,
-    {"test_bit_xor"           , test_bit_xor           } ,
-    {"test_bit_left_shift"    , test_bit_left_shift    } ,
-    {"test_bit_right_shift"   , test_bit_right_shift   } ,
-    {"test_bit_left_shift1"   , test_bit_left_shift1   } ,
-    {"test_bit_right_shift1"  , test_bit_right_shift1  } ,
+    // --- STACK MANIPULATION FUNCTIONS ---
+    {"test_rpn_calc_duplicate"         , test_rpn_calc_duplicate         } ,
+    {"test_rpn_calc_drop"              , test_rpn_calc_drop              } ,
+    {"test_rpn_calc_swap"              , test_rpn_calc_swap              } ,
+
+    // --- MATHEMATICAL OPERATORS ---
+    {"test_rpn_calc_plus"              , test_rpn_calc_plus              } ,
+    {"test_rpn_calc_minus"             , test_rpn_calc_minus             } ,
+    {"test_rpn_calc_neg"               , test_rpn_calc_neg               } ,
+    {"test_rpn_calc_multiply"          , test_rpn_calc_multiply          } ,
+    {"test_rpn_calc_divide"            , test_rpn_calc_divide            } ,
+    {"test_rpn_calc_pow"               , test_rpn_calc_pow               } ,
+    {"test_rpn_calc_squared"           , test_rpn_calc_squared           } ,
+    {"test_rpn_calc_cubed"             , test_rpn_calc_cubed             } ,
+    {"test_rpn_calc_sqrt"              , test_rpn_calc_sqrt              } ,
+    {"test_rpn_calc_cbrt"              , test_rpn_calc_cbrt              } ,
+    {"test_rpn_calc_xrt"               , test_rpn_calc_xrt               } ,
+    {"test_rpn_calc_abs"               , test_rpn_calc_abs               } ,
+    {"test_rpn_calc_inv"               , test_rpn_calc_inv               } ,
+    {"test_rpn_calc_sin_deg"           , test_rpn_calc_sin_deg           } ,
+    {"test_rpn_calc_sin_rad"           , test_rpn_calc_sin_rad           } ,
+    {"test_rpn_calc_cos_deg"           , test_rpn_calc_cos_deg           } ,
+    {"test_rpn_calc_cos_rad"           , test_rpn_calc_cos_rad           } ,
+    {"test_rpn_calc_tan_deg"           , test_rpn_calc_tan_deg           } ,
+    {"test_rpn_calc_tan_rad"           , test_rpn_calc_tan_rad           } ,
+    {"test_rpn_calc_asin_deg"          , test_rpn_calc_asin_deg          } ,
+    {"test_rpn_calc_asin_rad"          , test_rpn_calc_asin_rad          } ,
+    {"test_rpn_calc_acos_deg"          , test_rpn_calc_acos_deg          } ,
+    {"test_rpn_calc_acos_rad"          , test_rpn_calc_acos_rad          } ,
+    {"test_rpn_calc_atan_deg"          , test_rpn_calc_atan_deg          } ,
+    {"test_rpn_calc_atan_rad"          , test_rpn_calc_atan_rad          } ,
+    /* {"test_rpn_calc_log"               , test_rpn_calc_log               } , */
+    /* {"test_rpn_calc_ln"                , test_rpn_calc_ln                } , */
+    /* {"test_rpn_calc_logx"              , test_rpn_calc_logx              } , */
+    /* {"test_rpn_calc_exp"               , test_rpn_calc_exp               } , */
+
+    // --- BITWISE OPERATIONS ---
+    {"test_rpn_calc_bit_and"           , test_rpn_calc_bit_and           } ,
+    {"test_rpn_calc_bit_or"            , test_rpn_calc_bit_or            } ,
+    {"test_rpn_calc_bit_xor"           , test_rpn_calc_bit_xor           } ,
+    {"test_rpn_calc_bit_left_shift"    , test_rpn_calc_bit_left_shift    } ,
+    {"test_rpn_calc_bit_right_shift"   , test_rpn_calc_bit_right_shift   } ,
+    {"test_rpn_calc_bit_left_shift1"   , test_rpn_calc_bit_left_shift1   } ,
+    {"test_rpn_calc_bit_right_shift1"  , test_rpn_calc_bit_right_shift1  } ,
+    {"test_rpn_calc_bit_right_shift1"  , test_rpn_calc_bit_right_shift1  } ,
   };
 
 // PERFORM THE TESTS
