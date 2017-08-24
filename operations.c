@@ -108,6 +108,27 @@ static ret_codes my_sqrt() {
   return FAILED_OPERATION;
 }
 
+static ret_codes my_cbrt() {
+  // Make sure there are at least 1 elements on the stack
+  if (s.top >= 0) {
+    float num = pop();
+    add_to_stack(cbrt(num));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes xrt() {
+  // Make sure there are at least 1 elements on the stack
+  if (s.top >= 0) {
+    float num2 = pop();
+    float num1 = pop();
+    add_to_stack(pow(num1, 1.0/num2));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
 const static struct {
   const char *name;
   ret_codes (*func)(void);
@@ -123,6 +144,9 @@ const static struct {
     {"**2"  , squared   } , // squared
     {"**3"  , cubed     } , // cubed
     {"sqrt" , my_sqrt   } , // Square Roots the last stack entry
+    {"cbrt" , my_cbrt   } , // Cube Roots the last stack entry
+    {"xrt"  , xrt       } , // xth Root the last stack entry
+    {"//"   , xrt       } ,
   };
 
 // returns the index of the operation
