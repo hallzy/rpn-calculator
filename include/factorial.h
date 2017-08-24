@@ -1,6 +1,6 @@
 #ifndef _FACTORIAL_
 #define _FACTORIAL_
 
-float factorial(int x);
+long double factorial(int x);
 
 #endif

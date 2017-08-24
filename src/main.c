@@ -16,7 +16,7 @@ int main() {
   // characters for an input
   char input[128];
 
-  printf("FLT_MAX = %f\n", 340282346638528859911704183484516925441.0);
+  /* printf("FLT_MAX = %Lf\n", 340282346638528859911704183484516925441.0); */
 
   while(1) {
     // And give me the result!

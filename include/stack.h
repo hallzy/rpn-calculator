@@ -31,7 +31,7 @@ typedef enum {
 // angle_modes and base_modes are here also because depending on their state,
 // they affect how the stack looks.
 typedef struct {
-  float stk[MAX_STK];
+  long double stk[MAX_STK];
   // if top == -1, the stack is empty. It is this way because it makes using it
   // in arrays easier, as if there is 1 element top is 0.
   int top;
@@ -47,7 +47,7 @@ stack s;
 ret_codes push(char *val, int val_size);
 
 // This takes a value off the stack and reduces s.top to move the stack pointer
-float  pop();
+long double  pop();
 
 // Initializes the elements of the stack.
 void stack_init();
@@ -56,7 +56,7 @@ void stack_init();
 int stack_size();
 
 // Adds a new number to the stack and increments s.top stack pointer
-void add_to_stack(float f);
+void add_to_stack(long double f);
 
 // Removes the stack element at index j and reorganizes the stack.
 void remove_from_stack_index(unsigned int j);

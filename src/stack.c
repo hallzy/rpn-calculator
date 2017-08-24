@@ -20,7 +20,7 @@ int stack_size() {
 }
 
 // Add the number "f" to the top of the stack
-void add_to_stack(float f) {
+void add_to_stack(long double f) {
   // first check that we haven't maxed out the stack already.
   // If we have already reached MAX_STK then drop the element at the bottom of
   // the stack, and move all elements down to make room for a new one.
@@ -78,7 +78,7 @@ static ret_codes get_binary_number_and_add_to_stack(char *val) {
 // a numeric value that I can use.
 static ret_codes get_decimal_and_hex_numbers_and_add_to_stack(char *val) {
   char *next;
-  float num;
+  long double num;
   // strtof automatically recognizes "0x" for hex numbers.
   num = strtof(val, &next);
   if (next == val || *next != '\0') {
@@ -119,8 +119,8 @@ ret_codes push(char *val, int val_size) {
 }
 
 // Remove the element at the top and update the stack pointer.
-float pop() {
-  float popped = s.stk[s.top];
+long double pop() {
+  long double popped = s.stk[s.top];
   s.top--;
   return popped;
 }
@@ -161,7 +161,7 @@ void print_stack() {
     // Iterate through the whole stack and print out each number as a decimal
     // value.
     for (int i = 0; i <= s.top; i++) {
-      printf("%d:  %f", i+1, s.stk[i]);
+      printf("%d:  %Lf", i+1, s.stk[i]);
       printf("\n");
     }
   }

@@ -7,7 +7,7 @@
 
 #define input_size 128
 
-static float actual_result() {
+static long double actual_result() {
   return s.stk[s.top];
 }
 
@@ -404,7 +404,8 @@ static int test_rpn_calc_sin_deg() {
   strncpy(input, "sin", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 0.5) {
+  if (stack_size() == 1 && actual_result() > 0.499999 &&
+      actual_result() < 0.500001) {
     return 0;
   }
   return 1;
@@ -428,8 +429,8 @@ static int test_rpn_calc_sin_rad() {
   strncpy(input, "sin", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 0.5) { //&&
-      //actual_result() < 0.33334) {
+  if (stack_size() == 1 && actual_result() > 0.499999 &&
+      actual_result() < 0.500001) {
     return 0;
   }
   return 1;
@@ -447,7 +448,8 @@ static int test_rpn_calc_cos_deg() {
   strncpy(input, "cos", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 0.5) {
+  if (stack_size() == 1 && actual_result() > 0.499999 &&
+      actual_result() < 0.500001) {
     return 0;
   }
   return 1;
@@ -490,7 +492,8 @@ static int test_rpn_calc_tan_deg() {
   strncpy(input, "tan", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 1.0) {
+  if (stack_size() == 1 && actual_result() > 0.999999 &&
+      actual_result() < 1.000001) {
     return 0;
   }
   return 1;
@@ -514,7 +517,8 @@ static int test_rpn_calc_tan_rad() {
   strncpy(input, "tan", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 1.0) {
+  if (stack_size() == 1 && actual_result() > 0.999999 &&
+      actual_result() < 1.000001) {
     return 0;
   }
   return 1;
@@ -532,7 +536,8 @@ static int test_rpn_calc_asin_deg() {
   strncpy(input, "asin", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 30) {
+  if (stack_size() == 1 && actual_result() > 29.999999 &&
+      actual_result() < 30.000001) {
     return 0;
   }
   return 1;
@@ -550,8 +555,8 @@ static int test_rpn_calc_asin_rad() {
   strncpy(input, "asin", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() >= 0.523598
-      && actual_result() <= 0.523600) {
+  if (stack_size() == 1 && actual_result() > 0.523598
+      && actual_result() < 0.523600) {
     return 0;
   }
   return 1;
@@ -569,7 +574,8 @@ static int test_rpn_calc_acos_deg() {
   strncpy(input, "acos", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 60) {
+  if (stack_size() == 1 && actual_result() > 59.999999 &&
+      actual_result() < 60.000001) {
     return 0;
   }
   return 1;
@@ -587,7 +593,7 @@ static int test_rpn_calc_acos_rad() {
   strncpy(input, "cos", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() >= 0.877582 &&
+  if (stack_size() == 1 && actual_result() > 0.877582 &&
       actual_result() < 0.877584) {
     return 0;
   }
@@ -624,8 +630,8 @@ static int test_rpn_calc_atan_rad() {
   strncpy(input, "atan", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() >= 1.557407 &&
-      actual_result() <= 1.557409) {
+  if (stack_size() == 1 && actual_result() > 1.557407 &&
+      actual_result() < 1.557409) {
     return 0;
   }
   return 1;
@@ -655,8 +661,8 @@ static int test_rpn_calc_ln() {
   strncpy(input, "ln", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() >= 0.999999 &&
-      actual_result() <= 1.000001) {
+  if (stack_size() == 1 && actual_result() > 0.999999 &&
+      actual_result() < 1.000001) {
     return 0;
   }
   return 1;
@@ -674,7 +680,8 @@ static int test_rpn_calc_logx() {
   strncpy(input, "logx", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() >= 3.0) {
+  if (stack_size() == 1 && actual_result() > 2.999999 &&
+      actual_result() < 3.000001) {
     return 0;
   }
   return 1;
@@ -689,8 +696,8 @@ static int test_rpn_calc_exp() {
   strncpy(input, "exp", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() >= 7.389055 &&
-      actual_result() <= 7.389057) {
+  if (stack_size() == 1 && actual_result() > 7.389055 &&
+      actual_result() < 7.389057) {
     return 0;
   }
   return 1;

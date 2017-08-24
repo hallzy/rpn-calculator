@@ -2,18 +2,18 @@
 #include "factorial.h"
 
 
-// Calculating more than 34 results in inf anyways, so no point in going bigger.
-#define MAX_FACTORIAL_INPUT 36
+// Calculating more than 25! is no longer precise, so limit to 25!
+#define MAX_FACTORIAL_INPUT 26
 
 // Store Calcuated values here to recall answers quicker.
-static float fact_results[MAX_FACTORIAL_INPUT];
+static long double fact_results[MAX_FACTORIAL_INPUT];
 
-float factorial(int x) {
+long double factorial(int x) {
   if (x <= 1) {
     return 1;
   }
   if (x >= MAX_FACTORIAL_INPUT) {
-    return factorial(35);
+    return -1;
   }
   if (fact_results[x]) {
     return fact_results[x];
