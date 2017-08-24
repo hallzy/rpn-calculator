@@ -10,10 +10,23 @@ typedef enum {
   FAILED_OPERATION,
 } ret_codes;
 
+typedef enum {
+  RADIANS,
+  DEGREES,
+} angle_modes;
+
+typedef enum {
+  HEXADECIMAL,
+  DECIMAL,
+  OCTAL,
+  BINARY,
+} base_modes;
+
 typedef struct {
   float stk[MAX_STK];
   int top;
-  int rad_mode;
+  angle_modes angle_mode;
+  base_modes base_mode;
 } stack;
 
 stack s;

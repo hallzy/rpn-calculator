@@ -199,7 +199,7 @@ static ret_codes sine() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
-    if (s.rad_mode) {
+    if (s.angle_mode == RADIANS) {
       add_to_stack(sin(num));
     }
     else {
@@ -214,7 +214,7 @@ static ret_codes cosine() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
-    if (s.rad_mode) {
+    if (s.angle_mode == RADIANS) {
       add_to_stack(cos(num));
     }
     else {
@@ -229,7 +229,7 @@ static ret_codes tangent() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
-    if (s.rad_mode) {
+    if (s.angle_mode == RADIANS) {
       add_to_stack(tan(num));
     }
     else {
@@ -244,7 +244,7 @@ static ret_codes asine() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
-    if (s.rad_mode) {
+    if (s.angle_mode == RADIANS) {
       add_to_stack(asin(num));
     }
     else {
@@ -259,7 +259,7 @@ static ret_codes acosine() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
-    if (s.rad_mode) {
+    if (s.angle_mode == RADIANS) {
       add_to_stack(cos(num));
     }
     else {
@@ -274,7 +274,7 @@ static ret_codes atangent() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
-    if (s.rad_mode) {
+    if (s.angle_mode == RADIANS) {
       add_to_stack(tan(num));
     }
     else {
@@ -289,13 +289,37 @@ static ret_codes atangent() {
 
 // Change to radians mode
 static ret_codes rad() {
-  s.rad_mode=1;
+  s.angle_mode=RADIANS;
   return SUCCESS;
 }
 
 // Change to degrees mode
 static ret_codes deg() {
-  s.rad_mode=0;
+  s.angle_mode=DEGREES;
+  return SUCCESS;
+}
+
+// Change to degrees mode
+static ret_codes hex() {
+  s.base_mode=HEXADECIMAL;
+  return SUCCESS;
+}
+
+// Change to degrees mode
+static ret_codes dec() {
+  s.base_mode=DECIMAL;
+  return SUCCESS;
+}
+
+// Change to degrees mode
+static ret_codes oct() {
+  s.base_mode=OCTAL;
+  return SUCCESS;
+}
+
+// Change to degrees mode
+static ret_codes bin() {
+  s.base_mode=BINARY;
   return SUCCESS;
 }
 
@@ -354,6 +378,10 @@ const static struct {
     // Calculator Settings
     {"deg"  , deg       } ,
     {"rad"  , rad       } ,
+    {"hex"  , hex       } ,
+    {"dec"  , dec       } ,
+    {"oct"  , oct       } ,
+    {"bin"  , bin       } ,
 
     // Constants
     {"pi"  , my_pi     } ,

@@ -1,5 +1,6 @@
 #include "stack.h"
 #include "operations.h"
+#include "itoa.h"
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
@@ -7,7 +8,8 @@
 
 void stack_init() {
   s.top      = -1;
-  s.rad_mode = 1;
+  s.angle_mode = RADIANS;
+  s.base_mode = DECIMAL;
 }
 
 int stack_size() {
@@ -28,9 +30,47 @@ void add_to_stack(float f) {
   s.stk[s.top] = f;
 }
 
+static ret_codes get_octal_number_and_add_to_stack(char *val) {
+  char *next;
+  long numl;
+  // if it is prepended like an octal number then take off the prefix and
+  // see if the rest of the number is okay.
+  val += 1;
+  numl = strtol(val, &next, 8);
+  if (next == val || *next != '\0') {
+    return FAILED_TO_PUSH;
+  }
+  add_to_stack(numl);
+  return SUCCESS;
+}
+
+static ret_codes get_binary_number_and_add_to_stack(char *val) {
+  char *next;
+  long numl;
+  // if it is prepended like a binary number then take off the prefix and
+  // see if the rest of the number is okay.
+  val += 2;
+  numl = strtol(val, &next, 2);
+  if (next == val || *next != '\0') {
+    return FAILED_TO_PUSH;
+  }
+  add_to_stack(numl);
+  return SUCCESS;
+}
+
+static ret_codes get_decimal_and_hex_numbers_and_add_to_stack(char *val) {
+  char *next;
+  float num;
+  num = strtof(val, &next);
+  if (next == val || *next != '\0') {
+    return FAILED_TO_PUSH;
+  }
+  add_to_stack(num);
+  return SUCCESS;
+}
+
 ret_codes push(char *val, int val_size) {
   int op;
-  float num;
 
   // Is the input an operation
   if ((op = whichOperation(val)) != -1) {
@@ -38,15 +78,18 @@ ret_codes push(char *val, int val_size) {
   }
   // if it wasn't an operation it better be a number...
   else {
-    char *next;
-    // this will recognize decimal or hex values.
-    num = strtof(val, &next);
-    if (next == val || *next != '\0') {
-
-      return FAILED_TO_PUSH;
+    // Check if it is an octal number
+    if (val[0] == '0' && isdigit(val[1])) {
+      return get_octal_number_and_add_to_stack(val);
     }
-    add_to_stack(num);
-    return SUCCESS;
+    // Check if it is a binary number
+    else if (val[0] == '0' && (val[1] == 'b' || val[1] == 'B')) {
+      return get_binary_number_and_add_to_stack(val);
+    }
+    else {
+      // this will recognize decimal or hex values.
+      return get_decimal_and_hex_numbers_and_add_to_stack(val);
+    }
   }
 }
 
@@ -57,13 +100,37 @@ float pop() {
 }
 
 void print_stack() {
-  if (s.rad_mode == 1) {
-    printf("RAD\n\n");
+  if (s.angle_mode == RADIANS) {
+    printf("RAD\n");
   }
   else {
-    printf("DEG\n\n");
+    printf("DEG\n");
   }
-  for (int i = 0; i <= s.top; i++) {
-    printf("%d:  %f\n", i+1, s.stk[i]);
+
+  if (s.base_mode == HEXADECIMAL) {
+    printf("HEX\n\n");
+    for (int i = 0; i <= s.top; i++) {
+      printf("%d:  %x\n", i+1, (unsigned int)s.stk[i]);
+    }
+  }
+  else if (s.base_mode == DECIMAL) {
+    printf("DEC\n\n");
+    for (int i = 0; i <= s.top; i++) {
+      printf("%d:  %f\n", i+1, s.stk[i]);
+    }
+  }
+  else if (s.base_mode == OCTAL) {
+    printf("OCT\n\n");
+    for (int i = 0; i <= s.top; i++) {
+      printf("%d:  %o\n", i+1, (unsigned int)s.stk[i]);
+    }
+  }
+  else {
+    printf("BIN\n\n");
+    for (int i = 0; i <= s.top; i++) {
+      char buf[128];
+      itoa((unsigned int)s.stk[i], buf, 2);
+      printf("%d:  %s\n", i+1, buf);
+    }
   }
 }
