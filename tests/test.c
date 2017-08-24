@@ -752,6 +752,65 @@ static int test_rpn_calc_sum() {
   return 1;
 }
 
+static int test_rpn_calc_avgstack() {
+  char input[input_size];
+
+  strncpy(input, "11", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "3", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "3", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "5", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "7", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "4", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "6", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "8", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "93", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "2", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "5", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "7", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "9", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "2", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "12", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "avgstack", input_size);
+  push(input, strlen(input));
+
+
+  if (stack_size() == 3 && s.stk[0] == 11.0 && s.stk[1] == 9 &&
+      s.stk[2] == 13) {
+    return 0;
+  }
+  return 1;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static int test_rpn_calc_bit_and() {
@@ -921,6 +980,7 @@ const static struct {
     {"test_rpn_calc_exp"               , test_rpn_calc_exp               } ,
     {"test_rpn_calc_sumstack"          , test_rpn_calc_sumstack          } ,
     {"test_rpn_calc_sum"               , test_rpn_calc_sum               } ,
+    {"test_rpn_calc_avgstack"          , test_rpn_calc_avgstack          } ,
 
     // --- BITWISE OPERATIONS ---
     {"test_rpn_calc_bit_and"           , test_rpn_calc_bit_and           } ,

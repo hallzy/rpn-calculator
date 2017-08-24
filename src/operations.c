@@ -451,6 +451,56 @@ static ret_codes rpn_calc_sum() {
   return FAILED_OPERATION;
 }
 
+// finds the avg of the numbers on the stack from stack position x to stack
+// position y
+static ret_codes rpn_calc_avgstack() {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
+    float y = pop();
+    float x = pop();
+    ret_codes ret = SUCCESS;
+
+    if (y < 1 || y > stack_size()) {
+      printf("ERROR: Second Argument was not in the stack\n");
+      ret = FAILED_OPERATION;
+    }
+    if (x < 1 || x > stack_size()) {
+      printf("ERROR: First Argument was not in the stack\n");
+      ret = FAILED_OPERATION;
+    }
+
+    if (ret != SUCCESS) {
+      return ret;
+    }
+
+    int min, max;
+    float sum = 0;
+    if (x <= y) {
+      min = x;
+      max = y;
+    }
+    else {
+      min = y;
+      max = x;
+    }
+    // decrement to make it an index
+    min--;
+    for (int i = min; i < max; i++) {
+      sum += s.stk[i];
+    }
+
+    // now remove all the stack elements that were used in the addition.
+    for (int i = min; i < max; i++) {
+      remove_from_stack_index(min);
+    }
+
+    add_to_stack(sum/(max-min));
+    return SUCCESS;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static ret_codes rpn_calc_bit_and() {
@@ -633,6 +683,7 @@ const static struct {
     {"exp"       , rpn_calc_exp                } ,
     {"sumstack"  , rpn_calc_sumstack           } ,
     {"sum"       , rpn_calc_sum                } ,
+    {"avgstack"  , rpn_calc_avgstack           } ,
 
     // Bitwise Operations
     {"&"         , rpn_calc_bit_and            } ,
