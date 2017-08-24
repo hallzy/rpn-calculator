@@ -540,6 +540,71 @@ static int test_rpn_calc_atan_rad() {
   return 1;
 }
 
+static int test_rpn_calc_log() {
+  char input[input_size];
+
+  strncpy(input, "100", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "log", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() == 2) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_rpn_calc_ln() {
+  char input[input_size];
+
+  strncpy(input, "e", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "ln", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() >= 0.999999 &&
+      actual_result() <= 1.000001) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_rpn_calc_logx() {
+  char input[input_size];
+
+  strncpy(input, "8", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "2", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "logx", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() >= 3.0) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_rpn_calc_exp() {
+  char input[input_size];
+
+  strncpy(input, "2", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "exp", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() >= 7.389055 &&
+      actual_result() <= 7.389057) {
+    return 0;
+  }
+  return 1;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static int test_rpn_calc_bit_and() {
@@ -700,10 +765,10 @@ const static struct {
     {"test_rpn_calc_acos_rad"          , test_rpn_calc_acos_rad          } ,
     {"test_rpn_calc_atan_deg"          , test_rpn_calc_atan_deg          } ,
     {"test_rpn_calc_atan_rad"          , test_rpn_calc_atan_rad          } ,
-    /* {"test_rpn_calc_log"               , test_rpn_calc_log               } , */
-    /* {"test_rpn_calc_ln"                , test_rpn_calc_ln                } , */
-    /* {"test_rpn_calc_logx"              , test_rpn_calc_logx              } , */
-    /* {"test_rpn_calc_exp"               , test_rpn_calc_exp               } , */
+    {"test_rpn_calc_log"               , test_rpn_calc_log               } ,
+    {"test_rpn_calc_ln"                , test_rpn_calc_ln                } ,
+    {"test_rpn_calc_logx"              , test_rpn_calc_logx              } ,
+    {"test_rpn_calc_exp"               , test_rpn_calc_exp               } ,
 
     // --- BITWISE OPERATIONS ---
     {"test_rpn_calc_bit_and"           , test_rpn_calc_bit_and           } ,

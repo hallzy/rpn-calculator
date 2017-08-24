@@ -285,6 +285,52 @@ static ret_codes rpn_calc_atan() {
   return FAILED_OPERATION;
 }
 
+// base 10 logarithms
+static ret_codes rpn_calc_log() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    // log is the natural log normally, so I need to convert it to base 10
+    add_to_stack(log(num)/log(10));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+// Base e logarithms
+static ret_codes rpn_calc_ln() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    add_to_stack(log(num));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+// Variable Base logarithms
+static ret_codes rpn_calc_logx() {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
+    float base = pop();
+    float num = pop();
+    add_to_stack(log(num)/log(base));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+// e to the power of x
+static ret_codes rpn_calc_exp() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    add_to_stack(exp(num));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static ret_codes rpn_calc_bit_and() {
@@ -455,9 +501,10 @@ const static struct {
     {"asin" , rpn_calc_asin               } ,
     {"acos" , rpn_calc_acos               } ,
     {"atan" , rpn_calc_atan               } ,
-    /* {"log"  , rpn_calc_log                } , */
-    /* {"ln"   , rpn_calc_ln                 } , */
-    /* {"logx" , rpn_calc_logx               } , */
+    {"log"  , rpn_calc_log                } ,
+    {"ln"   , rpn_calc_ln                 } ,
+    {"logx" , rpn_calc_logx               } ,
+    {"exp"  , rpn_calc_exp                } ,
 
     // Bitwise Operations
     {"&"    , rpn_calc_bit_and            } ,
