@@ -1,5 +1,6 @@
 #include "stack.h"
 #include "operations.h"
+#include "factorial.h"
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
@@ -527,6 +528,18 @@ static ret_codes rpn_calc_avgstack() {
   return FAILED_OPERATION;
 }
 
+static ret_codes rpn_calc_factorial() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float x = pop();
+
+    add_to_stack(factorial((int)x));
+    return SUCCESS;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static ret_codes rpn_calc_bit_and() {
@@ -717,6 +730,9 @@ const static struct {
     {"sumstack"  , rpn_calc_sumstack           } ,
     {"sum"       , rpn_calc_sum                } ,
     {"avgstack"  , rpn_calc_avgstack           } ,
+    {"!"         , rpn_calc_factorial          } ,
+    {"fact"      , rpn_calc_factorial          } ,
+    {"factorial" , rpn_calc_factorial          } ,
 
     // Bitwise Operations
     {"&"         , rpn_calc_bit_and            } ,

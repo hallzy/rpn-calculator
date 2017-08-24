@@ -811,6 +811,22 @@ static int test_rpn_calc_avgstack() {
   return 1;
 }
 
+static int test_rpn_calc_factorial() {
+  char input[input_size];
+
+  strncpy(input, "5", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "!", input_size);
+  push(input, strlen(input));
+
+
+  if (stack_size() == 1 && actual_result() == 120) {
+    return 0;
+  }
+  return 1;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static int test_rpn_calc_bit_and() {
@@ -981,6 +997,7 @@ const static struct {
     {"test_rpn_calc_sumstack"          , test_rpn_calc_sumstack          } ,
     {"test_rpn_calc_sum"               , test_rpn_calc_sum               } ,
     {"test_rpn_calc_avgstack"          , test_rpn_calc_avgstack          } ,
+    {"test_rpn_calc_factorial"         , test_rpn_calc_factorial         } ,
 
     // --- BITWISE OPERATIONS ---
     {"test_rpn_calc_bit_and"           , test_rpn_calc_bit_and           } ,
