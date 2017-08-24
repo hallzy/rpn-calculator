@@ -10,10 +10,6 @@ static float actual_result() {
   return s.stk[s.top];
 }
 
-static void reset_stack() {
-  s.top=-1;
-}
-
 static int test_duplicate() {
   char input[input_size];
 
@@ -345,7 +341,7 @@ int performTests() {
         printf("%s() SUCCEEDED!\n", test_functions[i].name);
       }
     }
-    reset_stack();
+    stack_init();
   }
   printf("\nNumber of Failed Tests: %d\n", ret);
   return ret;
