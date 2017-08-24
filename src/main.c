@@ -16,19 +16,7 @@ int main() {
   // characters for an input
   char input[128];
 
-  printf("The calculator is now running. Do some stuff!\n");
   while(1) {
-    fgets(input, sizeof(input), stdin);
-    // Remove the newline character unless it is the only thing in the string (I
-    // will use that later in order to drop the element from the top of the
-    // stack)
-    if (input[0] != '\n') {
-      input[strlen(input)-1] = 0;
-    }
-
-    // q will be used to quit the calculator
-    if (strcmp(input, "q") ==0) return 0;
-
     printf("===============================================================\n");
     // Give the user input to the calcualtor, and let it do its thing
     push(input, strlen(input));
@@ -36,6 +24,17 @@ int main() {
     // And give me the result!
     print_stack();
     printf("===============================================================\n");
+
+    fgets(input, sizeof(input), stdin);
+    // Remove the newline character unless it is the only thing in the string (I
+    // will use that later in order to drop the element from the top of the
+    // stack)
+    if (input[0] != '\n') {
+      input[strlen(input)-1] = 0;
+   }
+
+    // q will be used to quit the calculator
+    if (strcmp(input, "q") ==0) return 0;
   }
   return 0;
 
