@@ -3,6 +3,8 @@
 #include <string.h>
 #include <math.h>
 
+#define pi 3.141592653589793
+#define e  2.718281828459045
 
 // --- STACK MANIPULATION FUNCTIONS ---
 
@@ -185,6 +187,51 @@ static ret_codes my_abs() {
   return FAILED_OPERATION;
 }
 
+static ret_codes sine() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    if (s.rad_mode) {
+      add_to_stack(sin(num));
+    }
+    else {
+      add_to_stack(sin(num*pi/180.0));
+    }
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes cosine() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    if (s.rad_mode) {
+      add_to_stack(cos(num));
+    }
+    else {
+      add_to_stack(cos(num*pi/180.0));
+    }
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes tangent() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    if (s.rad_mode) {
+      add_to_stack(tan(num));
+    }
+    else {
+      add_to_stack(tan(num*pi/180.0));
+    }
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
 // invert the value
 static ret_codes inv() {
   // Make sure there are at least 1 elements on the stack
@@ -194,6 +241,32 @@ static ret_codes inv() {
     return SUCCESS;
   }
   return FAILED_OPERATION;
+}
+
+// --- CALUCLATOR SETTINGS ---
+
+// Change to radians mode
+static ret_codes rad() {
+  s.rad_mode=1;
+  return SUCCESS;
+}
+
+// Change to degrees mode
+static ret_codes deg() {
+  s.rad_mode=0;
+  return SUCCESS;
+}
+
+// --- CONSTANTS ---
+
+static ret_codes my_pi() {
+  add_to_stack(pi);
+  return SUCCESS;
+}
+
+static ret_codes my_e() {
+  add_to_stack(e);
+  return SUCCESS;
 }
 
 // -----------------------------------------------------------------------------
@@ -229,6 +302,17 @@ const static struct {
     {"abs"  , my_abs    } ,
     {"inv"  , inv       } ,
     {"1/x"  , inv       } ,
+    {"sin"  , sine      } ,
+    {"cos"  , cosine    } ,
+    {"tan"  , tangent   } ,
+
+    // Calculator Settings
+    {"deg"  , deg       } ,
+    {"rad"  , rad       } ,
+
+    // Constants
+    {"pi"  , my_pi     } ,
+    {"e"   , my_e      } ,
   };
 
 // returns the index of the operation
