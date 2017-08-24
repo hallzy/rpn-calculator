@@ -203,7 +203,7 @@ static ret_codes rpn_calc_sin() {
       add_to_stack(sin(num));
     }
     else {
-      add_to_stack(sin(num*pi/180.0));
+      add_to_stack(sin(num*M_PI/180.0));
     }
     return SUCCESS;
   }
@@ -218,7 +218,7 @@ static ret_codes rpn_calc_cos() {
       add_to_stack(cos(num));
     }
     else {
-      add_to_stack(cos(num*pi/180.0));
+      add_to_stack(cos(num*M_PI/180.0));
     }
     return SUCCESS;
   }
@@ -233,7 +233,7 @@ static ret_codes rpn_calc_tan() {
       add_to_stack(tan(num));
     }
     else {
-      add_to_stack(tan(num*pi/180.0));
+      add_to_stack(tan(num*M_PI/180.0));
     }
     return SUCCESS;
   }
@@ -248,7 +248,7 @@ static ret_codes rpn_calc_asin() {
       add_to_stack(asin(num));
     }
     else {
-      add_to_stack(asin(num)*180.0/pi);
+      add_to_stack(asin(num)*180.0/M_PI);
     }
     return SUCCESS;
   }
@@ -263,7 +263,7 @@ static ret_codes rpn_calc_acos() {
       add_to_stack(cos(num));
     }
     else {
-      add_to_stack(acos(num)*180.0/pi);
+      add_to_stack(acos(num)*180.0/M_PI);
     }
     return SUCCESS;
   }
@@ -278,7 +278,7 @@ static ret_codes rpn_calc_atan() {
       add_to_stack(tan(num));
     }
     else {
-      add_to_stack(atan(num)*180.0/pi);
+      add_to_stack(atan(num)*180.0/M_PI);
     }
     return SUCCESS;
   }
@@ -403,12 +403,12 @@ static ret_codes rpn_calc_bin() {
 // --- CONSTANTS ---
 
 static ret_codes rpn_calc_pi() {
-  add_to_stack(pi);
+  add_to_stack(M_PI);
   return SUCCESS;
 }
 
 static ret_codes rpn_calc_e() {
-  add_to_stack(e);
+  add_to_stack(M_E);
   return SUCCESS;
 }
 
