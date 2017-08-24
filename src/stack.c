@@ -34,6 +34,13 @@ void add_to_stack(float f) {
   s.stk[s.top] = f;
 }
 
+void remove_from_stack_index(unsigned int j) {
+  for (int i =j; i < s.top; i++) {
+    s.stk[i] = s.stk[i+1];
+  }
+  s.top--;
+}
+
 // This grabs the octal input string from the user and converts it into a number
 // that I can use.
 static ret_codes get_octal_number_and_add_to_stack(char *val) {

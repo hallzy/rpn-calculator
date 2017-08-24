@@ -2,6 +2,7 @@
 #include "operations.h"
 #include <string.h>
 #include <math.h>
+#include <stdio.h>
 
 // --- STACK MANIPULATION FUNCTIONS ---
 
@@ -351,6 +352,84 @@ static ret_codes rpn_calc_exp() {
   return FAILED_OPERATION;
 }
 
+// finds the sum of the numbers on the stack from stack position x to stack
+// position y
+static ret_codes rpn_calc_sumstack() {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
+    float y = pop();
+    float x = pop();
+    ret_codes ret = SUCCESS;
+
+    if (y < 1 || y > stack_size()) {
+      printf("ERROR: Second Argument was not in the stack\n");
+      ret = FAILED_OPERATION;
+    }
+    if (x < 1 || x > stack_size()) {
+      printf("ERROR: First Argument was not in the stack\n");
+      ret = FAILED_OPERATION;
+    }
+
+    if (ret != SUCCESS) {
+      return ret;
+    }
+
+    int min, max;
+    float sum = 0;
+    if (x <= y) {
+      min = x;
+      max = y;
+    }
+    else {
+      min = y;
+      max = x;
+    }
+    // decrement to make it an index
+    min--;
+    for (int i = min; i < max; i++) {
+      sum += s.stk[i];
+    }
+
+    // now remove all the stack elements that were used in the addition.
+    for (int i = min; i < max; i++) {
+      remove_from_stack_index(min);
+    }
+
+    add_to_stack(sum);
+    return SUCCESS;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
+
+// Finds the sum of all the numbers between x and y.
+// ex: if x = 5 and y = 7, sum = 5+6+7 = 18
+static ret_codes rpn_calc_sum() {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
+    float y = pop();
+    float x = pop();
+
+    int min, max;
+    float sum = 0;
+    if (x <= y) {
+      min = x;
+      max = y;
+    }
+    else {
+      min = y;
+      max = x;
+    }
+    for (int i = min; i <= max; i++) {
+      sum += i;
+    }
+    add_to_stack(sum);
+    return SUCCESS;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static ret_codes rpn_calc_bit_and() {
@@ -490,66 +569,68 @@ const static struct {
 
 } calc_operations [] = {
   // Stack Manipulations
-    {"\n"     , rpn_calc_duplicate        } ,
-    {"drop"   , rpn_calc_drop             } ,
-    {"d"      , rpn_calc_drop             } ,
-    {"s"      , rpn_calc_swap             } ,
-    {"swap"   , rpn_calc_swap             } ,
-    {"clear"  , rpn_calc_clear            } ,
-    {"c"      , rpn_calc_clear            } ,
-    {"clearx" , rpn_calc_clearx           } ,
-    {"cx"     , rpn_calc_clearx           } ,
+    {"\n"        , rpn_calc_duplicate        } ,
+    {"drop"      , rpn_calc_drop             } ,
+    {"d"         , rpn_calc_drop             } ,
+    {"s"         , rpn_calc_swap             } ,
+    {"swap"      , rpn_calc_swap             } ,
+    {"clear"     , rpn_calc_clear            } ,
+    {"c"         , rpn_calc_clear            } ,
+    {"clearx"    , rpn_calc_clearx           } ,
+    {"cx"        , rpn_calc_clearx           } ,
 
   // Math Operations
-    {"+"    , rpn_calc_plus               } ,
-    {"-"    , rpn_calc_minus              } ,
-    {"neg"  , rpn_calc_neg                } ,
-    {"*"    , rpn_calc_multiply           } ,
-    {"/"    , rpn_calc_divide             } ,
-    {"pow"  , rpn_calc_pow                } ,
-    {"**"   , rpn_calc_pow                } ,
-    {"**2"  , rpn_calc_squared            } ,
-    {"**3"  , rpn_calc_cubed              } ,
-    {"sqrt" , rpn_calc_sqrt               } ,
-    {"//2"  , rpn_calc_sqrt               } ,
-    {"cbrt" , rpn_calc_cbrt               } ,
-    {"//3"  , rpn_calc_cbrt               } ,
-    {"xrt"  , rpn_calc_xrt                } ,
-    {"//"   , rpn_calc_xrt                } ,
-    {"abs"  , rpn_calc_abs                } ,
-    {"inv"  , rpn_calc_inv                } ,
-    {"1/x"  , rpn_calc_inv                } ,
-    {"sin"  , rpn_calc_sin                } ,
-    {"cos"  , rpn_calc_cos                } ,
-    {"tan"  , rpn_calc_tan                } ,
-    {"asin" , rpn_calc_asin               } ,
-    {"acos" , rpn_calc_acos               } ,
-    {"atan" , rpn_calc_atan               } ,
-    {"log"  , rpn_calc_log                } ,
-    {"ln"   , rpn_calc_ln                 } ,
-    {"logx" , rpn_calc_logx               } ,
-    {"exp"  , rpn_calc_exp                } ,
+    {"+"         , rpn_calc_plus               } ,
+    {"-"         , rpn_calc_minus              } ,
+    {"neg"       , rpn_calc_neg                } ,
+    {"*"         , rpn_calc_multiply           } ,
+    {"/"         , rpn_calc_divide             } ,
+    {"pow"       , rpn_calc_pow                } ,
+    {"**"        , rpn_calc_pow                } ,
+    {"**2"       , rpn_calc_squared            } ,
+    {"**3"       , rpn_calc_cubed              } ,
+    {"sqrt"      , rpn_calc_sqrt               } ,
+    {"//2"       , rpn_calc_sqrt               } ,
+    {"cbrt"      , rpn_calc_cbrt               } ,
+    {"//3"       , rpn_calc_cbrt               } ,
+    {"xrt"       , rpn_calc_xrt                } ,
+    {"//"        , rpn_calc_xrt                } ,
+    {"abs"       , rpn_calc_abs                } ,
+    {"inv"       , rpn_calc_inv                } ,
+    {"1/x"       , rpn_calc_inv                } ,
+    {"sin"       , rpn_calc_sin                } ,
+    {"cos"       , rpn_calc_cos                } ,
+    {"tan"       , rpn_calc_tan                } ,
+    {"asin"      , rpn_calc_asin               } ,
+    {"acos"      , rpn_calc_acos               } ,
+    {"atan"      , rpn_calc_atan               } ,
+    {"log"       , rpn_calc_log                } ,
+    {"ln"        , rpn_calc_ln                 } ,
+    {"logx"      , rpn_calc_logx               } ,
+    {"exp"       , rpn_calc_exp                } ,
+    {"sumstack"  , rpn_calc_sumstack           } ,
+    {"sum"       , rpn_calc_sum                } ,
 
     // Bitwise Operations
-    {"&"    , rpn_calc_bit_and            } ,
-    {"|"    , rpn_calc_bit_or             } ,
-    {"^"    , rpn_calc_bit_xor            } ,
-    {"<<"   , rpn_calc_bit_left_shift     } ,
-    {">>"   , rpn_calc_bit_right_shift    } ,
-    {"<<1"  , rpn_calc_bit_left_shift_1   } ,
-    {">>1"  , rpn_calc_bit_right_shift_1  } ,
+    {"&"         , rpn_calc_bit_and            } ,
+    {"|"         , rpn_calc_bit_or             } ,
+    {"^"         , rpn_calc_bit_xor            } ,
+    {"<<"        , rpn_calc_bit_left_shift     } ,
+    {">>"        , rpn_calc_bit_right_shift    } ,
+    {"<<1"       , rpn_calc_bit_left_shift_1   } ,
+    {">>1"       , rpn_calc_bit_right_shift_1  } ,
 
     // Calculator Settings
-    {"deg"  , rpn_calc_deg                } ,
-    {"rad"  , rpn_calc_rad                } ,
-    {"hex"  , rpn_calc_hex                } ,
-    {"dec"  , rpn_calc_dec                } ,
-    {"oct"  , rpn_calc_oct                } ,
-    {"bin"  , rpn_calc_bin                } ,
+    {"deg"       , rpn_calc_deg                } ,
+    {"rad"       , rpn_calc_rad                } ,
+    {"hex"       , rpn_calc_hex                } ,
+    {"dec"       , rpn_calc_dec                } ,
+    {"oct"       , rpn_calc_oct                } ,
+    {"bin"       , rpn_calc_bin                } ,
 
     // Constants
-    {"pi"  , rpn_calc_pi                  } ,
-    {"e"   , rpn_calc_e                   } ,
+    {"pi"        , rpn_calc_pi                  } ,
+    {"e"         , rpn_calc_e                   } ,
   };
 
 // This is called from stack.c when we are trying to find out if the user input

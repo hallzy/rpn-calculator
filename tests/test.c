@@ -668,6 +668,62 @@ static int test_rpn_calc_exp() {
   return 1;
 }
 
+static int test_rpn_calc_sumstack() {
+  char input[input_size];
+
+  strncpy(input, "5", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "10", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "7", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "3", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "5", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "2", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "4", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "sumstack", input_size);
+  push(input, strlen(input));
+
+
+  if (stack_size() == 3 && actual_result() == 20.0 && s.stk[0] == 5 &&
+      s.stk[1] == 5) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_rpn_calc_sum() {
+  char input[input_size];
+
+  strncpy(input, "5", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "1", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "100", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "sum", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 2 && actual_result() == 5050.0) {
+    return 0;
+  }
+  return 1;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static int test_rpn_calc_bit_and() {
@@ -834,6 +890,8 @@ const static struct {
     {"test_rpn_calc_ln"                , test_rpn_calc_ln                } ,
     {"test_rpn_calc_logx"              , test_rpn_calc_logx              } ,
     {"test_rpn_calc_exp"               , test_rpn_calc_exp               } ,
+    {"test_rpn_calc_sumstack"          , test_rpn_calc_sumstack          } ,
+    {"test_rpn_calc_sum"               , test_rpn_calc_sum               } ,
 
     // --- BITWISE OPERATIONS ---
     {"test_rpn_calc_bit_and"           , test_rpn_calc_bit_and           } ,

@@ -58,6 +58,9 @@ int stack_size();
 // Adds a new number to the stack and increments s.top stack pointer
 void add_to_stack(float f);
 
+// Removes the stack element at index j and reorganizes the stack.
+void remove_from_stack_index(unsigned int j);
+
 // Prints the current contents of the stack and its settings
 void print_stack();
 
