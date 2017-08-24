@@ -3,9 +3,6 @@
 #include <string.h>
 #include <math.h>
 
-#define pi 3.141592653589793
-#define e  2.718281828459045
-
 // --- STACK MANIPULATION FUNCTIONS ---
 
 // Blank entry duplicates the last item on the stack
@@ -187,6 +184,17 @@ static ret_codes my_abs() {
   return FAILED_OPERATION;
 }
 
+// invert the value
+static ret_codes inv() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    add_to_stack(1.0/num);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
 static ret_codes sine() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
@@ -232,12 +240,46 @@ static ret_codes tangent() {
   return FAILED_OPERATION;
 }
 
-// invert the value
-static ret_codes inv() {
+static ret_codes asine() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
-    add_to_stack(1.0/num);
+    if (s.rad_mode) {
+      add_to_stack(asin(num));
+    }
+    else {
+      add_to_stack(asin(num)*180.0/pi);
+    }
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes acosine() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    if (s.rad_mode) {
+      add_to_stack(cos(num));
+    }
+    else {
+      add_to_stack(acos(num)*180.0/pi);
+    }
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes atangent() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    if (s.rad_mode) {
+      add_to_stack(tan(num));
+    }
+    else {
+      add_to_stack(atan(num)*180.0/pi);
+    }
     return SUCCESS;
   }
   return FAILED_OPERATION;
@@ -305,6 +347,9 @@ const static struct {
     {"sin"  , sine      } ,
     {"cos"  , cosine    } ,
     {"tan"  , tangent   } ,
+    {"asin" , asine     } ,
+    {"acos" , acosine   } ,
+    {"atan" , atangent  } ,
 
     // Calculator Settings
     {"deg"  , deg       } ,
