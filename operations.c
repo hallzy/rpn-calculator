@@ -3,6 +3,10 @@
 #include <string.h>
 #include <math.h>
 
+
+// --- STACK MANIPULATION FUNCTIONS ---
+
+// Blank entry duplicates the last item on the stack
 static ret_codes duplicate() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -14,6 +18,7 @@ static ret_codes duplicate() {
   return FAILED_OPERATION;
 }
 
+// Removes the last entry on the stack
 static ret_codes drop() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -23,6 +28,22 @@ static ret_codes drop() {
   return FAILED_OPERATION;
 }
 
+// Swap the order of the last two stack entries
+static ret_codes swap() {
+  // Make sure there are at least 1 elements on the stack
+  if (s.top >= 0) {
+    float num2 = pop();
+    float num1 = pop();
+    add_to_stack(num2);
+    add_to_stack(num1);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+// --- MATHEMATICAL OPERATORS ---
+
+// Adds the last two stack entries together
 static ret_codes plus() {
   // Make sure there are at least 2 elements on the stack
   if (s.top >= 1) {
@@ -34,6 +55,7 @@ static ret_codes plus() {
   return FAILED_OPERATION;
 }
 
+// Subtracts the last two stack entries together
 static ret_codes minus() {
   // Make sure there are at least 2 elements on the stack
   if (s.top >= 1) {
@@ -45,6 +67,7 @@ static ret_codes minus() {
   return FAILED_OPERATION;
 }
 
+// Multiplies the last two stack entries together
 static ret_codes multiply() {
   // Make sure there are at least 2 elements on the stack
   if (s.top >= 1) {
@@ -56,6 +79,7 @@ static ret_codes multiply() {
   return FAILED_OPERATION;
 }
 
+// Divides the last two stack entries together
 static ret_codes divide() {
   // Make sure there are at least 2 elements on the stack
   if (s.top >= 1) {
@@ -67,6 +91,7 @@ static ret_codes divide() {
   return FAILED_OPERATION;
 }
 
+// x to the power of y
 static ret_codes my_pow() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -78,6 +103,7 @@ static ret_codes my_pow() {
   return FAILED_OPERATION;
 }
 
+// squared
 static ret_codes squared() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -88,6 +114,7 @@ static ret_codes squared() {
   return FAILED_OPERATION;
 }
 
+// cubed
 static ret_codes cubed() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -98,6 +125,7 @@ static ret_codes cubed() {
   return FAILED_OPERATION;
 }
 
+// Square Roots the last stack entry
 static ret_codes my_sqrt() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -108,6 +136,7 @@ static ret_codes my_sqrt() {
   return FAILED_OPERATION;
 }
 
+// Cube Roots the last stack entry
 static ret_codes my_cbrt() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -118,6 +147,7 @@ static ret_codes my_cbrt() {
   return FAILED_OPERATION;
 }
 
+// xth Root the last stack entry
 static ret_codes xrt() {
   // Make sure there are at least 1 elements on the stack
   if (s.top >= 0) {
@@ -129,24 +159,31 @@ static ret_codes xrt() {
   return FAILED_OPERATION;
 }
 
+// -----------------------------------------------------------------------------
+
 const static struct {
   const char *name;
   ret_codes (*func)(void);
 
 } calc_operations [] = {
-    {"\n"   , duplicate } , // Blank entry duplicates the last item on the stack
-    {"drop" , drop      } , // Removes the last entry on the stack
+  // Stack Manipulations
+    {"\n"   , duplicate } ,
+    {"drop" , drop      } ,
     {"d"    , drop      } ,
-    {"+"    , plus      } , // Adds the last two stack entries together
-    {"-"    , minus     } , // Subtracts the last two stack entries together
-    {"*"    , multiply  } , // Multiplies the last two stack entries together
-    {"/"    , divide    } , // Divides the last two stack entries together
-    {"pow"  , my_pow    } , // x to the power of y
-    {"**2"  , squared   } , // squared
-    {"**3"  , cubed     } , // cubed
-    {"sqrt" , my_sqrt   } , // Square Roots the last stack entry
-    {"cbrt" , my_cbrt   } , // Cube Roots the last stack entry
-    {"xrt"  , xrt       } , // xth Root the last stack entry
+    {"s"    , swap      } ,
+    {"swap" , swap      } ,
+
+  // Math Operations
+    {"+"    , plus      } ,
+    {"-"    , minus     } ,
+    {"*"    , multiply  } ,
+    {"/"    , divide    } ,
+    {"pow"  , my_pow    } ,
+    {"**2"  , squared   } ,
+    {"**3"  , cubed     } ,
+    {"sqrt" , my_sqrt   } ,
+    {"cbrt" , my_cbrt   } ,
+    {"xrt"  , xrt       } ,
     {"//"   , xrt       } ,
   };
 
