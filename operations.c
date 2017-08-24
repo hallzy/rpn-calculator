@@ -9,7 +9,7 @@
 // Blank entry duplicates the last item on the stack
 static ret_codes duplicate() {
   // Make sure there are at least 1 elements on the stack
-  if (s.top >= 0) {
+  if (stack_size() >= 1) {
     float num1 = pop();
     add_to_stack(num1);
     add_to_stack(num1);
@@ -21,7 +21,7 @@ static ret_codes duplicate() {
 // Removes the last entry on the stack
 static ret_codes drop() {
   // Make sure there are at least 1 elements on the stack
-  if (s.top >= 0) {
+  if (stack_size() >= 1) {
     pop();
     return SUCCESS;
   }
@@ -31,7 +31,7 @@ static ret_codes drop() {
 // Swap the order of the last two stack entries
 static ret_codes swap() {
   // Make sure there are at least 1 elements on the stack
-  if (s.top >= 0) {
+  if (stack_size() >= 1) {
     float num2 = pop();
     float num1 = pop();
     add_to_stack(num2);
@@ -46,7 +46,7 @@ static ret_codes swap() {
 // Adds the last two stack entries together
 static ret_codes plus() {
   // Make sure there are at least 2 elements on the stack
-  if (s.top >= 1) {
+  if (stack_size() >= 2) {
     float num2 = pop();
     float num1 = pop();
     add_to_stack(num1+num2);
@@ -58,7 +58,7 @@ static ret_codes plus() {
 // Subtracts the last two stack entries together
 static ret_codes minus() {
   // Make sure there are at least 2 elements on the stack
-  if (s.top >= 1) {
+  if (stack_size() >= 2) {
     float num2 = pop();
     float num1 = pop();
     add_to_stack(num1-num2);
@@ -67,10 +67,21 @@ static ret_codes minus() {
   return FAILED_OPERATION;
 }
 
+// Change the sign on the number
+static ret_codes neg() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    add_to_stack(num*-1);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
 // Multiplies the last two stack entries together
 static ret_codes multiply() {
   // Make sure there are at least 2 elements on the stack
-  if (s.top >= 1) {
+  if (stack_size() >= 2) {
     float num2 = pop();
     float num1 = pop();
     add_to_stack(num1*num2);
@@ -82,7 +93,7 @@ static ret_codes multiply() {
 // Divides the last two stack entries together
 static ret_codes divide() {
   // Make sure there are at least 2 elements on the stack
-  if (s.top >= 1) {
+  if (stack_size() >= 2) {
     float num2 = pop();
     float num1 = pop();
     add_to_stack(num1/num2);
@@ -93,8 +104,8 @@ static ret_codes divide() {
 
 // x to the power of y
 static ret_codes my_pow() {
-  // Make sure there are at least 1 elements on the stack
-  if (s.top >= 0) {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
     float num2 = pop();
     float num1 = pop();
     add_to_stack(pow(num1, num2));
@@ -106,7 +117,7 @@ static ret_codes my_pow() {
 // squared
 static ret_codes squared() {
   // Make sure there are at least 1 elements on the stack
-  if (s.top >= 0) {
+  if (stack_size() >= 1) {
     float num = pop();
     add_to_stack(pow(num, 2));
     return SUCCESS;
@@ -117,7 +128,7 @@ static ret_codes squared() {
 // cubed
 static ret_codes cubed() {
   // Make sure there are at least 1 elements on the stack
-  if (s.top >= 0) {
+  if (stack_size() >= 1) {
     float num = pop();
     add_to_stack(pow(num, 3));
     return SUCCESS;
@@ -128,7 +139,7 @@ static ret_codes cubed() {
 // Square Roots the last stack entry
 static ret_codes my_sqrt() {
   // Make sure there are at least 1 elements on the stack
-  if (s.top >= 0) {
+  if (stack_size() >= 1) {
     float num = pop();
     add_to_stack(sqrt(num));
     return SUCCESS;
@@ -139,7 +150,7 @@ static ret_codes my_sqrt() {
 // Cube Roots the last stack entry
 static ret_codes my_cbrt() {
   // Make sure there are at least 1 elements on the stack
-  if (s.top >= 0) {
+  if (stack_size() >= 1) {
     float num = pop();
     add_to_stack(cbrt(num));
     return SUCCESS;
@@ -149,11 +160,26 @@ static ret_codes my_cbrt() {
 
 // xth Root the last stack entry
 static ret_codes xrt() {
-  // Make sure there are at least 1 elements on the stack
-  if (s.top >= 0) {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
     float num2 = pop();
     float num1 = pop();
     add_to_stack(pow(num1, 1.0/num2));
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+// absolute value of number
+static ret_codes my_abs() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+
+    if (num < 0) {
+      num *= -1;
+    }
+    add_to_stack(num);
     return SUCCESS;
   }
   return FAILED_OPERATION;
@@ -176,6 +202,7 @@ const static struct {
   // Math Operations
     {"+"    , plus      } ,
     {"-"    , minus     } ,
+    {"neg"  , neg       } ,
     {"*"    , multiply  } ,
     {"/"    , divide    } ,
     {"pow"  , my_pow    } ,
@@ -185,6 +212,7 @@ const static struct {
     {"cbrt" , my_cbrt   } ,
     {"xrt"  , xrt       } ,
     {"//"   , xrt       } ,
+    {"abs"  , my_abs       } ,
   };
 
 // returns the index of the operation

@@ -20,6 +20,7 @@ stack s;
 ret_codes push(char *val, int val_size);
 float  pop();
 void stack_init();
+int stack_size();
 void add_to_stack(float f);
 void print_stack();
 

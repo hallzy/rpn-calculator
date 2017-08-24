@@ -9,6 +9,10 @@ void stack_init() {
   s.top = -1;
 }
 
+int stack_size() {
+  return s.top + 1;
+}
+
 void add_to_stack(float f) {
   // first check that we haven't maxed out the stack already.
   // If we have already reached MAX_STK then drop the element at the bottom of
