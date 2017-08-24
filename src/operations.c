@@ -29,12 +29,32 @@ static ret_codes rpn_calc_drop() {
 
 // Swap the order of the last two stack entries
 static ret_codes rpn_calc_swap() {
-  // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
     float num2 = pop();
     float num1 = pop();
     add_to_stack(num2);
     add_to_stack(num1);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+// Clear the WHOLE STACK
+static ret_codes rpn_calc_clear() {
+  s.top = -1;
+  return SUCCESS;
+}
+
+// Clear x elements from the stack (not including the element of x)
+static ret_codes rpn_calc_clearx() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    s.top -= num;
+    if (s.top < -1) {
+      s.top = -1;
+    }
     return SUCCESS;
   }
   return FAILED_OPERATION;
@@ -470,11 +490,15 @@ const static struct {
 
 } calc_operations [] = {
   // Stack Manipulations
-    {"\n"   , rpn_calc_duplicate          } ,
-    {"drop" , rpn_calc_drop               } ,
-    {"d"    , rpn_calc_drop               } ,
-    {"s"    , rpn_calc_swap               } ,
-    {"swap" , rpn_calc_swap               } ,
+    {"\n"     , rpn_calc_duplicate        } ,
+    {"drop"   , rpn_calc_drop             } ,
+    {"d"      , rpn_calc_drop             } ,
+    {"s"      , rpn_calc_swap             } ,
+    {"swap"   , rpn_calc_swap             } ,
+    {"clear"  , rpn_calc_clear            } ,
+    {"c"      , rpn_calc_clear            } ,
+    {"clearx" , rpn_calc_clearx           } ,
+    {"cx"     , rpn_calc_clearx           } ,
 
   // Math Operations
     {"+"    , rpn_calc_plus               } ,

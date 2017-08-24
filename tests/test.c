@@ -64,6 +64,69 @@ static int test_rpn_calc_swap() {
   return 1;
 }
 
+static int test_rpn_calc_clear() {
+  char input[input_size];
+
+  strncpy(input, "1.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "2.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "3.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "4.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "5.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "6.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "clear", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 0) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_rpn_calc_clearx() {
+  char input[input_size];
+
+  strncpy(input, "1.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "2.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "9.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "4.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "5.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "6.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "3.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "clearx", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 3 && actual_result() == 9.0) {
+    return 0;
+  }
+  return 1;
+}
+
 // --- MATHEMATICAL OPERATORS ---
 
 static int test_rpn_calc_plus() {
@@ -738,6 +801,8 @@ const static struct {
     {"test_rpn_calc_duplicate"         , test_rpn_calc_duplicate         } ,
     {"test_rpn_calc_drop"              , test_rpn_calc_drop              } ,
     {"test_rpn_calc_swap"              , test_rpn_calc_swap              } ,
+    {"test_rpn_calc_clear"             , test_rpn_calc_clear             } ,
+    {"test_rpn_calc_clearx"            , test_rpn_calc_clearx            } ,
 
     // --- MATHEMATICAL OPERATORS ---
     {"test_rpn_calc_plus"              , test_rpn_calc_plus              } ,
