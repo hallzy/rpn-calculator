@@ -115,13 +115,13 @@ static int test_rpn_calc_clearx() {
   strncpy(input, "6.0", input_size);
   push(input, strlen(input));
 
-  strncpy(input, "3.0", input_size);
+  strncpy(input, "2.0", input_size);
   push(input, strlen(input));
 
   strncpy(input, "clearx", input_size);
   push(input, strlen(input));
 
-  if (stack_size() == 3 && actual_result() == 9.0) {
+  if (stack_size() == 2 && actual_result() == 2.0) {
     return 0;
   }
   return 1;

@@ -46,12 +46,12 @@ static ret_codes rpn_calc_clear() {
   return SUCCESS;
 }
 
-// Clear x elements from the stack (not including the element of x)
+// Clear up to the stack element that is numbered by x
 static ret_codes rpn_calc_clearx() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
-    s.top -= num;
+    s.top = num - 1;
     if (s.top < -1) {
       s.top = -1;
     }
