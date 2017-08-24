@@ -9,22 +9,6 @@ void stack_init() {
   s.top = -1;
 }
 
-static int isNumber(char *s, int s_len) {
-  int already_has_decimal=0;
-  for (int i = 0; i < s_len; i++) {
-    if (isdigit(s[i])) {
-      continue;
-    }
-    else if (s[i] == '.' && already_has_decimal == 0) {
-        already_has_decimal=1;
-        continue;
-    }
-    // failed. Not a number
-    return 0;
-  }
-  return 1;
-}
-
 void add_to_stack(float f) {
   // first check that we haven't maxed out the stack already.
   // If we have already reached MAX_STK then drop the element at the bottom of
@@ -41,18 +25,23 @@ void add_to_stack(float f) {
 
 ret_codes push(char *val, int val_size) {
   int op;
-  if (val_size == 0) {
-    return NOTHING_TO_PUSH;
-  }
-  else if (isNumber(val, val_size)) {
-    add_to_stack(atof(val));
-    return SUCCESS;
-  }
-  else if ((op = whichOperation(val)) != -1) {
+  float num;
+
+  // Is the input an operation
+  if ((op = whichOperation(val)) != -1) {
     return performOperation(op);
   }
+  // if it wasn't an operation it better be a number...
   else {
-    return FAILED_TO_PUSH;
+    char *next;
+    // this will recognize decimal or hex values.
+    num = strtof(val, &next);
+    if (next == val || *next != '\0') {
+
+      return FAILED_TO_PUSH;
+    }
+    add_to_stack(num);
+    return SUCCESS;
   }
 }
 
