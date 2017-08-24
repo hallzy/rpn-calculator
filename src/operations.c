@@ -6,7 +6,7 @@
 // --- STACK MANIPULATION FUNCTIONS ---
 
 // Blank entry duplicates the last item on the stack
-static ret_codes duplicate() {
+static ret_codes rpn_calc_duplicate() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num1 = pop();
@@ -18,7 +18,7 @@ static ret_codes duplicate() {
 }
 
 // Removes the last entry on the stack
-static ret_codes drop() {
+static ret_codes rpn_calc_drop() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     pop();
@@ -28,7 +28,7 @@ static ret_codes drop() {
 }
 
 // Swap the order of the last two stack entries
-static ret_codes swap() {
+static ret_codes rpn_calc_swap() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num2 = pop();
@@ -43,7 +43,7 @@ static ret_codes swap() {
 // --- MATHEMATICAL OPERATORS ---
 
 // Adds the last two stack entries together
-static ret_codes plus() {
+static ret_codes rpn_calc_plus() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -55,7 +55,7 @@ static ret_codes plus() {
 }
 
 // Subtracts the last two stack entries together
-static ret_codes minus() {
+static ret_codes rpn_calc_minus() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -67,7 +67,7 @@ static ret_codes minus() {
 }
 
 // Change the sign on the number
-static ret_codes neg() {
+static ret_codes rpn_calc_neg() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -78,7 +78,7 @@ static ret_codes neg() {
 }
 
 // Multiplies the last two stack entries together
-static ret_codes multiply() {
+static ret_codes rpn_calc_multiply() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -90,7 +90,7 @@ static ret_codes multiply() {
 }
 
 // Divides the last two stack entries together
-static ret_codes divide() {
+static ret_codes rpn_calc_divide() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -102,7 +102,7 @@ static ret_codes divide() {
 }
 
 // x to the power of y
-static ret_codes my_pow() {
+static ret_codes rpn_calc_pow() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -114,7 +114,7 @@ static ret_codes my_pow() {
 }
 
 // squared
-static ret_codes squared() {
+static ret_codes rpn_calc_squared() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -125,7 +125,7 @@ static ret_codes squared() {
 }
 
 // cubed
-static ret_codes cubed() {
+static ret_codes rpn_calc_cubed() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -136,7 +136,7 @@ static ret_codes cubed() {
 }
 
 // Square Roots the last stack entry
-static ret_codes my_sqrt() {
+static ret_codes rpn_calc_sqrt() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -147,7 +147,7 @@ static ret_codes my_sqrt() {
 }
 
 // Cube Roots the last stack entry
-static ret_codes my_cbrt() {
+static ret_codes rpn_calc_cbrt() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -158,7 +158,7 @@ static ret_codes my_cbrt() {
 }
 
 // xth Root the last stack entry
-static ret_codes xrt() {
+static ret_codes rpn_calc_xrt() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -170,7 +170,7 @@ static ret_codes xrt() {
 }
 
 // absolute value of number
-static ret_codes my_abs() {
+static ret_codes rpn_calc_abs() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -185,7 +185,7 @@ static ret_codes my_abs() {
 }
 
 // invert the value
-static ret_codes inv() {
+static ret_codes rpn_calc_inv() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -195,7 +195,7 @@ static ret_codes inv() {
   return FAILED_OPERATION;
 }
 
-static ret_codes sine() {
+static ret_codes rpn_calc_sin() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -210,7 +210,7 @@ static ret_codes sine() {
   return FAILED_OPERATION;
 }
 
-static ret_codes cosine() {
+static ret_codes rpn_calc_cos() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -225,7 +225,7 @@ static ret_codes cosine() {
   return FAILED_OPERATION;
 }
 
-static ret_codes tangent() {
+static ret_codes rpn_calc_tan() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -240,7 +240,7 @@ static ret_codes tangent() {
   return FAILED_OPERATION;
 }
 
-static ret_codes asine() {
+static ret_codes rpn_calc_asin() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -255,7 +255,7 @@ static ret_codes asine() {
   return FAILED_OPERATION;
 }
 
-static ret_codes acosine() {
+static ret_codes rpn_calc_acos() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -270,7 +270,7 @@ static ret_codes acosine() {
   return FAILED_OPERATION;
 }
 
-static ret_codes atangent() {
+static ret_codes rpn_calc_atan() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -285,7 +285,9 @@ static ret_codes atangent() {
   return FAILED_OPERATION;
 }
 
-static ret_codes bit_and() {
+// --- BITWISE OPERATIONS ---
+
+static ret_codes rpn_calc_bit_and() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -296,7 +298,7 @@ static ret_codes bit_and() {
   return FAILED_OPERATION;
 }
 
-static ret_codes bit_or() {
+static ret_codes rpn_calc_bit_or() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -307,7 +309,7 @@ static ret_codes bit_or() {
   return FAILED_OPERATION;
 }
 
-static ret_codes bit_xor() {
+static ret_codes rpn_calc_bit_xor() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -318,7 +320,7 @@ static ret_codes bit_xor() {
   return FAILED_OPERATION;
 }
 
-static ret_codes bit_left_shift() {
+static ret_codes rpn_calc_bit_left_shift() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -329,7 +331,7 @@ static ret_codes bit_left_shift() {
   return FAILED_OPERATION;
 }
 
-static ret_codes bit_right_shift() {
+static ret_codes rpn_calc_bit_right_shift() {
   // Make sure there are at least 2 elements on the stack
   if (stack_size() >= 2) {
     float num2 = pop();
@@ -340,7 +342,7 @@ static ret_codes bit_right_shift() {
   return FAILED_OPERATION;
 }
 
-static ret_codes bit_left_shift_1() {
+static ret_codes rpn_calc_bit_left_shift_1() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -350,7 +352,7 @@ static ret_codes bit_left_shift_1() {
   return FAILED_OPERATION;
 }
 
-static ret_codes bit_right_shift_1() {
+static ret_codes rpn_calc_bit_right_shift_1() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     float num = pop();
@@ -363,49 +365,49 @@ static ret_codes bit_right_shift_1() {
 // --- CALUCLATOR SETTINGS ---
 
 // Change to radians mode
-static ret_codes rad() {
+static ret_codes rpn_calc_rad() {
   s.angle_mode=RADIANS;
   return SUCCESS;
 }
 
 // Change to degrees mode
-static ret_codes deg() {
+static ret_codes rpn_calc_deg() {
   s.angle_mode=DEGREES;
   return SUCCESS;
 }
 
 // Change to degrees mode
-static ret_codes hex() {
+static ret_codes rpn_calc_hex() {
   s.base_mode=HEXADECIMAL;
   return SUCCESS;
 }
 
 // Change to degrees mode
-static ret_codes dec() {
+static ret_codes rpn_calc_dec() {
   s.base_mode=DECIMAL;
   return SUCCESS;
 }
 
 // Change to degrees mode
-static ret_codes oct() {
+static ret_codes rpn_calc_oct() {
   s.base_mode=OCTAL;
   return SUCCESS;
 }
 
 // Change to degrees mode
-static ret_codes bin() {
+static ret_codes rpn_calc_bin() {
   s.base_mode=BINARY;
   return SUCCESS;
 }
 
 // --- CONSTANTS ---
 
-static ret_codes my_pi() {
+static ret_codes rpn_calc_pi() {
   add_to_stack(pi);
   return SUCCESS;
 }
 
-static ret_codes my_e() {
+static ret_codes rpn_calc_e() {
   add_to_stack(e);
   return SUCCESS;
 }
@@ -422,58 +424,61 @@ const static struct {
 
 } calc_operations [] = {
   // Stack Manipulations
-    {"\n"   , duplicate } ,
-    {"drop" , drop      } ,
-    {"d"    , drop      } ,
-    {"s"    , swap      } ,
-    {"swap" , swap      } ,
+    {"\n"   , rpn_calc_duplicate          } ,
+    {"drop" , rpn_calc_drop               } ,
+    {"d"    , rpn_calc_drop               } ,
+    {"s"    , rpn_calc_swap               } ,
+    {"swap" , rpn_calc_swap               } ,
 
   // Math Operations
-    {"+"    , plus      } ,
-    {"-"    , minus     } ,
-    {"neg"  , neg       } ,
-    {"*"    , multiply  } ,
-    {"/"    , divide    } ,
-    {"pow"  , my_pow    } ,
-    {"**"   , my_pow    } ,
-    {"**2"  , squared   } ,
-    {"**3"  , cubed     } ,
-    {"sqrt" , my_sqrt   } ,
-    {"//2"  , my_sqrt   } ,
-    {"cbrt" , my_cbrt   } ,
-    {"//3"  , my_cbrt   } ,
-    {"xrt"  , xrt       } ,
-    {"//"   , xrt       } ,
-    {"abs"  , my_abs    } ,
-    {"inv"  , inv       } ,
-    {"1/x"  , inv       } ,
-    {"sin"  , sine      } ,
-    {"cos"  , cosine    } ,
-    {"tan"  , tangent   } ,
-    {"asin" , asine     } ,
-    {"acos" , acosine   } ,
-    {"atan" , atangent  } ,
+    {"+"    , rpn_calc_plus               } ,
+    {"-"    , rpn_calc_minus              } ,
+    {"neg"  , rpn_calc_neg                } ,
+    {"*"    , rpn_calc_multiply           } ,
+    {"/"    , rpn_calc_divide             } ,
+    {"pow"  , rpn_calc_pow                } ,
+    {"**"   , rpn_calc_pow                } ,
+    {"**2"  , rpn_calc_squared            } ,
+    {"**3"  , rpn_calc_cubed              } ,
+    {"sqrt" , rpn_calc_sqrt               } ,
+    {"//2"  , rpn_calc_sqrt               } ,
+    {"cbrt" , rpn_calc_cbrt               } ,
+    {"//3"  , rpn_calc_cbrt               } ,
+    {"xrt"  , rpn_calc_xrt                } ,
+    {"//"   , rpn_calc_xrt                } ,
+    {"abs"  , rpn_calc_abs                } ,
+    {"inv"  , rpn_calc_inv                } ,
+    {"1/x"  , rpn_calc_inv                } ,
+    {"sin"  , rpn_calc_sin                } ,
+    {"cos"  , rpn_calc_cos                } ,
+    {"tan"  , rpn_calc_tan                } ,
+    {"asin" , rpn_calc_asin               } ,
+    {"acos" , rpn_calc_acos               } ,
+    {"atan" , rpn_calc_atan               } ,
+    /* {"log"  , rpn_calc_log                } , */
+    /* {"ln"   , rpn_calc_ln                 } , */
+    /* {"logx" , rpn_calc_logx               } , */
 
     // Bitwise Operations
-    {"&"    , bit_and            } ,
-    {"|"    , bit_or             } ,
-    {"^"    , bit_xor            } ,
-    {"<<"   , bit_left_shift     } ,
-    {">>"   , bit_right_shift    } ,
-    {"<<1"  , bit_left_shift_1   } ,
-    {">>1"  , bit_right_shift_1  } ,
+    {"&"    , rpn_calc_bit_and            } ,
+    {"|"    , rpn_calc_bit_or             } ,
+    {"^"    , rpn_calc_bit_xor            } ,
+    {"<<"   , rpn_calc_bit_left_shift     } ,
+    {">>"   , rpn_calc_bit_right_shift    } ,
+    {"<<1"  , rpn_calc_bit_left_shift_1   } ,
+    {">>1"  , rpn_calc_bit_right_shift_1  } ,
 
     // Calculator Settings
-    {"deg"  , deg       } ,
-    {"rad"  , rad       } ,
-    {"hex"  , hex       } ,
-    {"dec"  , dec       } ,
-    {"oct"  , oct       } ,
-    {"bin"  , bin       } ,
+    {"deg"  , rpn_calc_deg                } ,
+    {"rad"  , rpn_calc_rad                } ,
+    {"hex"  , rpn_calc_hex                } ,
+    {"dec"  , rpn_calc_dec                } ,
+    {"oct"  , rpn_calc_oct                } ,
+    {"bin"  , rpn_calc_bin                } ,
 
     // Constants
-    {"pi"  , my_pi     } ,
-    {"e"   , my_e      } ,
+    {"pi"  , rpn_calc_pi                  } ,
+    {"e"   , rpn_calc_e                   } ,
   };
 
 // This is called from stack.c when we are trying to find out if the user input
