@@ -185,6 +185,17 @@ static ret_codes my_abs() {
   return FAILED_OPERATION;
 }
 
+// invert the value
+static ret_codes inv() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    add_to_stack(1.0/num);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
 // -----------------------------------------------------------------------------
 
 const static struct {
@@ -216,6 +227,8 @@ const static struct {
     {"xrt"  , xrt       } ,
     {"//"   , xrt       } ,
     {"abs"  , my_abs    } ,
+    {"inv"  , inv       } ,
+    {"1/x"  , inv       } ,
   };
 
 // returns the index of the operation

@@ -281,6 +281,25 @@ static int test_my_abs() {
   return 1;
 }
 
+static int test_inv() {
+  char input[input_size];
+
+  strncpy(input, "1.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "3.0", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "inv", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 2 && actual_result() > 0.33332 &&
+      actual_result() < 0.33334) {
+    return 0;
+  }
+  return 1;
+}
+
 
 
 // LIST OF TESTS
@@ -305,6 +324,7 @@ const static struct {
     {"test_my_cbrt"     , test_my_cbrt   } ,
     {"test_xrt"         , test_xrt       } ,
     {"test_my_abs"      , test_my_abs    } ,
+    {"test_inv"         , test_inv       } ,
   };
 
 // PERFORM THE TESTS
