@@ -206,13 +206,16 @@ const static struct {
     {"*"    , multiply  } ,
     {"/"    , divide    } ,
     {"pow"  , my_pow    } ,
+    {"**"   , my_pow    } ,
     {"**2"  , squared   } ,
     {"**3"  , cubed     } ,
     {"sqrt" , my_sqrt   } ,
+    {"//2"  , my_sqrt   } ,
     {"cbrt" , my_cbrt   } ,
+    {"//3"  , my_cbrt   } ,
     {"xrt"  , xrt       } ,
     {"//"   , xrt       } ,
-    {"abs"  , my_abs       } ,
+    {"abs"  , my_abs    } ,
   };
 
 // returns the index of the operation

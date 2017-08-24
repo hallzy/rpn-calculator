@@ -1,10 +1,15 @@
+#ifndef TEST
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "stack.h"
+#else
+#include "test.h"
+#endif // TEST
 
 int main() {
+#ifndef TEST
   stack_init();
 
   char input[128];
@@ -24,6 +29,9 @@ int main() {
     print_stack();
     printf("===============================================================\n");
   }
-
   return 0;
+
+#else
+  return performTests();
+#endif // TEST
 }
