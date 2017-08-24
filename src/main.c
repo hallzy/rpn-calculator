@@ -17,13 +17,8 @@ int main() {
   char input[128];
 
   while(1) {
-    printf("===============================================================\n");
-    // Give the user input to the calcualtor, and let it do its thing
-    push(input, strlen(input));
-
     // And give me the result!
     print_stack();
-    printf("===============================================================\n");
 
     fgets(input, sizeof(input), stdin);
     // Remove the newline character unless it is the only thing in the string (I
@@ -35,6 +30,10 @@ int main() {
 
     // q will be used to quit the calculator
     if (strcmp(input, "q") ==0) return 0;
+
+    // Give the user input to the calcualtor, and let it do its thing
+    push(input, strlen(input));
+
   }
   return 0;
 
