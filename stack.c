@@ -6,7 +6,8 @@
 #include <stdio.h>
 
 void stack_init() {
-  s.top = -1;
+  s.top      = -1;
+  s.rad_mode = 1;
 }
 
 int stack_size() {
@@ -56,6 +57,12 @@ float pop() {
 }
 
 void print_stack() {
+  if (s.rad_mode == 1) {
+    printf("RAD\n\n");
+  }
+  else {
+    printf("DEG\n\n");
+  }
   for (int i = 0; i <= s.top; i++) {
     printf("%d:  %f\n", i+1, s.stk[i]);
   }

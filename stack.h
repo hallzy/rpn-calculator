@@ -13,6 +13,7 @@ typedef enum {
 typedef struct {
   float stk[MAX_STK];
   int top;
+  int rad_mode;
 } stack;
 
 stack s;
