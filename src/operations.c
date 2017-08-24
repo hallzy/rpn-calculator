@@ -285,6 +285,81 @@ static ret_codes atangent() {
   return FAILED_OPERATION;
 }
 
+static ret_codes bit_and() {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
+    float num2 = pop();
+    float num1 = pop();
+    add_to_stack((int)num1 & (int)num2);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes bit_or() {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
+    float num2 = pop();
+    float num1 = pop();
+    add_to_stack((int)num1 | (int)num2);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes bit_xor() {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
+    float num2 = pop();
+    float num1 = pop();
+    add_to_stack((int)num1 ^ (int)num2);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes bit_left_shift() {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
+    float num2 = pop();
+    float num1 = pop();
+    add_to_stack((int)num1 << (int)num2);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes bit_right_shift() {
+  // Make sure there are at least 2 elements on the stack
+  if (stack_size() >= 2) {
+    float num2 = pop();
+    float num1 = pop();
+    add_to_stack((int)num1 >> (int)num2);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes bit_left_shift_1() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    add_to_stack((int)num << 1);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
+static ret_codes bit_right_shift_1() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    float num = pop();
+    add_to_stack((int)num >> 1);
+    return SUCCESS;
+  }
+  return FAILED_OPERATION;
+}
+
 // --- CALUCLATOR SETTINGS ---
 
 // Change to radians mode
@@ -374,6 +449,15 @@ const static struct {
     {"asin" , asine     } ,
     {"acos" , acosine   } ,
     {"atan" , atangent  } ,
+
+    // Bitwise Operations
+    {"&"    , bit_and            } ,
+    {"|"    , bit_or             } ,
+    {"^"    , bit_xor            } ,
+    {"<<"   , bit_left_shift     } ,
+    {">>"   , bit_right_shift    } ,
+    {"<<1"  , bit_left_shift_1   } ,
+    {">>1"  , bit_right_shift_1  } ,
 
     // Calculator Settings
     {"deg"  , deg       } ,

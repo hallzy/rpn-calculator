@@ -540,9 +540,127 @@ static int test_atangent_rad() {
   return 1;
 }
 
-// --- CALUCLATOR SETTINGS ---
+// --- BITWISE OPERATIONS ---
 
-// --- CONSTANTS ---
+static int test_bit_and() {
+  char input[input_size];
+
+  strncpy(input, "0b1010", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "0b11", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "&", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() == 2) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_bit_or() {
+  char input[input_size];
+
+  strncpy(input, "0b1010", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "0b11", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "|", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() == 11) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_bit_xor() {
+  char input[input_size];
+
+  strncpy(input, "0b1010", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "0b11", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "^", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() == 9) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_bit_left_shift() {
+  char input[input_size];
+
+  strncpy(input, "0b1010", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "2", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "<<", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() == 40) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_bit_right_shift() {
+  char input[input_size];
+
+  strncpy(input, "0b1010", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "3", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, ">>", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() == 1) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_bit_left_shift1() {
+  char input[input_size];
+
+  strncpy(input, "0b1010", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "<<1", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() == 20) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_bit_right_shift1() {
+  char input[input_size];
+
+  strncpy(input, "0b1010", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, ">>1", input_size);
+  push(input, strlen(input));
+
+  if (stack_size() == 1 && actual_result() == 5) {
+    return 0;
+  }
+  return 1;
+}
 
 
 // LIST OF TESTS
@@ -552,34 +670,41 @@ const static struct {
 
 } test_functions [] = {
   // Stack Manipulations
-    {"test_duplicate"    , test_duplicate    } ,
-    {"test_drop"         , test_drop         } ,
-    {"test_swap"         , test_swap         } ,
-    {"test_plus"         , test_plus         } ,
-    {"test_minus"        , test_minus        } ,
-    {"test_neg"          , test_neg          } ,
-    {"test_multiply"     , test_multiply     } ,
-    {"test_divide"       , test_divide       } ,
-    {"test_my_pow"       , test_my_pow       } ,
-    {"test_squared"      , test_squared      } ,
-    {"test_cubed"        , test_cubed        } ,
-    {"test_my_sqrt"      , test_my_sqrt      } ,
-    {"test_my_cbrt"      , test_my_cbrt      } ,
-    {"test_xrt"          , test_xrt          } ,
-    {"test_my_abs"       , test_my_abs       } ,
-    {"test_inv"          , test_inv          } ,
-    {"test_sine_deg"     , test_sine_deg     } ,
-    {"test_sine_rad"     , test_sine_rad     } ,
-    {"test_cosine_deg"   , test_cosine_deg   } ,
-    {"test_cosine_rad"   , test_cosine_rad   } ,
-    {"test_tangent_deg"  , test_tangent_deg  } ,
-    {"test_tangent_rad"  , test_tangent_rad  } ,
-    {"test_asine_deg"    , test_asine_deg    } ,
-    {"test_asine_rad"    , test_asine_rad    } ,
-    {"test_acosine_deg"  , test_acosine_deg  } ,
-    {"test_acosine_rad"  , test_acosine_rad  } ,
-    {"test_atangent_deg" , test_atangent_deg } ,
-    {"test_atangent_rad" , test_atangent_rad } ,
+    {"test_duplicate"         , test_duplicate         } ,
+    {"test_drop"              , test_drop              } ,
+    {"test_swap"              , test_swap              } ,
+    {"test_plus"              , test_plus              } ,
+    {"test_minus"             , test_minus             } ,
+    {"test_neg"               , test_neg               } ,
+    {"test_multiply"          , test_multiply          } ,
+    {"test_divide"            , test_divide            } ,
+    {"test_my_pow"            , test_my_pow            } ,
+    {"test_squared"           , test_squared           } ,
+    {"test_cubed"             , test_cubed             } ,
+    {"test_my_sqrt"           , test_my_sqrt           } ,
+    {"test_my_cbrt"           , test_my_cbrt           } ,
+    {"test_xrt"               , test_xrt               } ,
+    {"test_my_abs"            , test_my_abs            } ,
+    {"test_inv"               , test_inv               } ,
+    {"test_sine_deg"          , test_sine_deg          } ,
+    {"test_sine_rad"          , test_sine_rad          } ,
+    {"test_cosine_deg"        , test_cosine_deg        } ,
+    {"test_cosine_rad"        , test_cosine_rad        } ,
+    {"test_tangent_deg"       , test_tangent_deg       } ,
+    {"test_tangent_rad"       , test_tangent_rad       } ,
+    {"test_asine_deg"         , test_asine_deg         } ,
+    {"test_asine_rad"         , test_asine_rad         } ,
+    {"test_acosine_deg"       , test_acosine_deg       } ,
+    {"test_acosine_rad"       , test_acosine_rad       } ,
+    {"test_atangent_deg"      , test_atangent_deg      } ,
+    {"test_atangent_rad"      , test_atangent_rad      } ,
+    {"test_bit_and"           , test_bit_and           } ,
+    {"test_bit_or"            , test_bit_or            } ,
+    {"test_bit_xor"           , test_bit_xor           } ,
+    {"test_bit_left_shift"    , test_bit_left_shift    } ,
+    {"test_bit_right_shift"   , test_bit_right_shift   } ,
+    {"test_bit_left_shift1"   , test_bit_left_shift1   } ,
+    {"test_bit_right_shift1"  , test_bit_right_shift1  } ,
   };
 
 // PERFORM THE TESTS
