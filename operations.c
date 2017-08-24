@@ -136,6 +136,7 @@ const static struct {
 } calc_operations [] = {
     {"\n"   , duplicate } , // Blank entry duplicates the last item on the stack
     {"drop" , drop      } , // Removes the last entry on the stack
+    {"d"    , drop      } ,
     {"+"    , plus      } , // Adds the last two stack entries together
     {"-"    , minus     } , // Subtracts the last two stack entries together
     {"*"    , multiply  } , // Multiplies the last two stack entries together
