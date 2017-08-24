@@ -532,7 +532,7 @@ static ret_codes rpn_calc_factorial() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double x = pop();
-    long double ans = factorial((int)x);
+    long double ans = factorial(x);
 
     if (ans == -1) {
       printf("ERROR: Factorial is only accurate up to 25!\n");

@@ -1,6 +1,6 @@
 #ifndef _FACTORIAL_
 #define _FACTORIAL_
 
-long double factorial(int x);
+long double factorial(long double x);
 
-#endif
+#endif // _FACTORIAL_
