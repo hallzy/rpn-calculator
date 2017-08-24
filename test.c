@@ -606,6 +606,6 @@ int performTests() {
     ret = 0;
     stack_init();
   }
-  printf("\nNumber of Failed Tests: %d\n", ret);
-  return ret;
+  printf("\nNumber of Failed Tests: %d\n", total_ret);
+  return total_ret;
 }
