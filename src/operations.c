@@ -536,7 +536,8 @@ static ret_codes rpn_calc_factorial() {
     long double ans = factorial(x);
 
     if (ans == -1) {
-      printf("ERROR: Factorial is only accurate up to 25!\n");
+      printf("ERROR: Fibonacci is only accurate up to %d!\n",
+              MAX_FACTORIAL_INPUT-1);
       add_to_stack(x);
       return FAILED_OPERATION;
     }
@@ -554,7 +555,8 @@ static ret_codes rpn_calc_fibonacci() {
     long double ans = fibonacci(x);
 
     if (ans == -1) {
-      printf("ERROR: Fibonacci is only accurate up to 93!\n");
+      printf("ERROR: Fibonacci is only accurate up to %d!\n",
+              MAX_FIBONACCI_INPUT-1);
       add_to_stack(x);
       return FAILED_OPERATION;
     }
