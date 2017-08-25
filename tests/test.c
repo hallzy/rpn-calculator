@@ -1049,10 +1049,10 @@ int performTests() {
       ret = test_functions[i].func();
       if (ret) {
         total_ret++;
-        printf("%s() FAILED!\n", test_functions[i].name);
+        printf("FAILED!  %s()\n", test_functions[i].name);
       }
       else {
-        printf("%s() SUCCEEDED!\n", test_functions[i].name);
+        printf("SUCCEEDED!  %s()\n", test_functions[i].name);
       }
     }
     ret = 0;
