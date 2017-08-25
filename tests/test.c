@@ -821,14 +821,30 @@ static int test_rpn_calc_avgstack() {
 static int test_rpn_calc_factorial() {
   char input[input_size];
 
-  strncpy(input, "5", input_size);
+  strncpy(input, "7", input_size);
   push(input, strlen(input));
 
   strncpy(input, "!", input_size);
   push(input, strlen(input));
 
 
-  if (stack_size() == 1 && actual_result() == 120) {
+  if (stack_size() == 1 && actual_result() == 5040) {
+    return 0;
+  }
+  return 1;
+}
+
+static int test_rpn_calc_fibonacci() {
+  char input[input_size];
+
+  strncpy(input, "30", input_size);
+  push(input, strlen(input));
+
+  strncpy(input, "fib", input_size);
+  push(input, strlen(input));
+
+
+  if (stack_size() == 1 && actual_result() == 832040) {
     return 0;
   }
   return 1;
@@ -1005,6 +1021,7 @@ const static struct {
     {"test_rpn_calc_sum"               , test_rpn_calc_sum               } ,
     {"test_rpn_calc_avgstack"          , test_rpn_calc_avgstack          } ,
     {"test_rpn_calc_factorial"         , test_rpn_calc_factorial         } ,
+    {"test_rpn_calc_fibonacci"         , test_rpn_calc_fibonacci         } ,
 
     // --- BITWISE OPERATIONS ---
     {"test_rpn_calc_bit_and"           , test_rpn_calc_bit_and           } ,

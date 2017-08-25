@@ -1,6 +1,7 @@
 #include "stack.h"
 #include "operations.h"
 #include "factorial.h"
+#include "fibonacci.h"
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
@@ -546,6 +547,24 @@ static ret_codes rpn_calc_factorial() {
   return FAILED_OPERATION;
 }
 
+static ret_codes rpn_calc_fibonacci() {
+  // Make sure there are at least 1 elements on the stack
+  if (stack_size() >= 1) {
+    long double x = pop();
+    long double ans = fibonacci(x);
+
+    if (ans == -1) {
+      printf("ERROR: Fibonacci is only accurate up to 93!\n");
+      add_to_stack(x);
+      return FAILED_OPERATION;
+    }
+    add_to_stack(ans);
+    return SUCCESS;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static ret_codes rpn_calc_bit_and() {
@@ -739,6 +758,8 @@ const static struct {
     {"!"         , rpn_calc_factorial          } ,
     {"fact"      , rpn_calc_factorial          } ,
     {"factorial" , rpn_calc_factorial          } ,
+    {"fib"       , rpn_calc_fibonacci          } ,
+    {"fibonacci" , rpn_calc_fibonacci          } ,
 
     // Bitwise Operations
     {"&"         , rpn_calc_bit_and            } ,
