@@ -16,8 +16,6 @@ int main() {
   // characters for an input
   char input[128];
 
-  /* printf("FLT_MAX = %Lf\n", 340282346638528859911704183484516925441.0); */
-
   while(1) {
     // And give me the result!
     print_stack();
@@ -34,8 +32,7 @@ int main() {
     if (strcmp(input, "q") ==0) return 0;
 
     // Give the user input to the calcualtor, and let it do its thing
-    push(input, strlen(input));
-
+    processUserInput(input, strlen(input));
   }
   return 0;
 

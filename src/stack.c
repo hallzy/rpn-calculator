@@ -20,7 +20,7 @@ int stack_size() {
 }
 
 // Add the number "f" to the top of the stack
-void add_to_stack(long double f) {
+void push(long double f) {
   // first check that we haven't maxed out the stack already.
   // If we have already reached MAX_STK then drop the element at the bottom of
   // the stack, and move all elements down to make room for a new one.
@@ -43,7 +43,7 @@ void remove_from_stack_index(unsigned int j) {
 
 // This grabs the octal input string from the user and converts it into a number
 // that I can use.
-static ret_codes get_octal_number_and_add_to_stack(char *val) {
+static ret_codes get_octal_number_and_push(char *val) {
   char *next;
   long numl;
   // if it is prepended like an octal number then take off the prefix and
@@ -54,13 +54,13 @@ static ret_codes get_octal_number_and_add_to_stack(char *val) {
   if (next == val || *next != '\0') {
     return FAILED_TO_PUSH;
   }
-  add_to_stack(numl);
+  push(numl);
   return SUCCESS;
 }
 
 // This grabs the binary input string from the user and converts it into a
 // number that I can use.
-static ret_codes get_binary_number_and_add_to_stack(char *val) {
+static ret_codes get_binary_number_and_push(char *val) {
   char *next;
   long numl;
   // if it is prepended like a binary number then take off the prefix and
@@ -70,13 +70,13 @@ static ret_codes get_binary_number_and_add_to_stack(char *val) {
   if (next == val || *next != '\0') {
     return FAILED_TO_PUSH;
   }
-  add_to_stack(numl);
+  push(numl);
   return SUCCESS;
 }
 
 // This grabs the decimal or hex input string from the user and converts it into
 // a numeric value that I can use.
-static ret_codes get_decimal_and_hex_numbers_and_add_to_stack(char *val) {
+static ret_codes get_decimal_and_hex_numbers_and_push(char *val) {
   char *next;
   long double num;
   // strtof automatically recognizes "0x" for hex numbers.
@@ -84,13 +84,13 @@ static ret_codes get_decimal_and_hex_numbers_and_add_to_stack(char *val) {
   if (next == val || *next != '\0') {
     return FAILED_TO_PUSH;
   }
-  add_to_stack(num);
+  push(num);
   return SUCCESS;
 }
 
 // Check if the user input string is an operation, or a number, and act
 // accordingly
-ret_codes push(char *val, int val_size) {
+ret_codes processUserInput(char *val, int val_size) {
   int op;
 
   // Is the input an operation? If so, then do the operation
@@ -102,18 +102,18 @@ ret_codes push(char *val, int val_size) {
     // Check if it is an octal number. Octals are prefixed by "0" and then a
     // number
     if (val[0] == '0' && isdigit(val[1])) {
-      return get_octal_number_and_add_to_stack(val);
+      return get_octal_number_and_push(val);
     }
     // Check if it is a binary number. Binary numbers are prefixed with either
     // "0b" or "0B"
     else if (val[0] == '0' && (val[1] == 'b' || val[1] == 'B')) {
-      return get_binary_number_and_add_to_stack(val);
+      return get_binary_number_and_push(val);
     }
     else {
       // this will recognize decimal or hex values.
       // This is the last chance for the input to be a number. if it isn't, then
       // it fails silently here and doesn't do anything to the stack.
-      return get_decimal_and_hex_numbers_and_add_to_stack(val);
+      return get_decimal_and_hex_numbers_and_push(val);
     }
   }
 }

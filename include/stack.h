@@ -44,7 +44,7 @@ stack s;
 // This is a high level function that sends a user inputed string to be parsed.
 // If the string is found to be a number, it is pushed to the stack, otherwise
 // it finds the operation that was specified, or fails.
-ret_codes push(char *val, int val_size);
+ret_codes processUserInput(char *val, int val_size);
 
 // This takes a value off the stack and reduces s.top to move the stack pointer
 long double  pop();
@@ -56,7 +56,7 @@ void stack_init();
 int stack_size();
 
 // Adds a new number to the stack and increments s.top stack pointer
-void add_to_stack(long double f);
+void push(long double f);
 
 // Removes the stack element at index j and reorganizes the stack.
 void remove_from_stack_index(unsigned int j);

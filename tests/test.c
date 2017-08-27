@@ -17,10 +17,10 @@ static int test_rpn_calc_duplicate() {
   char input[input_size];
 
   strncpy(input, "5.5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "\n", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == 5.5) {
     return 0;
@@ -32,13 +32,13 @@ static int test_rpn_calc_drop() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "drop", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 1.0) {
     return 0;
@@ -50,22 +50,22 @@ static int test_rpn_calc_dropx() {
   char input[input_size];
 
   strncpy(input, "5.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "6.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "7.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "8.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "dropx", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 3 && s.stk[0] == 5.0 && s.stk[1] == 7.0 &&
       s.stk[2] == 8.0) {
@@ -78,13 +78,13 @@ static int test_rpn_calc_swap() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "swap", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == 1.0) {
     return 0;
@@ -96,25 +96,25 @@ static int test_rpn_calc_clear() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "3.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "4.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "5.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "6.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "clear", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 0) {
     return 0;
@@ -126,28 +126,28 @@ static int test_rpn_calc_clearx() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "9.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "4.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "5.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "6.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "clearx", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == 2.0) {
     return 0;
@@ -161,13 +161,13 @@ static int test_rpn_calc_plus() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "+", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 3.0) {
     return 0;
@@ -179,13 +179,13 @@ static int test_rpn_calc_minus() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "-", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == -1.0) {
     return 0;
@@ -197,13 +197,13 @@ static int test_rpn_calc_neg() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "neg", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == -2.0) {
     return 0;
@@ -215,13 +215,13 @@ static int test_rpn_calc_multiply() {
   char input[input_size];
 
   strncpy(input, "3.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "*", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 6.0) {
     return 0;
@@ -233,13 +233,13 @@ static int test_rpn_calc_divide() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "/", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 0.5) {
     return 0;
@@ -251,13 +251,13 @@ static int test_rpn_calc_pow() {
   char input[input_size];
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "4.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "**", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 16.0) {
     return 0;
@@ -269,13 +269,13 @@ static int test_rpn_calc_squared() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "3.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "**2", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == 9.0) {
     return 0;
@@ -287,13 +287,13 @@ static int test_rpn_calc_cubed() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "**3", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == 8.0) {
     return 0;
@@ -305,13 +305,13 @@ static int test_rpn_calc_sqrt() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "25.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "sqrt", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == 5.0) {
     return 0;
@@ -323,13 +323,13 @@ static int test_rpn_calc_cbrt() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "125.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "cbrt", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == 5.0) {
     return 0;
@@ -341,13 +341,13 @@ static int test_rpn_calc_xrt() {
   char input[input_size];
 
   strncpy(input, "32.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "5.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "//", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 2.0) {
     return 0;
@@ -359,13 +359,13 @@ static int test_rpn_calc_abs() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "-2.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "abs", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == 2.0) {
     return 0;
@@ -377,13 +377,13 @@ static int test_rpn_calc_inv() {
   char input[input_size];
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "3.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "inv", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() > 0.33332 &&
       actual_result() < 0.33334) {
@@ -396,13 +396,13 @@ static int test_rpn_calc_sin_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "30", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "sin", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 0.499999 &&
       actual_result() < 0.500001) {
@@ -415,19 +415,19 @@ static int test_rpn_calc_sin_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "pi", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "6", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "/", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "sin", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 0.499999 &&
       actual_result() < 0.500001) {
@@ -440,13 +440,13 @@ static int test_rpn_calc_cos_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "60", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "cos", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 0.499999 &&
       actual_result() < 0.500001) {
@@ -459,19 +459,19 @@ static int test_rpn_calc_cos_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "pi", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "3", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "/", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "cos", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 0.4999 &&
       actual_result() < 0.50001) {
@@ -484,13 +484,13 @@ static int test_rpn_calc_tan_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "45", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "tan", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 0.999999 &&
       actual_result() < 1.000001) {
@@ -503,19 +503,19 @@ static int test_rpn_calc_tan_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "pi", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "4", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "/", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "tan", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 0.999999 &&
       actual_result() < 1.000001) {
@@ -528,13 +528,13 @@ static int test_rpn_calc_asin_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "0.5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "asin", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 29.999999 &&
       actual_result() < 30.000001) {
@@ -547,13 +547,13 @@ static int test_rpn_calc_asin_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "0.5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "asin", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 0.523598
       && actual_result() < 0.523600) {
@@ -566,13 +566,13 @@ static int test_rpn_calc_acos_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "0.5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "acos", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 59.999999 &&
       actual_result() < 60.000001) {
@@ -585,13 +585,13 @@ static int test_rpn_calc_acos_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "0.5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "cos", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 0.877582 &&
       actual_result() < 0.877584) {
@@ -604,13 +604,13 @@ static int test_rpn_calc_atan_deg() {
   char input[input_size];
 
   strncpy(input, "deg", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "atan", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 45) {
     return 0;
@@ -622,13 +622,13 @@ static int test_rpn_calc_atan_rad() {
   char input[input_size];
 
   strncpy(input, "rad", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "1.0", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "atan", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 1.557407 &&
       actual_result() < 1.557409) {
@@ -641,10 +641,10 @@ static int test_rpn_calc_log() {
   char input[input_size];
 
   strncpy(input, "100", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "log", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 2) {
     return 0;
@@ -656,10 +656,10 @@ static int test_rpn_calc_ln() {
   char input[input_size];
 
   strncpy(input, "e", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "ln", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 0.999999 &&
       actual_result() < 1.000001) {
@@ -672,13 +672,13 @@ static int test_rpn_calc_logx() {
   char input[input_size];
 
   strncpy(input, "8", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "logx", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 2.999999 &&
       actual_result() < 3.000001) {
@@ -691,10 +691,10 @@ static int test_rpn_calc_exp() {
   char input[input_size];
 
   strncpy(input, "2", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "exp", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() > 7.389055 &&
       actual_result() < 7.389057) {
@@ -707,28 +707,28 @@ static int test_rpn_calc_sumstack() {
   char input[input_size];
 
   strncpy(input, "5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "10", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "7", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "3", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "4", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "sumstack", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
 
   if (stack_size() == 3 && actual_result() == 20.0 && s.stk[0] == 5 &&
@@ -742,16 +742,16 @@ static int test_rpn_calc_sum() {
   char input[input_size];
 
   strncpy(input, "5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "1", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "100", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "sum", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 2 && actual_result() == 5050.0) {
     return 0;
@@ -763,52 +763,52 @@ static int test_rpn_calc_avgstack() {
   char input[input_size];
 
   strncpy(input, "11", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "3", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "3", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "7", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "4", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "6", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "8", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "93", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "5", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "7", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "9", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "12", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "avgstack", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
 
   if (stack_size() == 3 && s.stk[0] == 11.0 && s.stk[1] == 9 &&
@@ -822,10 +822,10 @@ static int test_rpn_calc_factorial() {
   char input[input_size];
 
   strncpy(input, "7", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "!", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
 
   if (stack_size() == 1 && actual_result() == 5040) {
@@ -838,10 +838,10 @@ static int test_rpn_calc_fibonacci() {
   char input[input_size];
 
   strncpy(input, "30", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "fib", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
 
   if (stack_size() == 1 && actual_result() == 832040) {
@@ -856,13 +856,13 @@ static int test_rpn_calc_bit_and() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "0b11", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "&", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 2) {
     return 0;
@@ -874,13 +874,13 @@ static int test_rpn_calc_bit_or() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "0b11", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "|", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 11) {
     return 0;
@@ -892,13 +892,13 @@ static int test_rpn_calc_bit_xor() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "0b11", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "^", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 9) {
     return 0;
@@ -910,13 +910,13 @@ static int test_rpn_calc_bit_left_shift() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "2", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "<<", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 40) {
     return 0;
@@ -928,13 +928,13 @@ static int test_rpn_calc_bit_right_shift() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "3", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, ">>", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 1) {
     return 0;
@@ -946,10 +946,10 @@ static int test_rpn_calc_bit_left_shift1() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, "<<1", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 20) {
     return 0;
@@ -961,10 +961,10 @@ static int test_rpn_calc_bit_right_shift1() {
   char input[input_size];
 
   strncpy(input, "0b1010", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   strncpy(input, ">>1", input_size);
-  push(input, strlen(input));
+  processUserInput(input, strlen(input));
 
   if (stack_size() == 1 && actual_result() == 5) {
     return 0;

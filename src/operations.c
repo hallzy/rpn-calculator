@@ -13,8 +13,8 @@ static ret_codes rpn_calc_duplicate() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num1 = pop();
-    add_to_stack(num1);
-    add_to_stack(num1);
+    push(num1);
+    push(num1);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -44,7 +44,7 @@ static ret_codes rpn_calc_dropx() {
       return SUCCESS;
     }
     // Put the last entry back on the stack because of the error
-    add_to_stack(entry);
+    push(entry);
     printf("ERROR: The specified stack entry does not exist\n");
     return FAILED_OPERATION;
   }
@@ -58,8 +58,8 @@ static ret_codes rpn_calc_swap() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack(num2);
-    add_to_stack(num1);
+    push(num2);
+    push(num1);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -95,7 +95,7 @@ static ret_codes rpn_calc_plus() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack(num1+num2);
+    push(num1+num2);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -108,7 +108,7 @@ static ret_codes rpn_calc_minus() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack(num1-num2);
+    push(num1-num2);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -120,7 +120,7 @@ static ret_codes rpn_calc_neg() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack(num*-1);
+    push(num*-1);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -133,7 +133,7 @@ static ret_codes rpn_calc_multiply() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack(num1*num2);
+    push(num1*num2);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -146,7 +146,7 @@ static ret_codes rpn_calc_divide() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack(num1/num2);
+    push(num1/num2);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -159,7 +159,7 @@ static ret_codes rpn_calc_pow() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack(pow(num1, num2));
+    push(pow(num1, num2));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -171,7 +171,7 @@ static ret_codes rpn_calc_squared() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack(pow(num, 2));
+    push(pow(num, 2));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -183,7 +183,7 @@ static ret_codes rpn_calc_cubed() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack(pow(num, 3));
+    push(pow(num, 3));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -195,7 +195,7 @@ static ret_codes rpn_calc_sqrt() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack(sqrt(num));
+    push(sqrt(num));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -207,7 +207,7 @@ static ret_codes rpn_calc_cbrt() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack(cbrt(num));
+    push(cbrt(num));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -220,7 +220,7 @@ static ret_codes rpn_calc_xrt() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack(pow(num1, 1.0/num2));
+    push(pow(num1, 1.0/num2));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -236,7 +236,7 @@ static ret_codes rpn_calc_abs() {
     if (num < 0) {
       num *= -1;
     }
-    add_to_stack(num);
+    push(num);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -248,7 +248,7 @@ static ret_codes rpn_calc_inv() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack(1.0/num);
+    push(1.0/num);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -260,10 +260,10 @@ static ret_codes rpn_calc_sin() {
   if (stack_size() >= 1) {
     long double num = pop();
     if (s.angle_mode == RADIANS) {
-      add_to_stack(sin(num));
+      push(sin(num));
     }
     else {
-      add_to_stack(sin(num*M_PI/180.0));
+      push(sin(num*M_PI/180.0));
     }
     return SUCCESS;
   }
@@ -276,10 +276,10 @@ static ret_codes rpn_calc_cos() {
   if (stack_size() >= 1) {
     long double num = pop();
     if (s.angle_mode == RADIANS) {
-      add_to_stack(cos(num));
+      push(cos(num));
     }
     else {
-      add_to_stack(cos(num*M_PI/180.0));
+      push(cos(num*M_PI/180.0));
     }
     return SUCCESS;
   }
@@ -292,10 +292,10 @@ static ret_codes rpn_calc_tan() {
   if (stack_size() >= 1) {
     long double num = pop();
     if (s.angle_mode == RADIANS) {
-      add_to_stack(tan(num));
+      push(tan(num));
     }
     else {
-      add_to_stack(tan(num*M_PI/180.0));
+      push(tan(num*M_PI/180.0));
     }
     return SUCCESS;
   }
@@ -308,10 +308,10 @@ static ret_codes rpn_calc_asin() {
   if (stack_size() >= 1) {
     long double num = pop();
     if (s.angle_mode == RADIANS) {
-      add_to_stack(asin(num));
+      push(asin(num));
     }
     else {
-      add_to_stack(asin(num)*180.0/M_PI);
+      push(asin(num)*180.0/M_PI);
     }
     return SUCCESS;
   }
@@ -324,10 +324,10 @@ static ret_codes rpn_calc_acos() {
   if (stack_size() >= 1) {
     long double num = pop();
     if (s.angle_mode == RADIANS) {
-      add_to_stack(cos(num));
+      push(cos(num));
     }
     else {
-      add_to_stack(acos(num)*180.0/M_PI);
+      push(acos(num)*180.0/M_PI);
     }
     return SUCCESS;
   }
@@ -340,10 +340,10 @@ static ret_codes rpn_calc_atan() {
   if (stack_size() >= 1) {
     long double num = pop();
     if (s.angle_mode == RADIANS) {
-      add_to_stack(tan(num));
+      push(tan(num));
     }
     else {
-      add_to_stack(atan(num)*180.0/M_PI);
+      push(atan(num)*180.0/M_PI);
     }
     return SUCCESS;
   }
@@ -357,7 +357,7 @@ static ret_codes rpn_calc_log() {
   if (stack_size() >= 1) {
     long double num = pop();
     // log is the natural log normally, so I need to convert it to base 10
-    add_to_stack(log(num)/log(10));
+    push(log(num)/log(10));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -369,7 +369,7 @@ static ret_codes rpn_calc_ln() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack(log(num));
+    push(log(num));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -382,7 +382,7 @@ static ret_codes rpn_calc_logx() {
   if (stack_size() >= 2) {
     long double base = pop();
     long double num = pop();
-    add_to_stack(log(num)/log(base));
+    push(log(num)/log(base));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -394,7 +394,7 @@ static ret_codes rpn_calc_exp() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack(exp(num));
+    push(exp(num));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -444,7 +444,7 @@ static ret_codes rpn_calc_sumstack() {
       remove_from_stack_index(min);
     }
 
-    add_to_stack(sum);
+    push(sum);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -472,7 +472,7 @@ static ret_codes rpn_calc_sum() {
     for (int i = min; i <= max; i++) {
       sum += i;
     }
-    add_to_stack(sum);
+    push(sum);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -522,7 +522,7 @@ static ret_codes rpn_calc_avgstack() {
       remove_from_stack_index(min);
     }
 
-    add_to_stack(sum/(max-min));
+    push(sum/(max-min));
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -538,10 +538,10 @@ static ret_codes rpn_calc_factorial() {
     if (ans == -1) {
       printf("ERROR: Fibonacci is only accurate up to %d!\n",
               MAX_FACTORIAL_INPUT-1);
-      add_to_stack(x);
+      push(x);
       return FAILED_OPERATION;
     }
-    add_to_stack(ans);
+    push(ans);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -557,10 +557,10 @@ static ret_codes rpn_calc_fibonacci() {
     if (ans == -1) {
       printf("ERROR: Fibonacci is only accurate up to %d!\n",
               MAX_FIBONACCI_INPUT-1);
-      add_to_stack(x);
+      push(x);
       return FAILED_OPERATION;
     }
-    add_to_stack(ans);
+    push(ans);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -574,7 +574,7 @@ static ret_codes rpn_calc_bit_and() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack((int)num1 & (int)num2);
+    push((int)num1 & (int)num2);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -586,7 +586,7 @@ static ret_codes rpn_calc_bit_or() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack((int)num1 | (int)num2);
+    push((int)num1 | (int)num2);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -598,7 +598,7 @@ static ret_codes rpn_calc_bit_xor() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack((int)num1 ^ (int)num2);
+    push((int)num1 ^ (int)num2);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -610,7 +610,7 @@ static ret_codes rpn_calc_bit_left_shift() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack((int)num1 << (int)num2);
+    push((int)num1 << (int)num2);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -622,7 +622,7 @@ static ret_codes rpn_calc_bit_right_shift() {
   if (stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
-    add_to_stack((int)num1 >> (int)num2);
+    push((int)num1 >> (int)num2);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -633,7 +633,7 @@ static ret_codes rpn_calc_bit_left_shift_1() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack((int)num << 1);
+    push((int)num << 1);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -644,7 +644,7 @@ static ret_codes rpn_calc_bit_right_shift_1() {
   // Make sure there are at least 1 elements on the stack
   if (stack_size() >= 1) {
     long double num = pop();
-    add_to_stack((int)num >> 1);
+    push((int)num >> 1);
     return SUCCESS;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -692,12 +692,12 @@ static ret_codes rpn_calc_bin() {
 // --- CONSTANTS ---
 
 static ret_codes rpn_calc_pi() {
-  add_to_stack(M_PI);
+  push(M_PI);
   return SUCCESS;
 }
 
 static ret_codes rpn_calc_e() {
-  add_to_stack(M_E);
+  push(M_E);
   return SUCCESS;
 }
 
