@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef NO_CLEAR
 // Clears the screen to keep the UI clean.
 static void clear_screen() {
   #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
@@ -16,11 +17,14 @@ static void clear_screen() {
   // Otherwise just leave it
   return;
 }
+#endif // NO_CLEAR
 
 
 // Print all of my calculator information and stack info.
 void print_stack() {
+#ifndef NO_CLEAR
   clear_screen();
+#endif // NO_CLEAR
   printf("===============================================================\n");
   // Is my calculator in Radians or Degrees?
   if (s.angle_mode == RADIANS) {
