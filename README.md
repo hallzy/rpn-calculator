@@ -336,7 +336,171 @@ These are settings that can be made to the Calculator to change how it behaves
 or displays information.
 
 #### Change Angle Mode
+
+These settings change the angle that the calculator assumes for the Trig
+functions.
+
+* `deg`, `rad`:
+  * These commands change the mode of the calculator to Degrees or Radians
+    respectively.
+
+> ##### Example:
+>
+> NOTE: To see how the different modes actually work with Operations that use
+> angles, see [Trigonometric Functions](#trigonometric-functions). These examples
+> won't show the use of degrees vs radians, but just shows how to change them with
+> the command.
+>
+> Starting with this:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> ===============================================================
+> ```
+>
+> This is what we get if we use the `deg` command:
+>
+> ```
+> ===============================================================
+>       +---+
+>  RAD  |DEG|
+>       +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> ===============================================================
+> ```
+>
+> Performing the `rad` command then takes us back to:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> ===============================================================
+> ```
+
 #### Change Numeric Base
+
+These settings change the numeric base that the calculator uses to DISPLAY
+numeric values. It does NOT affect how numbers are interpreted. To find out how
+to enter hex, octal, or binary numbers into the calculator, see [Usage](#usage).
+
+* `hex`, `dec`, `oct`, `bin`:
+  * These commands change the mode of the calculator to hexadecimal, decimal,
+    octal, and binary respectively.
+
+> ##### Example:
+>
+> NOTE: that the decimal part of a number is not displayed in any mode other
+> than decimal. So if you enter the number `5.5` and then change to hex mode, it
+> will display as just `5`. Please note that this is ONLY displayed information
+> and that the fractional part of the number is still there, it is just not
+> displayed. This is the way that C handles different bases (ie. as integers).
+> Also, because they are displayed as integers, displaying numbers in a base
+> other than decimal could result in a number rolling over because it is handled
+> as an integer which is a much smaller datatype than what the calculator uses
+> for decimal numbers. Again, just because it is displayed as rolled over, it is
+> not, and performing math on it or converting it back to decimal will work
+> fine (unless it has rolled over in decimal mode).
+>
+> Starting with this:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> 1:  10.000000
+> 2:  20.000000
+> 3:  30.000000
+> 4:  40.000000
+> 5:  50.000000
+> 6:  6.000000
+> ===============================================================
+> ```
+>
+> Note that currently it is in decimal mode which is the standard setting.
+>
+> Now we will change to hex mode with the `hex` command:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+> +---+
+> |HEX|  DEC   OCT   BIN
+> +---+
+>
+> 1:  a
+> 2:  14
+> 3:  1e
+> 4:  28
+> 5:  32
+> 6:  6
+> ===============================================================
+> ```
+>
+> Notice that the setting at the top has moved to `hex`. Also, all the numbers
+> on the stack have been converted to hexadecmial.
+>
+> Now to change to octal with the `oct` command:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>             +---+
+>  HEX   DEC  |OCT|  BIN
+>             +---+
+>
+> 1:  12
+> 2:  24
+> 3:  36
+> 4:  50
+> 5:  62
+> 6:  6
+> ===============================================================
+> ```
+>
+> And finally, binary with `bin` command:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>                   +---+
+>  HEX   DEC   OCT  |BIN|
+>                   +---+
+>
+> 1:  1010
+> 2:  10100
+> 3:  11110
+> 4:  101000
+> 5:  110010
+> 6:  110
+> ===============================================================
+> ```
 
 ### Math Operations
 
