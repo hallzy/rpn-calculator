@@ -10,6 +10,11 @@ RPN Calculator for the terminal.
 * [Install](#install)
 * [Run Tests](#run-tests)
 * [Usage](#usage)
+  * [Entering Hex, Octal, or Binary Numbers](#entering-hex-octal-or-binary-numbers)
+    * [Decimal](#decimal)
+    * [Hexadecimal](#hexadecimal)
+    * [Octal](#octal)
+    * [Binary](#binary)
 * [Supported Operations](#supported-operations)
   * [Stack Manipulations](#stack-manipulations)
     * [Duplicate Stack Element](#duplicate-stack-element)
@@ -113,7 +118,7 @@ default the calculator is in decimal, so if you enter `025` without changing the
 base, you will actually see `21.000000` come onto the stack, since `25` in
 octal is `21` in decimal).
 
-#### Octal
+#### Binary
 
 To enter a Binary number, you must prefix the number with a `0b` or `0B`. For
 example, if I wanted to enter the binary number `1010101`, I would type
