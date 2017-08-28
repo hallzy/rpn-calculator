@@ -12,7 +12,7 @@ RPN Calculator for the terminal.
 * [Usage](#usage)
 * [Supported Operations](#supported-operations)
   * [Stack Manipulations](#stack-manipulations)
-    * [Duplicate Stack Element](duplicate-stack-element)
+    * [Duplicate Stack Element](#duplicate-stack-element)
     * [Drop Element From the Stack](#drop-element-from-the-stack)
     * [Swap Stack Elements](#swap-stack-elements)
     * [Clear the stack](#clear-the-stack)
@@ -89,38 +89,38 @@ stack.
   * Entering just a blank input into the calculator duplicates the last number
     that was entered to the stack.
 
-##### Example:
-
-Starting with this:
-
-```
-===============================================================
-+---+
-|RAD|  DEG
-+---+
-      +---+
- HEX  |DEC|  OCT   BIN
-      +---+
-
-1:  10.000000
-===============================================================
-```
-
-We would get this if we did a duplication:
-
-```
-===============================================================
-+---+
-|RAD|  DEG
-+---+
-      +---+
- HEX  |DEC|  OCT   BIN
-      +---+
-
-1:  10.000000
-2:  10.000000
-===============================================================
-```
+> ##### Example:
+>
+> Starting with this:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> 1:  10.000000
+> ===============================================================
+> ```
+>
+> We would get this if we did a duplication:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> 1:  10.000000
+> 2:  10.000000
+> ===============================================================
+> ```
 
 #### Drop Element From the Stack
 
