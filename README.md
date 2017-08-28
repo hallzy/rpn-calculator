@@ -575,6 +575,7 @@ Features that perform mathematical operations on the numbers on the stack.
 #### Operations on Specified Stack Entries
 #### Factorial
 #### Fibonacci
+#### Random Number Generator
 
 ### Mathematical Constants
 

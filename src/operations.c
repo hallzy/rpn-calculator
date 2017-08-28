@@ -5,6 +5,8 @@
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 // --- STACK MANIPULATION FUNCTIONS ---
 
@@ -567,6 +569,33 @@ static ret_codes rpn_calc_fibonacci() {
   return FAILED_OPERATION;
 }
 
+static int random_helper() {
+  static int already_seeded = 0;
+  if (!already_seeded) {
+    srand(time(NULL));
+  }
+  return rand();
+}
+
+// Generate a random number between 0 and 1
+static ret_codes rpn_calc_rand() {
+  push((long double)random_helper() / RAND_MAX);
+  return SUCCESS;
+}
+
+// Generate a random number beetween min and max inclusive
+static ret_codes rpn_calc_randx() {
+  // Make sure there are at least 2 elements on the stack
+  if (get_stack_size() >= 2) {
+    int max = (int)pop();
+    int min = (int)pop();
+    push((long double)(random_helper() % (max-min+1) + min));
+    return SUCCESS;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static ret_codes rpn_calc_bit_and() {
@@ -762,6 +791,8 @@ const static struct {
     {"factorial" , rpn_calc_factorial          } ,
     {"fib"       , rpn_calc_fibonacci          } ,
     {"fibonacci" , rpn_calc_fibonacci          } ,
+    {"rand"      , rpn_calc_rand               } ,
+    {"randx"     , rpn_calc_randx              } ,
 
     // Bitwise Operations
     {"&"         , rpn_calc_bit_and            } ,

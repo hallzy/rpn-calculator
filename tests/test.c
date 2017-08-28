@@ -852,6 +852,107 @@ static int test_rpn_calc_fibonacci() {
   return 1;
 }
 
+static int test_rpn_calc_rand() {
+  char input[input_size];
+  int r = 0;
+
+  strncpy(input, "rand", input_size);
+  processUserInput(input, strlen(input));
+
+  if (!(get_stack_size() == 1 && actual_result() >= 0 &&
+        actual_result() <= 1)) {
+    r = 1;
+  }
+
+  strncpy(input, "rand", input_size);
+  processUserInput(input, strlen(input));
+
+  if (!(get_stack_size() == 2 && actual_result() >= 0 &&
+        actual_result() <= 1)) {
+    r = 1;
+  }
+
+  strncpy(input, "rand", input_size);
+  processUserInput(input, strlen(input));
+
+  if (!(get_stack_size() == 3 && actual_result() >= 0 &&
+        actual_result() <= 1)) {
+    r = 1;
+  }
+
+  strncpy(input, "rand", input_size);
+  processUserInput(input, strlen(input));
+
+  if (!(get_stack_size() == 4 && actual_result() >= 0 &&
+        actual_result() <= 1)) {
+    r = 1;
+  }
+  return r;
+}
+
+static int test_rpn_calc_randx() {
+  char input[input_size];
+  int r = 0;
+
+  strncpy(input, "1", input_size);
+  processUserInput(input, strlen(input));
+
+  strncpy(input, "10", input_size);
+  processUserInput(input, strlen(input));
+
+  strncpy(input, "randx", input_size);
+  processUserInput(input, strlen(input));
+
+  if (!(get_stack_size() == 1 && actual_result() >= 1 &&
+        actual_result() <= 10)) {
+    r = 1;
+  }
+
+  strncpy(input, "1", input_size);
+  processUserInput(input, strlen(input));
+
+  strncpy(input, "10", input_size);
+  processUserInput(input, strlen(input));
+
+  strncpy(input, "randx", input_size);
+  processUserInput(input, strlen(input));
+
+  if (!(get_stack_size() == 2 && actual_result() >= 1 &&
+        actual_result() <= 10)) {
+    r = 1;
+  }
+
+  strncpy(input, "1", input_size);
+  processUserInput(input, strlen(input));
+
+  strncpy(input, "10", input_size);
+  processUserInput(input, strlen(input));
+
+  strncpy(input, "randx", input_size);
+  processUserInput(input, strlen(input));
+
+  if (!(get_stack_size() == 3 && actual_result() >= 1 &&
+        actual_result() <= 10)) {
+    r = 1;
+  }
+
+  strncpy(input, "1", input_size);
+  processUserInput(input, strlen(input));
+
+  strncpy(input, "10", input_size);
+  processUserInput(input, strlen(input));
+
+  strncpy(input, "randx", input_size);
+  processUserInput(input, strlen(input));
+
+  if (!(get_stack_size() == 4 && actual_result() >= 1 &&
+        actual_result() <= 10)) {
+    r = 1;
+  }
+
+  return r;
+}
+
 // --- BITWISE OPERATIONS ---
 
 static int test_rpn_calc_bit_and() {
@@ -1039,6 +1140,8 @@ const static struct {
     {"test_rpn_calc_avgstack"          , test_rpn_calc_avgstack          } ,
     {"test_rpn_calc_factorial"         , test_rpn_calc_factorial         } ,
     {"test_rpn_calc_fibonacci"         , test_rpn_calc_fibonacci         } ,
+    {"test_rpn_calc_rand"              , test_rpn_calc_rand              } ,
+    {"test_rpn_calc_randx"             , test_rpn_calc_randx             } ,
 
     // --- BITWISE OPERATIONS ---
     {"test_rpn_calc_bit_and"           , test_rpn_calc_bit_and           } ,
