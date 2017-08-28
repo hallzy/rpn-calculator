@@ -1,7 +1,14 @@
 #include "stack.h"
+#include "expr.h"
 #include "operations.h"
 #include <ctype.h>
+#include <string.h>
 #include <stdlib.h>
+
+// Define THE stack here and static so that it can't be accesssed anywhere else,
+// thus forcing everyone to use the below functions to interact with the stack
+// and make the code more readable.
+static stack s;
 
 // Just define some starting points for the stack
 void stack_init() {
@@ -10,10 +17,36 @@ void stack_init() {
   s.base_mode  = DECIMAL;
 }
 
+void set_angle_mode(angle_modes angle) {
+  s.angle_mode = angle;
+}
+
+void set_base_mode(base_modes base) {
+  s.base_mode = base;
+}
+
+angle_modes get_angle_mode() {
+  return s.angle_mode;
+}
+
+base_modes get_base_mode() {
+  return s.base_mode;
+}
+
+long double get_stack_value_at_index(int i) {
+  return s.stk[i];
+}
+
 // s.top is -1 for emtpy, and 0 for a stack with 1 element. This function will
 // make it easier to use when I need to determine the size of the stack.
-int stack_size() {
+int get_stack_size() {
   return s.top + 1;
+}
+
+void set_stack_size(int size) {
+  // minus 1 because s.top is -1 when empty. So specify that the stack should be
+  // empty means that size should equal 0.
+  s.top = size - 1;
 }
 
 // Add the number "f" to the top of the stack
@@ -90,8 +123,16 @@ static ret_codes get_decimal_and_hex_numbers_and_push(char *val) {
 ret_codes processUserInput(char *val, int val_size) {
   int op;
 
+  // Check to see if the input is an RPN string expression
+  // If it is, then I need to parse the string to break it into parts.
+  char *expr = "expr ";
+  if(strncmp(val, expr, strlen(expr)) == 0) {
+    // Parse the expression.
+    // + strlen() is to remove the "expr: " string from the input
+    return parseExpression(val+strlen(expr));
+  }
   // Is the input an operation? If so, then do the operation
-  if ((op = whichOperation(val)) != -1) {
+  else if ((op = whichOperation(val)) != -1) {
     return performOperation(op);
   }
   // if it wasn't an operation it better be a number...

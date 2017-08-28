@@ -27,7 +27,7 @@ void print_stack() {
 #endif // NO_CLEAR
   printf("===============================================================\n");
   // Is my calculator in Radians or Degrees?
-  if (s.angle_mode == RADIANS) {
+  if (get_angle_mode() == RADIANS) {
     printf("+---+\n");
     printf("|RAD|  DEG\n");
     printf("+---+\n");
@@ -40,38 +40,38 @@ void print_stack() {
 
   // What base am I in?
   // Make sure to print the stack info to respect the base.
-  if (s.base_mode == HEXADECIMAL) {
+  if (get_base_mode() == HEXADECIMAL) {
     printf("+---+\n");
     printf("|HEX|  DEC   OCT   BIN\n");
     printf("+---+\n");
     printf("\n");
     // Iterate through the whole stack and print out each number as a hex value.
-    for (int i = 0; i <= s.top; i++) {
-      printf("%d:  %x", i+1, (unsigned int)s.stk[i]);
+    for (int i = 0; i < get_stack_size(); i++) {
+      printf("%d:  %x", i+1, (unsigned int)get_stack_value_at_index(i));
       printf("\n");
     }
   }
-  else if (s.base_mode == DECIMAL) {
+  else if (get_base_mode() == DECIMAL) {
     printf("      +---+\n");
     printf(" HEX  |DEC|  OCT   BIN\n");
     printf("      +---+\n");
     printf("\n");
     // Iterate through the whole stack and print out each number as a decimal
     // value.
-    for (int i = 0; i <= s.top; i++) {
-      printf("%d:  %Lf", i+1, s.stk[i]);
+    for (int i = 0; i < get_stack_size(); i++) {
+      printf("%d:  %Lf", i+1, get_stack_value_at_index(i));
       printf("\n");
     }
   }
-  else if (s.base_mode == OCTAL) {
+  else if (get_base_mode() == OCTAL) {
     printf("            +---+\n");
     printf(" HEX   DEC  |OCT|  BIN\n");
     printf("            +---+\n");
     printf("\n");
     // Iterate through the whole stack and print out each number as an octal
     // value.
-    for (int i = 0; i <= s.top; i++) {
-      printf("%d:  %o", i+1, (unsigned int)s.stk[i]);
+    for (int i = 0; i < get_stack_size(); i++) {
+      printf("%d:  %o", i+1, (unsigned int)get_stack_value_at_index(i));
       printf("\n");
     }
   }
@@ -82,12 +82,12 @@ void print_stack() {
     printf("\n");
     // Iterate through the whole stack and print out each number as a binary
     // value.
-    for (int i = 0; i <= s.top; i++) {
+    for (int i = 0; i < get_stack_size(); i++) {
       // I need to use itoa to do this since C doesn't have any built-in way to
       // print binary numbers
       // This converts the number into a string represented as a binary number
       char buf[128];
-      itoa((unsigned int)s.stk[i], buf, 2);
+      itoa((unsigned int)get_stack_value_at_index(i), buf, 2);
       printf("%d:  %s", i+1, buf);
       printf("\n");
     }

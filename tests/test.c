@@ -8,7 +8,7 @@
 #define input_size 128
 
 static long double actual_result() {
-  return s.stk[s.top];
+  return get_stack_value_at_index(get_stack_size() - 1);
 }
 
 // --- STACK MANIPULATION FUNCTIONS ---
@@ -22,7 +22,7 @@ static int test_rpn_calc_duplicate() {
   strncpy(input, "\n", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == 5.5) {
+  if (get_stack_size() == 2 && actual_result() == 5.5) {
     return 0;
   }
   return 1;
@@ -40,7 +40,7 @@ static int test_rpn_calc_drop() {
   strncpy(input, "drop", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 1.0) {
+  if (get_stack_size() == 1 && actual_result() == 1.0) {
     return 0;
   }
   return 1;
@@ -67,8 +67,10 @@ static int test_rpn_calc_dropx() {
   strncpy(input, "dropx", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 3 && s.stk[0] == 5.0 && s.stk[1] == 7.0 &&
-      s.stk[2] == 8.0) {
+  if (get_stack_size() == 3 &&
+      get_stack_value_at_index(0) == 5.0 &&
+      get_stack_value_at_index(1) == 7.0 &&
+      get_stack_value_at_index(2) == 8.0) {
     return 0;
   }
   return 1;
@@ -86,7 +88,7 @@ static int test_rpn_calc_swap() {
   strncpy(input, "swap", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == 1.0) {
+  if (get_stack_size() == 2 && actual_result() == 1.0) {
     return 0;
   }
   return 1;
@@ -116,7 +118,7 @@ static int test_rpn_calc_clear() {
   strncpy(input, "clear", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 0) {
+  if (get_stack_size() == 0) {
     return 0;
   }
   return 1;
@@ -149,7 +151,7 @@ static int test_rpn_calc_clearx() {
   strncpy(input, "clearx", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == 2.0) {
+  if (get_stack_size() == 2 && actual_result() == 2.0) {
     return 0;
   }
   return 1;
@@ -169,7 +171,7 @@ static int test_rpn_calc_plus() {
   strncpy(input, "+", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 3.0) {
+  if (get_stack_size() == 1 && actual_result() == 3.0) {
     return 0;
   }
   return 1;
@@ -187,7 +189,7 @@ static int test_rpn_calc_minus() {
   strncpy(input, "-", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == -1.0) {
+  if (get_stack_size() == 1 && actual_result() == -1.0) {
     return 0;
   }
   return 1;
@@ -205,7 +207,7 @@ static int test_rpn_calc_neg() {
   strncpy(input, "neg", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == -2.0) {
+  if (get_stack_size() == 2 && actual_result() == -2.0) {
     return 0;
   }
   return 1;
@@ -223,7 +225,7 @@ static int test_rpn_calc_multiply() {
   strncpy(input, "*", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 6.0) {
+  if (get_stack_size() == 1 && actual_result() == 6.0) {
     return 0;
   }
   return 1;
@@ -241,7 +243,7 @@ static int test_rpn_calc_divide() {
   strncpy(input, "/", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 0.5) {
+  if (get_stack_size() == 1 && actual_result() == 0.5) {
     return 0;
   }
   return 1;
@@ -259,7 +261,7 @@ static int test_rpn_calc_pow() {
   strncpy(input, "**", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 16.0) {
+  if (get_stack_size() == 1 && actual_result() == 16.0) {
     return 0;
   }
   return 1;
@@ -277,7 +279,7 @@ static int test_rpn_calc_squared() {
   strncpy(input, "**2", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == 9.0) {
+  if (get_stack_size() == 2 && actual_result() == 9.0) {
     return 0;
   }
   return 1;
@@ -295,7 +297,7 @@ static int test_rpn_calc_cubed() {
   strncpy(input, "**3", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == 8.0) {
+  if (get_stack_size() == 2 && actual_result() == 8.0) {
     return 0;
   }
   return 1;
@@ -313,7 +315,7 @@ static int test_rpn_calc_sqrt() {
   strncpy(input, "sqrt", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == 5.0) {
+  if (get_stack_size() == 2 && actual_result() == 5.0) {
     return 0;
   }
   return 1;
@@ -331,7 +333,7 @@ static int test_rpn_calc_cbrt() {
   strncpy(input, "cbrt", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == 5.0) {
+  if (get_stack_size() == 2 && actual_result() == 5.0) {
     return 0;
   }
   return 1;
@@ -349,7 +351,7 @@ static int test_rpn_calc_xrt() {
   strncpy(input, "//", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 2.0) {
+  if (get_stack_size() == 1 && actual_result() == 2.0) {
     return 0;
   }
   return 1;
@@ -367,7 +369,7 @@ static int test_rpn_calc_abs() {
   strncpy(input, "abs", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == 2.0) {
+  if (get_stack_size() == 2 && actual_result() == 2.0) {
     return 0;
   }
   return 1;
@@ -385,7 +387,7 @@ static int test_rpn_calc_inv() {
   strncpy(input, "inv", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() > 0.33332 &&
+  if (get_stack_size() == 2 && actual_result() > 0.33332 &&
       actual_result() < 0.33334) {
     return 0;
   }
@@ -404,7 +406,7 @@ static int test_rpn_calc_sin_deg() {
   strncpy(input, "sin", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 0.499999 &&
+  if (get_stack_size() == 1 && actual_result() > 0.499999 &&
       actual_result() < 0.500001) {
     return 0;
   }
@@ -429,7 +431,7 @@ static int test_rpn_calc_sin_rad() {
   strncpy(input, "sin", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 0.499999 &&
+  if (get_stack_size() == 1 && actual_result() > 0.499999 &&
       actual_result() < 0.500001) {
     return 0;
   }
@@ -448,7 +450,7 @@ static int test_rpn_calc_cos_deg() {
   strncpy(input, "cos", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 0.499999 &&
+  if (get_stack_size() == 1 && actual_result() > 0.499999 &&
       actual_result() < 0.500001) {
     return 0;
   }
@@ -473,7 +475,7 @@ static int test_rpn_calc_cos_rad() {
   strncpy(input, "cos", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 0.4999 &&
+  if (get_stack_size() == 1 && actual_result() > 0.4999 &&
       actual_result() < 0.50001) {
     return 0;
   }
@@ -492,7 +494,7 @@ static int test_rpn_calc_tan_deg() {
   strncpy(input, "tan", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 0.999999 &&
+  if (get_stack_size() == 1 && actual_result() > 0.999999 &&
       actual_result() < 1.000001) {
     return 0;
   }
@@ -517,7 +519,7 @@ static int test_rpn_calc_tan_rad() {
   strncpy(input, "tan", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 0.999999 &&
+  if (get_stack_size() == 1 && actual_result() > 0.999999 &&
       actual_result() < 1.000001) {
     return 0;
   }
@@ -536,7 +538,7 @@ static int test_rpn_calc_asin_deg() {
   strncpy(input, "asin", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 29.999999 &&
+  if (get_stack_size() == 1 && actual_result() > 29.999999 &&
       actual_result() < 30.000001) {
     return 0;
   }
@@ -555,7 +557,7 @@ static int test_rpn_calc_asin_rad() {
   strncpy(input, "asin", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 0.523598
+  if (get_stack_size() == 1 && actual_result() > 0.523598
       && actual_result() < 0.523600) {
     return 0;
   }
@@ -574,7 +576,7 @@ static int test_rpn_calc_acos_deg() {
   strncpy(input, "acos", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 59.999999 &&
+  if (get_stack_size() == 1 && actual_result() > 59.999999 &&
       actual_result() < 60.000001) {
     return 0;
   }
@@ -593,7 +595,7 @@ static int test_rpn_calc_acos_rad() {
   strncpy(input, "cos", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 0.877582 &&
+  if (get_stack_size() == 1 && actual_result() > 0.877582 &&
       actual_result() < 0.877584) {
     return 0;
   }
@@ -612,7 +614,7 @@ static int test_rpn_calc_atan_deg() {
   strncpy(input, "atan", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 45) {
+  if (get_stack_size() == 1 && actual_result() == 45) {
     return 0;
   }
   return 1;
@@ -630,7 +632,7 @@ static int test_rpn_calc_atan_rad() {
   strncpy(input, "atan", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 1.557407 &&
+  if (get_stack_size() == 1 && actual_result() > 1.557407 &&
       actual_result() < 1.557409) {
     return 0;
   }
@@ -646,7 +648,7 @@ static int test_rpn_calc_log() {
   strncpy(input, "log", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 2) {
+  if (get_stack_size() == 1 && actual_result() == 2) {
     return 0;
   }
   return 1;
@@ -661,7 +663,7 @@ static int test_rpn_calc_ln() {
   strncpy(input, "ln", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 0.999999 &&
+  if (get_stack_size() == 1 && actual_result() > 0.999999 &&
       actual_result() < 1.000001) {
     return 0;
   }
@@ -680,7 +682,7 @@ static int test_rpn_calc_logx() {
   strncpy(input, "logx", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 2.999999 &&
+  if (get_stack_size() == 1 && actual_result() > 2.999999 &&
       actual_result() < 3.000001) {
     return 0;
   }
@@ -696,7 +698,7 @@ static int test_rpn_calc_exp() {
   strncpy(input, "exp", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() > 7.389055 &&
+  if (get_stack_size() == 1 && actual_result() > 7.389055 &&
       actual_result() < 7.389057) {
     return 0;
   }
@@ -731,8 +733,8 @@ static int test_rpn_calc_sumstack() {
   processUserInput(input, strlen(input));
 
 
-  if (stack_size() == 3 && actual_result() == 20.0 && s.stk[0] == 5 &&
-      s.stk[1] == 5) {
+  if (get_stack_size() == 3 && actual_result() == 20.0 &&
+      get_stack_value_at_index(0) == 5 && get_stack_value_at_index(1) == 5) {
     return 0;
   }
   return 1;
@@ -753,7 +755,7 @@ static int test_rpn_calc_sum() {
   strncpy(input, "sum", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 2 && actual_result() == 5050.0) {
+  if (get_stack_size() == 2 && actual_result() == 5050.0) {
     return 0;
   }
   return 1;
@@ -811,8 +813,8 @@ static int test_rpn_calc_avgstack() {
   processUserInput(input, strlen(input));
 
 
-  if (stack_size() == 3 && s.stk[0] == 11.0 && s.stk[1] == 9 &&
-      s.stk[2] == 13) {
+  if (get_stack_size() == 3 && get_stack_value_at_index(0) == 11.0 &&
+      get_stack_value_at_index(1) == 9 && get_stack_value_at_index(2) == 13) {
     return 0;
   }
   return 1;
@@ -828,7 +830,7 @@ static int test_rpn_calc_factorial() {
   processUserInput(input, strlen(input));
 
 
-  if (stack_size() == 1 && actual_result() == 5040) {
+  if (get_stack_size() == 1 && actual_result() == 5040) {
     return 0;
   }
   return 1;
@@ -844,7 +846,7 @@ static int test_rpn_calc_fibonacci() {
   processUserInput(input, strlen(input));
 
 
-  if (stack_size() == 1 && actual_result() == 832040) {
+  if (get_stack_size() == 1 && actual_result() == 832040) {
     return 0;
   }
   return 1;
@@ -864,7 +866,7 @@ static int test_rpn_calc_bit_and() {
   strncpy(input, "&", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 2) {
+  if (get_stack_size() == 1 && actual_result() == 2) {
     return 0;
   }
   return 1;
@@ -882,7 +884,7 @@ static int test_rpn_calc_bit_or() {
   strncpy(input, "|", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 11) {
+  if (get_stack_size() == 1 && actual_result() == 11) {
     return 0;
   }
   return 1;
@@ -900,7 +902,7 @@ static int test_rpn_calc_bit_xor() {
   strncpy(input, "^", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 9) {
+  if (get_stack_size() == 1 && actual_result() == 9) {
     return 0;
   }
   return 1;
@@ -918,7 +920,7 @@ static int test_rpn_calc_bit_left_shift() {
   strncpy(input, "<<", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 40) {
+  if (get_stack_size() == 1 && actual_result() == 40) {
     return 0;
   }
   return 1;
@@ -936,7 +938,7 @@ static int test_rpn_calc_bit_right_shift() {
   strncpy(input, ">>", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 1) {
+  if (get_stack_size() == 1 && actual_result() == 1) {
     return 0;
   }
   return 1;
@@ -951,7 +953,7 @@ static int test_rpn_calc_bit_left_shift1() {
   strncpy(input, "<<1", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 20) {
+  if (get_stack_size() == 1 && actual_result() == 20) {
     return 0;
   }
   return 1;
@@ -966,7 +968,7 @@ static int test_rpn_calc_bit_right_shift1() {
   strncpy(input, ">>1", input_size);
   processUserInput(input, strlen(input));
 
-  if (stack_size() == 1 && actual_result() == 5) {
+  if (get_stack_size() == 1 && actual_result() == 5) {
     return 0;
   }
   return 1;

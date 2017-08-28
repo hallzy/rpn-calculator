@@ -11,7 +11,7 @@
 // Blank entry duplicates the last item on the stack
 static ret_codes rpn_calc_duplicate() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num1 = pop();
     push(num1);
     push(num1);
@@ -24,7 +24,7 @@ static ret_codes rpn_calc_duplicate() {
 // Removes the last entry on the stack
 static ret_codes rpn_calc_drop() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     pop();
     return SUCCESS;
   }
@@ -35,10 +35,10 @@ static ret_codes rpn_calc_drop() {
 static ret_codes rpn_calc_dropx() {
   // Make sure there are at least 1 elements on the stack so I know that I can
   // pop something.
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double entry = pop();
     // Make sure that the xth entry actually exists
-    if (stack_size() >= entry) {
+    if (get_stack_size() >= entry) {
       // 1 less than entry to make it an index
       remove_from_stack_index(entry-1);
       return SUCCESS;
@@ -55,7 +55,7 @@ static ret_codes rpn_calc_dropx() {
 // Swap the order of the last two stack entries
 static ret_codes rpn_calc_swap() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push(num2);
@@ -68,18 +68,18 @@ static ret_codes rpn_calc_swap() {
 
 // Clear the WHOLE STACK
 static ret_codes rpn_calc_clear() {
-  s.top = -1;
+  set_stack_size(0);
   return SUCCESS;
 }
 
 // Clear up to the stack element that is numbered by x
 static ret_codes rpn_calc_clearx() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
-    s.top = num - 1;
-    if (s.top < -1) {
-      s.top = -1;
+    set_stack_size(num);
+    if (get_stack_size() < 0) {
+      set_stack_size(0);
     }
     return SUCCESS;
   }
@@ -92,7 +92,7 @@ static ret_codes rpn_calc_clearx() {
 // Adds the last two stack entries together
 static ret_codes rpn_calc_plus() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push(num1+num2);
@@ -105,7 +105,7 @@ static ret_codes rpn_calc_plus() {
 // Subtracts the last two stack entries together
 static ret_codes rpn_calc_minus() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push(num1-num2);
@@ -118,7 +118,7 @@ static ret_codes rpn_calc_minus() {
 // Change the sign on the number
 static ret_codes rpn_calc_neg() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push(num*-1);
     return SUCCESS;
@@ -130,7 +130,7 @@ static ret_codes rpn_calc_neg() {
 // Multiplies the last two stack entries together
 static ret_codes rpn_calc_multiply() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push(num1*num2);
@@ -143,7 +143,7 @@ static ret_codes rpn_calc_multiply() {
 // Divides the last two stack entries together
 static ret_codes rpn_calc_divide() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push(num1/num2);
@@ -156,7 +156,7 @@ static ret_codes rpn_calc_divide() {
 // x to the power of y
 static ret_codes rpn_calc_pow() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push(pow(num1, num2));
@@ -169,7 +169,7 @@ static ret_codes rpn_calc_pow() {
 // squared
 static ret_codes rpn_calc_squared() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push(pow(num, 2));
     return SUCCESS;
@@ -181,7 +181,7 @@ static ret_codes rpn_calc_squared() {
 // cubed
 static ret_codes rpn_calc_cubed() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push(pow(num, 3));
     return SUCCESS;
@@ -193,7 +193,7 @@ static ret_codes rpn_calc_cubed() {
 // Square Roots the last stack entry
 static ret_codes rpn_calc_sqrt() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push(sqrt(num));
     return SUCCESS;
@@ -205,7 +205,7 @@ static ret_codes rpn_calc_sqrt() {
 // Cube Roots the last stack entry
 static ret_codes rpn_calc_cbrt() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push(cbrt(num));
     return SUCCESS;
@@ -217,7 +217,7 @@ static ret_codes rpn_calc_cbrt() {
 // xth Root the last stack entry
 static ret_codes rpn_calc_xrt() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push(pow(num1, 1.0/num2));
@@ -230,7 +230,7 @@ static ret_codes rpn_calc_xrt() {
 // absolute value of number
 static ret_codes rpn_calc_abs() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
 
     if (num < 0) {
@@ -246,7 +246,7 @@ static ret_codes rpn_calc_abs() {
 // invert the value
 static ret_codes rpn_calc_inv() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push(1.0/num);
     return SUCCESS;
@@ -257,9 +257,9 @@ static ret_codes rpn_calc_inv() {
 
 static ret_codes rpn_calc_sin() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
-    if (s.angle_mode == RADIANS) {
+    if (get_angle_mode() == RADIANS) {
       push(sin(num));
     }
     else {
@@ -273,9 +273,9 @@ static ret_codes rpn_calc_sin() {
 
 static ret_codes rpn_calc_cos() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
-    if (s.angle_mode == RADIANS) {
+    if (get_angle_mode() == RADIANS) {
       push(cos(num));
     }
     else {
@@ -289,9 +289,9 @@ static ret_codes rpn_calc_cos() {
 
 static ret_codes rpn_calc_tan() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
-    if (s.angle_mode == RADIANS) {
+    if (get_angle_mode() == RADIANS) {
       push(tan(num));
     }
     else {
@@ -305,9 +305,9 @@ static ret_codes rpn_calc_tan() {
 
 static ret_codes rpn_calc_asin() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
-    if (s.angle_mode == RADIANS) {
+    if (get_angle_mode() == RADIANS) {
       push(asin(num));
     }
     else {
@@ -321,9 +321,9 @@ static ret_codes rpn_calc_asin() {
 
 static ret_codes rpn_calc_acos() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
-    if (s.angle_mode == RADIANS) {
+    if (get_angle_mode() == RADIANS) {
       push(cos(num));
     }
     else {
@@ -337,9 +337,9 @@ static ret_codes rpn_calc_acos() {
 
 static ret_codes rpn_calc_atan() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
-    if (s.angle_mode == RADIANS) {
+    if (get_angle_mode() == RADIANS) {
       push(tan(num));
     }
     else {
@@ -354,7 +354,7 @@ static ret_codes rpn_calc_atan() {
 // base 10 logarithms
 static ret_codes rpn_calc_log() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     // log is the natural log normally, so I need to convert it to base 10
     push(log(num)/log(10));
@@ -367,7 +367,7 @@ static ret_codes rpn_calc_log() {
 // Base e logarithms
 static ret_codes rpn_calc_ln() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push(log(num));
     return SUCCESS;
@@ -379,7 +379,7 @@ static ret_codes rpn_calc_ln() {
 // Variable Base logarithms
 static ret_codes rpn_calc_logx() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double base = pop();
     long double num = pop();
     push(log(num)/log(base));
@@ -392,7 +392,7 @@ static ret_codes rpn_calc_logx() {
 // e to the power of x
 static ret_codes rpn_calc_exp() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push(exp(num));
     return SUCCESS;
@@ -405,16 +405,16 @@ static ret_codes rpn_calc_exp() {
 // position y
 static ret_codes rpn_calc_sumstack() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double y = pop();
     long double x = pop();
     ret_codes ret = SUCCESS;
 
-    if (y < 1 || y > stack_size()) {
+    if (y < 1 || y > get_stack_size()) {
       printf("ERROR: Second Argument was not in the stack\n");
       ret = FAILED_OPERATION;
     }
-    if (x < 1 || x > stack_size()) {
+    if (x < 1 || x > get_stack_size()) {
       printf("ERROR: First Argument was not in the stack\n");
       ret = FAILED_OPERATION;
     }
@@ -436,7 +436,7 @@ static ret_codes rpn_calc_sumstack() {
     // decrement to make it an index
     min--;
     for (int i = min; i < max; i++) {
-      sum += s.stk[i];
+      sum += get_stack_value_at_index(i);
     }
 
     // now remove all the stack elements that were used in the addition.
@@ -455,7 +455,7 @@ static ret_codes rpn_calc_sumstack() {
 // ex: if x = 5 and y = 7, sum = 5+6+7 = 18
 static ret_codes rpn_calc_sum() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double y = pop();
     long double x = pop();
 
@@ -483,16 +483,16 @@ static ret_codes rpn_calc_sum() {
 // position y
 static ret_codes rpn_calc_avgstack() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double y = pop();
     long double x = pop();
     ret_codes ret = SUCCESS;
 
-    if (y < 1 || y > stack_size()) {
+    if (y < 1 || y > get_stack_size()) {
       printf("ERROR: Second Argument was not in the stack\n");
       ret = FAILED_OPERATION;
     }
-    if (x < 1 || x > stack_size()) {
+    if (x < 1 || x > get_stack_size()) {
       printf("ERROR: First Argument was not in the stack\n");
       ret = FAILED_OPERATION;
     }
@@ -514,7 +514,7 @@ static ret_codes rpn_calc_avgstack() {
     // decrement to make it an index
     min--;
     for (int i = min; i < max; i++) {
-      sum += s.stk[i];
+      sum += get_stack_value_at_index(i);
     }
 
     // now remove all the stack elements that were used in the addition.
@@ -531,7 +531,7 @@ static ret_codes rpn_calc_avgstack() {
 
 static ret_codes rpn_calc_factorial() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double x = pop();
     long double ans = factorial(x);
 
@@ -550,7 +550,7 @@ static ret_codes rpn_calc_factorial() {
 
 static ret_codes rpn_calc_fibonacci() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double x = pop();
     long double ans = fibonacci(x);
 
@@ -571,7 +571,7 @@ static ret_codes rpn_calc_fibonacci() {
 
 static ret_codes rpn_calc_bit_and() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push((int)num1 & (int)num2);
@@ -583,7 +583,7 @@ static ret_codes rpn_calc_bit_and() {
 
 static ret_codes rpn_calc_bit_or() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push((int)num1 | (int)num2);
@@ -595,7 +595,7 @@ static ret_codes rpn_calc_bit_or() {
 
 static ret_codes rpn_calc_bit_xor() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push((int)num1 ^ (int)num2);
@@ -607,7 +607,7 @@ static ret_codes rpn_calc_bit_xor() {
 
 static ret_codes rpn_calc_bit_left_shift() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push((int)num1 << (int)num2);
@@ -619,7 +619,7 @@ static ret_codes rpn_calc_bit_left_shift() {
 
 static ret_codes rpn_calc_bit_right_shift() {
   // Make sure there are at least 2 elements on the stack
-  if (stack_size() >= 2) {
+  if (get_stack_size() >= 2) {
     long double num2 = pop();
     long double num1 = pop();
     push((int)num1 >> (int)num2);
@@ -631,7 +631,7 @@ static ret_codes rpn_calc_bit_right_shift() {
 
 static ret_codes rpn_calc_bit_left_shift_1() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push((int)num << 1);
     return SUCCESS;
@@ -642,7 +642,7 @@ static ret_codes rpn_calc_bit_left_shift_1() {
 
 static ret_codes rpn_calc_bit_right_shift_1() {
   // Make sure there are at least 1 elements on the stack
-  if (stack_size() >= 1) {
+  if (get_stack_size() >= 1) {
     long double num = pop();
     push((int)num >> 1);
     return SUCCESS;
@@ -655,37 +655,37 @@ static ret_codes rpn_calc_bit_right_shift_1() {
 
 // Change to radians mode
 static ret_codes rpn_calc_rad() {
-  s.angle_mode=RADIANS;
+  set_angle_mode(RADIANS);
   return SUCCESS;
 }
 
 // Change to degrees mode
 static ret_codes rpn_calc_deg() {
-  s.angle_mode=DEGREES;
+  set_angle_mode(DEGREES);
   return SUCCESS;
 }
 
 // Change to degrees mode
 static ret_codes rpn_calc_hex() {
-  s.base_mode=HEXADECIMAL;
+  set_base_mode(HEXADECIMAL);
   return SUCCESS;
 }
 
 // Change to degrees mode
 static ret_codes rpn_calc_dec() {
-  s.base_mode=DECIMAL;
+  set_base_mode(DECIMAL);
   return SUCCESS;
 }
 
 // Change to degrees mode
 static ret_codes rpn_calc_oct() {
-  s.base_mode=OCTAL;
+  set_base_mode(OCTAL);
   return SUCCESS;
 }
 
 // Change to degrees mode
 static ret_codes rpn_calc_bin() {
-  s.base_mode=BINARY;
+  set_base_mode(BINARY);
   return SUCCESS;
 }
 

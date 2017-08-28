@@ -39,12 +39,24 @@ typedef struct {
   base_modes base_mode;
 } stack;
 
-stack s;
-
 // This is a high level function that sends a user inputed string to be parsed.
 // If the string is found to be a number, it is pushed to the stack, otherwise
 // it finds the operation that was specified, or fails.
 ret_codes processUserInput(char *val, int val_size);
+
+// Functions to set the base and angle of the stack
+void set_angle_mode(angle_modes angle);
+void set_base_mode(base_modes base);
+
+// Functions to get the base and angle of the stack
+angle_modes get_angle_mode();
+base_modes get_base_mode();
+
+// Return the value on the stack at index i
+long double get_stack_value_at_index(int i);
+
+// Set Stack Size, so long as it is a lower value than the current s.top
+void set_stack_size(int size);
 
 // This takes a value off the stack and reduces s.top to move the stack pointer
 long double  pop();
@@ -53,7 +65,7 @@ long double  pop();
 void stack_init();
 
 // just changes s.top into a more reasonable number for determining size
-int stack_size();
+int get_stack_size();
 
 // Adds a new number to the stack and increments s.top stack pointer
 void push(long double f);
