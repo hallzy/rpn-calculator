@@ -974,6 +974,21 @@ static int test_rpn_calc_bit_right_shift1() {
   return 1;
 }
 
+// --- HIGHER LEVEL OPERATIONS ---
+
+static int test_rpn_calc_expr() {
+  char input[input_size];
+
+  // 4+(4*(2+6))/2 = 20
+  strncpy(input, "expr 2 6 + 4 * 2 / 4 +", input_size);
+  processUserInput(input, strlen(input));
+
+  if (get_stack_size() == 1 && actual_result() > 19.999999 &&
+      actual_result() < 20.000001) {
+    return 0;
+  }
+  return 1;
+}
 
 // LIST OF TESTS
 const static struct {
@@ -1034,6 +1049,9 @@ const static struct {
     {"test_rpn_calc_bit_left_shift1"   , test_rpn_calc_bit_left_shift1   } ,
     {"test_rpn_calc_bit_right_shift1"  , test_rpn_calc_bit_right_shift1  } ,
     {"test_rpn_calc_bit_right_shift1"  , test_rpn_calc_bit_right_shift1  } ,
+
+    // --- HIGHER LEVEL OPERATIONS ---
+    {"test_rpn_calc_expr"  , test_rpn_calc_expr  } ,
   };
 
 // PERFORM THE TESTS

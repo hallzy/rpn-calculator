@@ -75,7 +75,12 @@ Run the calculator with:
 ./calc
 ```
 
-Operate as a normal RPN Calcualtor.
+Operate as a normal RPN Calculator.
+
+Alternatively, there is an `expr` command where you can type out an RPN
+calculation on one line with all the numbers and operators separated by spaces.
+
+For Example: `expr 2 6 + 4 * 2 / 4 +` which would equate to `20`.
 
 NOTE: This calculator will require the `enter` key to be pressed in order to
 register anything. Otherwise it won't know when you are done writing your
