@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "stack.h"
+#include "ui.h"
 #else
 #include "test.h"
 #endif // TEST

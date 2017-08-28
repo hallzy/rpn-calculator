@@ -61,7 +61,4 @@ void push(long double f);
 // Removes the stack element at index j and reorganizes the stack.
 void remove_from_stack_index(unsigned int j);
 
-// Prints the current contents of the stack and its settings
-void print_stack();
-
 #endif // _STACK_H_
