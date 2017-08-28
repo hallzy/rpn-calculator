@@ -76,6 +76,55 @@ NOTE: This calculator will require the `enter` key to be pressed in order to
 register anything. Otherwise it won't know when you are done writing your
 command.
 
+### Entering Hex, Octal, or Binary Numbers
+
+You will see later on in the [Change Numeric Base](#change-numeric-base)
+section, that we are able to change the numeric base that the numbers are
+displayed in.
+
+Here I will explain how to actually enter numbers in other bases.
+
+#### Decimal
+
+We will start easy. To enter a number in base 10 (decimal), just enter the
+number as normal.
+
+#### Hexadecimal
+
+To enter a Hex number, you must prefix the number with a `0x` or `0X`. For
+example, if I wanted to enter the hex number `4f`, I would type `0x4f` and press
+enter.
+
+The calculator will take the number, recognize it as hex, and it will display
+the number in whatever numeric base you have chosen for the calculator (by
+default the calculator is in decimal, so if you enter `0x4f` without changing
+the base, you will actually see `79.000000` come onto the stack, since `4f` in
+hexadecimal is `79` in decimal).
+
+#### Octal
+
+To enter an Octal number, you must prefix the number with a `0`. For
+example, if I wanted to enter the octal number `25`, I would type `025` and
+press enter.
+
+The calculator will take the number, recognize it as octal, and it will display
+the number in whatever numeric base you have chosen for the calculator (by
+default the calculator is in decimal, so if you enter `025` without changing the
+base, you will actually see `21.000000` come onto the stack, since `25` in
+octal is `21` in decimal).
+
+#### Octal
+
+To enter a Binary number, you must prefix the number with a `0b` or `0B`. For
+example, if I wanted to enter the binary number `1010101`, I would type
+`0b1010101` and press enter.
+
+The calculator will take the number, recognize it as binary, and it will display
+the number in whatever numeric base you have chosen for the calculator (by
+default the calculator is in decimal, so if you enter `0b1010101` without
+changing the base, you will actually see `85.000000` come onto the stack, since
+`1010101` in octal is `85` in decimal).
+
 ## Supported Operations
 
 ### Stack Manipulations
