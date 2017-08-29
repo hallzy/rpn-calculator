@@ -1,15 +1,21 @@
 #ifndef _STACK_H_
 #define _STACK_H_
 
+#include "bool.h"
+
 // Defines the maximum size of the stack which is completely arbitrary. Doubt I
 // will need it bigger. To emulate the feel of a scientific RPN calculator you
 // can reduce this to something like 4.
 #define MAX_STK 128
 
+bool need_to_pop;
+
 // Return codes used for several functions just to make it clear what is being
 // returned.
 typedef enum {
-  SUCCESS,
+  SUCCESSFUL_PUSH,
+  SUCCESSFUL_OPERATION,
+  SUCCESSFUL_EXPRESSION,
   NOTHING_TO_PUSH,
   FAILED_TO_PUSH,
   FAILED_OPERATION,

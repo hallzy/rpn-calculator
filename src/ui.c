@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef TEST
 #ifndef NO_CLEAR
 // Clears the screen to keep the UI clean.
 static void clear_screen() {
@@ -18,10 +19,12 @@ static void clear_screen() {
   return;
 }
 #endif // NO_CLEAR
+#endif // TEST
 
 
 // Print all of my calculator information and stack info.
 void print_stack() {
+#ifndef TEST
 #ifndef NO_CLEAR
   clear_screen();
 #endif // NO_CLEAR
@@ -93,4 +96,5 @@ void print_stack() {
     }
   }
   printf("===============================================================\n");
+#endif // TEST
 }

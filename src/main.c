@@ -4,7 +4,9 @@
 #include <string.h>
 
 #include "stack.h"
+#include "kbhit.h"
 #include "ui.h"
+#include "expr.h"
 #else
 #include "test.h"
 #endif // TEST
@@ -17,17 +19,34 @@ int main() {
   // characters for an input
   char input[128];
 
-  while(1) {
-    // And give me the result!
+  // Set up the terminal so that the program will accept characters as they come
+  // instead of after a newline.
+  singleCharacterInputInit();
+
+  // Keep looking for key presses.
+  while(!kbhit()) {
+    // Print the initial stack.
     print_stack();
 
-    fgets(input, sizeof(input), stdin);
-    // Remove the newline character unless it is the only thing in the string (I
-    // will use that later in order to drop the element from the top of the
-    // stack)
-    if (input[0] != '\n') {
-      input[strlen(input)-1] = 0;
-   }
+    input[0] = getchar();
+    input[1] = 0;
+    // if the input is the expression char, then this is a one line RPN
+    // expression that needs to be evaluated.
+    if (input[0] == EXPRESSION_CHAR) {
+      int i = 0;
+      // Allow characters to be entered until a newline is reached. Down further
+      // we will send it off to be processed.
+      while(!kbhit()) {
+        printf("%c", input[i]);
+        ++i;
+        input[i] = getchar();
+        if (input[i] == '\n') {
+          input[i] = 0;
+          break;
+        }
+      }
+
+    }
 
     // q will be used to quit the calculator
     if (strcmp(input, "q") ==0) return 0;

@@ -77,14 +77,11 @@ Run the calculator with:
 
 Operate as a normal RPN Calculator.
 
-Alternatively, there is an `expr` command where you can type out an RPN
-calculation on one line with all the numbers and operators separated by spaces.
+Alternatively, there is an expression command (`e`) command where you can type
+out an RPN calculation on one line with all the numbers and operators separated
+by spaces.
 
-For Example: `expr 2 6 + 4 * 2 / 4 +` which would equate to `20`.
-
-NOTE: This calculator will require the `enter` key to be pressed in order to
-register anything. Otherwise it won't know when you are done writing your
-command.
+For Example: `e 2 6 + 4 * 2 / 4 +` which would equate to `20`.
 
 ### Entering Hex, Octal, or Binary Numbers
 
@@ -185,11 +182,8 @@ stack.
 
 The drop commands removes entries from the stack.
 
-* `drop`, `d`:
+*  `d`:
   * These drop commands all drop the last entry on the stack.
-* `dropx`, `dx`:
-  * These drop commands all drop the stack entry on line x (where x is the last
-    stack entry)
 
 > ##### Example:
 >
@@ -211,7 +205,7 @@ The drop commands removes entries from the stack.
 > ===============================================================
 > ```
 >
-> We would get this if we did a regular drop command (`d`):
+> We would get this if we did a `drop` command:
 >
 > ```
 > ===============================================================
@@ -225,41 +219,6 @@ The drop commands removes entries from the stack.
 > 1:  10.000000
 > 2:  20.000000
 > 3:  30.000000
-> ===============================================================
-> ```
->
-> If we now entered a `2` onto the stack:
->
-> ```
-> ===============================================================
-> +---+
-> |RAD|  DEG
-> +---+
->       +---+
->  HEX  |DEC|  OCT   BIN
->       +---+
->
-> 1:  10.000000
-> 2:  20.000000
-> 3:  30.000000
-> 4:  2.000000
-> ===============================================================
-> ```
->
-> and do a `dx` command, we would be removing the 2nd value in the stack and get
-> this:
->
-> ```
-> ===============================================================
-> +---+
-> |RAD|  DEG
-> +---+
->       +---+
->  HEX  |DEC|  OCT   BIN
->       +---+
->
-> 1:  10.000000
-> 2:  30.000000
 > ===============================================================
 > ```
 
@@ -267,7 +226,7 @@ The drop commands removes entries from the stack.
 
 The swap commands swap stack entries with one another.
 
-* `swap`, `s`:
+* `s`:
   * Swaps the last stack entry with the second to last stack entry.
 
 > ##### Example:
@@ -290,7 +249,7 @@ The swap commands swap stack entries with one another.
 > ===============================================================
 > ```
 >
-> This is what we get if we perform a `s` operation:
+> This is what we get if we perform a `swap`:
 >
 > ```
 > ===============================================================
@@ -312,12 +271,8 @@ The swap commands swap stack entries with one another.
 
 The clear command clears the whole stack or a defined part of it.
 
-* `clear`, `c`:
-  * Clears the WHOLE stack.
-* `clearx`, `cx`:
-  * Clears all stack entries from the bottom of the stack up to (but not
-    including) the stack entry numbered by x (where x is the last entry on the
-stack)
+* `<escape>`:
+  * Pressing the escape button clears the WHOLE stack.
 
 > ##### Example:
 >
@@ -339,7 +294,7 @@ stack)
 > ===============================================================
 > ```
 >
-> This is what we get if we perform a `c` operation:
+> This is what we get if we perform a `clear` operation:
 >
 > ```
 > ===============================================================
@@ -350,42 +305,6 @@ stack)
 >  HEX  |DEC|  OCT   BIN
 >       +---+
 >
-> ===============================================================
-> ```
->
-> If we then start with this:
->
-> ```
-> ===============================================================
-> +---+
-> |RAD|  DEG
-> +---+
->       +---+
->  HEX  |DEC|  OCT   BIN
->       +---+
->
-> 1:  10.000000
-> 2:  20.000000
-> 3:  30.000000
-> 4:  40.000000
-> 5:  2.000000
-> ===============================================================
-> ```
->
-> Then this is what we get if we perform a `cx` operation (note that the 2 at line
-> 5 is the x argument for `cx`):
->
-> ```
-> ===============================================================
-> +---+
-> |RAD|  DEG
-> +---+
->       +---+
->  HEX  |DEC|  OCT   BIN
->       +---+
->
-> 1:  10.000000
-> 2:  20.000000
 > ===============================================================
 > ```
 
@@ -399,16 +318,16 @@ or displays information.
 These settings change the angle that the calculator assumes for the Trig
 functions.
 
-* `deg`, `rad`:
+* `ctrl+e`, `ctrl+r`:
   * These commands change the mode of the calculator to Degrees or Radians
     respectively.
 
 > ##### Example:
 >
 > NOTE: To see how the different modes actually work with Operations that use
-> angles, see [Trigonometric Functions](#trigonometric-functions). These examples
-> won't show the use of degrees vs radians, but just shows how to change them with
-> the command.
+> angles, see [Trigonometric Functions](#trigonometric-functions). These
+> examples won't show the use of degrees vs radians, but just shows how to
+> change them with the command.
 >
 > Starting with this:
 >
@@ -424,7 +343,7 @@ functions.
 > ===============================================================
 > ```
 >
-> This is what we get if we use the `deg` command:
+> This is what we get if we use the `degree` command:
 >
 > ```
 > ===============================================================
@@ -438,7 +357,7 @@ functions.
 > ===============================================================
 > ```
 >
-> Performing the `rad` command then takes us back to:
+> Performing the `radian` command then takes us back to:
 >
 > ```
 > ===============================================================
@@ -458,7 +377,7 @@ These settings change the numeric base that the calculator uses to DISPLAY
 numeric values. It does NOT affect how numbers are interpreted. To find out how
 to enter hex, octal, or binary numbers into the calculator, see [Usage](#usage).
 
-* `hex`, `dec`, `oct`, `bin`:
+* `ctrl+h`, `ctrl+d`, `ctrl+o`, `ctrl+b`:
   * These commands change the mode of the calculator to hexadecimal, decimal,
     octal, and binary respectively.
 
@@ -498,7 +417,7 @@ to enter hex, octal, or binary numbers into the calculator, see [Usage](#usage).
 >
 > Note that currently it is in decimal mode which is the standard setting.
 >
-> Now we will change to hex mode with the `hex` command:
+> Now we will change to hex mode:
 >
 > ```
 > ===============================================================
@@ -518,10 +437,10 @@ to enter hex, octal, or binary numbers into the calculator, see [Usage](#usage).
 > ===============================================================
 > ```
 >
-> Notice that the setting at the top has moved to `hex`. Also, all the numbers
+> Notice that the setting at the top has moved to `HEX`. Also, all the numbers
 > on the stack have been converted to hexadecmial.
 >
-> Now to change to octal with the `oct` command:
+> Now to change to octal:
 >
 > ```
 > ===============================================================
@@ -541,7 +460,7 @@ to enter hex, octal, or binary numbers into the calculator, see [Usage](#usage).
 > ===============================================================
 > ```
 >
-> And finally, binary with `bin` command:
+> And finally, binary:
 >
 > ```
 > ===============================================================

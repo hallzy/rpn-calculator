@@ -1,9 +1,12 @@
 #include "stack.h"
+#include "ui.h"
 #include "expr.h"
+#include "kbhit.h"
 #include "operations.h"
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 // Define THE stack here and static so that it can't be accesssed anywhere else,
 // thus forcing everyone to use the below functions to interact with the stack
@@ -15,6 +18,9 @@ void stack_init() {
   s.top        = -1;
   s.angle_mode = RADIANS;
   s.base_mode  = DECIMAL;
+
+  expression_is_running = false;
+  need_to_pop = false;
 }
 
 void set_angle_mode(angle_modes angle) {
@@ -64,6 +70,13 @@ void push(long double f) {
   s.stk[s.top] = f;
 }
 
+// Remove the element at the top and update the stack pointer.
+long double pop() {
+  long double popped = s.stk[s.top];
+  s.top--;
+  return popped;
+}
+
 void remove_from_stack_index(unsigned int j) {
   for (int i =j; i < s.top; i++) {
     s.stk[i] = s.stk[i+1];
@@ -84,8 +97,12 @@ static ret_codes get_octal_number_and_push(char *val) {
   if (next == val || *next != '\0') {
     return FAILED_TO_PUSH;
   }
+  // Push twice so that the number you start editing the next time is
+  // automatically pushed. The second one will be popped automatically if it is
+  // found that the user is entering a number the next time.
   push(numl);
-  return SUCCESS;
+  push(numl);
+  return SUCCESSFUL_PUSH;
 }
 
 // This grabs the binary input string from the user and converts it into a
@@ -100,8 +117,13 @@ static ret_codes get_binary_number_and_push(char *val) {
   if (next == val || *next != '\0') {
     return FAILED_TO_PUSH;
   }
+
+  // Push twice so that the number you start editing the next time is
+  // automatically pushed. The second one will be popped automatically if it is
+  // found that the user is entering a number the next time.
   push(numl);
-  return SUCCESS;
+  push(numl);
+  return SUCCESSFUL_PUSH;
 }
 
 // This grabs the decimal or hex input string from the user and converts it into
@@ -114,51 +136,141 @@ static ret_codes get_decimal_and_hex_numbers_and_push(char *val) {
   if (next == val || *next != '\0') {
     return FAILED_TO_PUSH;
   }
+  // Push twice so that the number you start editing the next time is
+  // automatically pushed. The second one will be popped automatically if it is
+  // found that the user is entering a number the next time.
   push(num);
-  return SUCCESS;
+  push(num);
+  return SUCCESSFUL_PUSH;
+}
+
+// We have finished parsing the number now. Just push it using one of the 3
+// functions defined above depending on what base the number is.
+static ret_codes push_the_number(char *val) {
+  // Check if it is an octal number. Octals are prefixed by "0" and then a
+  // number
+  if (val[0] == '0' && isdigit(val[1])) {
+    return get_octal_number_and_push(val);
+  }
+  // Check if it is a binary number. Binary numbers are prefixed with either
+  // "0b" or "0B"
+  else if (val[0] == '0' && (val[1] == 'b' || val[1] == 'B')) {
+    return get_binary_number_and_push(val);
+  }
+  else {
+    // this will recognize decimal or hex values.
+    // This is the last chance for the input to be a number. if it isn't, then
+    // it fails silently here and doesn't do anything to the stack.
+    return get_decimal_and_hex_numbers_and_push(val);
+  }
+}
+
+// In the event that val starts with a number, we assume it is a number and we
+// run this in order to allow the user to finish typing their number. While
+// getting the data for the number, we are also checking if the user inputs an
+// operation on the end of the number for us to perform.
+void get_the_rest_of_the_number_from_user(char *val, operation_location *op) {
+  // If it is a number, then we will want to wait until the user presses
+  // enter before doing anything with it so that we know the user has
+  // finished entering their number.
+  char c[2];
+  c[1] = 0;
+  int i = 0;
+  if (isdigit(val[0])) {
+    while(!kbhit()) {
+      printf("%c", val[i]);
+      ++i;
+      c[0] = getchar();
+      *op = whichOperation(c);
+      if (c[0] == '\n') {
+        // if we get into this then we need to reset op, because it was just
+        // given a new value above.
+        op->operation_index = -1;
+        op->operation_type_index = -1;
+        val[i] = 0;
+        return;
+      }
+      else if (op->operation_index != -1) {
+        val[i] = 0;
+        return;
+      }
+      // Is the input an operation? If so, then do the operation after pushing
+      // the number
+      val[i] = c[0];
+    }
+  }
+}
+
+static ret_codes parseNumber(char *val) {
+  /* operation_location op = {-1,-1}; */
+  operation_location op;
+  op.operation_type_index=-1;
+  op.operation_index=-1;
+  ret_codes ret;
+  // If I am entering a number after I JUST entered a number onto the stack,
+  // the number is on the stack twice automatically. If I get to this point
+  // after JUST adding a number, it means I need to overwrite the latest
+  // number (which was duplicate of the last one).
+  if (need_to_pop && !expression_is_running) {
+    pop();
+    print_stack();
+  }
+  need_to_pop = true;
+#ifndef TEST
+  // If we are in an expression there is no need to wait for more characters
+  // because we have them all already.
+  if (!expression_is_running) {
+    // also returns the operation op index
+    get_the_rest_of_the_number_from_user(val, &op);
+  }
+  else {
+#endif // TEST
+    val[strlen(val)-1] = 0;
+#ifndef TEST
+  }
+#endif // TEST
+  // We now have a number, so figure out what base it is, and push it.
+  ret = push_the_number(val);
+
+  // If pushing a number failed, then return the error code
+  if (ret != SUCCESSFUL_PUSH) {
+    // if it failed, then don't pop next time
+    need_to_pop = false;
+    return ret;
+  }
+  // If no error happened in the previous step, check if we had an operation
+  // on the end of the number and perform it.
+  if (op.operation_index != -1) {
+    // If my number ended with an operation, then I have pushed that number
+    // twice already. Do get expected results, I need to pop one of the
+    // duplicates off first. I also need to tell the program NOT to pop the
+    // number off the next time.
+    pop();
+    return performOperation(op);
+  }
+  // If anything else, then return ret;
+  return ret;
 }
 
 // Check if the user input string is an operation, or a number, and act
 // accordingly
 ret_codes processUserInput(char *val, int val_size) {
-  int op;
+  operation_location op;
 
+  // Is the input an operation? If so, then do the operation
+  op = whichOperation(val);
+  if (op.operation_index != -1) {
+    return performOperation(op);
+  }
   // Check to see if the input is an RPN string expression
   // If it is, then I need to parse the string to break it into parts.
-  char *expr = "expr ";
-  if(strncmp(val, expr, strlen(expr)) == 0) {
+  else if(val[0] == EXPRESSION_CHAR) {
     // Parse the expression.
     // + strlen() is to remove the "expr: " string from the input
-    return parseExpression(val+strlen(expr));
-  }
-  // Is the input an operation? If so, then do the operation
-  else if ((op = whichOperation(val)) != -1) {
-    return performOperation(op);
+    return parseExpression(val+1);
   }
   // if it wasn't an operation it better be a number...
   else {
-    // Check if it is an octal number. Octals are prefixed by "0" and then a
-    // number
-    if (val[0] == '0' && isdigit(val[1])) {
-      return get_octal_number_and_push(val);
-    }
-    // Check if it is a binary number. Binary numbers are prefixed with either
-    // "0b" or "0B"
-    else if (val[0] == '0' && (val[1] == 'b' || val[1] == 'B')) {
-      return get_binary_number_and_push(val);
-    }
-    else {
-      // this will recognize decimal or hex values.
-      // This is the last chance for the input to be a number. if it isn't, then
-      // it fails silently here and doesn't do anything to the stack.
-      return get_decimal_and_hex_numbers_and_push(val);
-    }
+    return parseNumber(val);
   }
-}
-
-// Remove the element at the top and update the stack pointer.
-long double pop() {
-  long double popped = s.stk[s.top];
-  s.top--;
-  return popped;
 }
