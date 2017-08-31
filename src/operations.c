@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+static ret_codes rpn_calc_help();
 // --- STACK MANIPULATION FUNCTIONS ---
 
 // Blank entry duplicates the last item on the stack
@@ -671,40 +672,41 @@ static ret_codes rpn_calc_e() {
 struct operation_map {
   const char name;
   ret_codes (*func)(void);
-  char description[30];
+  char description[40];
 
 };
 
 const static struct operation_map calc_single_char_operations [] = {
   // Stack Manipulations
-    {'\n'             , rpn_calc_duplicate    ,""      } ,
-    {'d'              , rpn_calc_drop         ,""      } ,
-    {'s'              , rpn_calc_swap         ,""      } ,
-    {ESCAPE           , rpn_calc_clear        ,""      } ,
+    {'\n'    , rpn_calc_duplicate        , "<enter> : Duplicate Last Stack Entry"     } ,
+    {'d'     , rpn_calc_drop             , "d       : Delete Last Stack Entry"        } ,
+    {'s'     , rpn_calc_swap             , "s       : Swap Last 2 Stack Entries"      } ,
+    {ESCAPE  , rpn_calc_clear            , "<esc>   : Clear Stack"                    } ,
+    {'?'     , rpn_calc_help             , "?       : Show Help"                      } ,
 
   // Math Operations
-    {'+'              , rpn_calc_plus         ,""      } ,
-    {'-'              , rpn_calc_minus        ,""      } ,
-    {'n'              , rpn_calc_neg          ,""      } ,
-    {'*'              , rpn_calc_multiply     ,""      } ,
-    {'/'              , rpn_calc_divide       ,""      } ,
-    {'i'              , rpn_calc_inv          ,""      } ,
-    {'!'              , rpn_calc_factorial    ,""      } ,
+    {'+'     , rpn_calc_plus             , "+       : Plus"                           } ,
+    {'-'     , rpn_calc_minus            , "-       : Minus"                          } ,
+    {'*'     , rpn_calc_multiply         , "*       : Multiply"                       } ,
+    {'/'     , rpn_calc_divide           , "/       : Divide"                         } ,
+    {'n'     , rpn_calc_neg              , "n       : Change Sign (+/-)"              } ,
+    {'i'     , rpn_calc_inv              , "i       : 1/x"                            } ,
+    {'!'     , rpn_calc_factorial        , "!       : Factorial of last Stack Entry"  } ,
 
     // Bitwise Operations
-    {'&'              , rpn_calc_bit_and          ,""  } ,
-    {'|'              , rpn_calc_bit_or           ,""  } ,
-    {'^'              , rpn_calc_bit_xor          ,""  } ,
-    {'<'              , rpn_calc_bit_left_shift   ,""  } ,
-    {'>'              , rpn_calc_bit_right_shift  ,""  } ,
+    {'&'     , rpn_calc_bit_and          , "&       : Bitwise AND"                    } ,
+    {'|'     , rpn_calc_bit_or           , "|       : Bitwise OR"                     } ,
+    {'^'     , rpn_calc_bit_xor          , "^       : Bitwise XOR"                    } ,
+    {'<'     , rpn_calc_bit_left_shift   , "<       : Left Shift x entry y bits"      } ,
+    {'>'     , rpn_calc_bit_right_shift  , ">       : Right Shift x entry y bits"     } ,
 
     // Calculator Settings
-    {CTRL_E           , rpn_calc_deg         ,""       } ,
-    {CTRL_R           , rpn_calc_rad         ,""       } ,
-    {CTRL_H           , rpn_calc_hex         ,""       } ,
-    {CTRL_D           , rpn_calc_dec         ,""       } ,
-    {CTRL_O           , rpn_calc_oct         ,""       } ,
-    {CTRL_B           , rpn_calc_bin         ,""       } ,
+    {CTRL_E  , rpn_calc_deg              , "ctrl+e  : Change Angle to Degrees"        } ,
+    {CTRL_R  , rpn_calc_rad              , "ctrl+r  : Change Angle to Radians"        } ,
+    {CTRL_H  , rpn_calc_hex              , "ctrl+h  : Change numeric base to HEX"     } ,
+    {CTRL_D  , rpn_calc_dec              , "ctrl+d  : Change numeric base to DEC"     } ,
+    {CTRL_O  , rpn_calc_oct              , "ctrl+o  : Change numeric base to OCT"     } ,
+    {CTRL_B  , rpn_calc_bin              , "ctrl+b  : Change numeric base to BIN"     } ,
   };
 
 
@@ -768,18 +770,43 @@ const static struct {
   const char name;
   struct operation_map *map;
   int size;
+  char description[30];
 
 } calc_operation_types [] = {
-  {'C'  , calc_complex_operations    , (int)sizeof(calc_complex_operations)   } ,
-  {'E'  , calc_exponent_operations   , (int)sizeof(calc_exponent_operations)  } ,
-  {'L'  , calc_logarithm_operations  , (int)sizeof(calc_logarithm_operations) } ,
-  {'R'  , calc_radical_operations    , (int)sizeof(calc_radical_operations)   } ,
-  {'T'  , calc_trig_operations       , (int)sizeof(calc_trig_operations)      } ,
-  {'c'  , calc_constants             , (int)sizeof(calc_constants)            } ,
-  {'r'  , calc_random_operations     , (int)sizeof(calc_random_operations)    } ,
+  {'C'  , calc_complex_operations    , (int)sizeof(calc_complex_operations)   , "Complex Operations"        } ,
+  {'E'  , calc_exponent_operations   , (int)sizeof(calc_exponent_operations)  , "Exponent Operations"       } ,
+  {'L'  , calc_logarithm_operations  , (int)sizeof(calc_logarithm_operations) , "Logarithm Operations"      } ,
+  {'R'  , calc_radical_operations    , (int)sizeof(calc_radical_operations)   , "Radical Operations"        } ,
+  {'T'  , calc_trig_operations       , (int)sizeof(calc_trig_operations)      , "Trigonometric Operations"  } ,
+  {'c'  , calc_constants             , (int)sizeof(calc_constants)            , "Constants"                 } ,
+  {'r'  , calc_random_operations     , (int)sizeof(calc_random_operations)    , "Random Operations"         } ,
 };
 
 // ****** END OF MULTI-CHAR OPERATIONS ******
+
+static ret_codes rpn_calc_help() {
+  int num_iterations = sizeof(calc_single_char_operations)/
+                       sizeof(calc_single_char_operations[0]);
+
+  for (int i = 0; i < num_iterations; i++) {
+    printf("%s\n", calc_single_char_operations[i].description);
+  }
+  printf("\n");
+
+  num_iterations = sizeof(calc_operation_types)/
+                      sizeof(calc_operation_types[0]);
+
+  for (int i = 0; i < num_iterations; i++) {
+    printf("\n%c: ", calc_operation_types[i].name);
+    printf("%s", calc_operation_types[i].description);
+  }
+  printf("\n");
+
+  // Wait for a character to continue
+  getchar();
+
+  return SUCCESSFUL_OPERATION;
+}
 
 #ifndef TEST
 static void print_operation_type_key(int op_type) {

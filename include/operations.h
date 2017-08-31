@@ -1,6 +1,8 @@
 #ifndef _OPERATIONS_H_
 #define _OPERATIONS_H_
 
+/* ret_codes rpn_calc_help(); */
+
 typedef struct {
   int operation_type_index;
   int operation_index;

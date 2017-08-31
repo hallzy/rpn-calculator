@@ -75,6 +75,11 @@ Run the calculator with:
 ./calc
 ```
 
+If you forget a command, you can give the command `?`, which will give a list of
+usable commands. If you select one of the categories at the bottom of the help
+list, it will give you a sub help list for you so you know what commands exist
+within the category.
+
 Operate as a normal RPN Calculator.
 
 Alternatively, there is an expression command (`e`) command where you can type
