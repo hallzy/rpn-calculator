@@ -522,33 +522,33 @@ static ret_codes rpn_calc_fibonacci() {
   return FAILED_OPERATION;
 }
 
-/* static int random_helper() { */
-/*   static bool already_seeded = false; */
-/*   if (!already_seeded) { */
-/*     srand(time(NULL)); */
-/*     already_seeded = true; */
-/*   } */
-/*   return rand(); */
-/* } */
+static int random_helper() {
+  static bool already_seeded = false;
+  if (!already_seeded) {
+    srand(time(NULL));
+    already_seeded = true;
+  }
+  return rand();
+}
 
-/* // Generate a random number between 0 and 1 */
-/* static ret_codes rpn_calc_rand() { */
-/*   push((long double)random_helper() / RAND_MAX); */
-/*   return SUCCESSFUL_OPERATION; */
-/* } */
+// Generate a random number between 0 and 1
+static ret_codes rpn_calc_rand() {
+  push((long double)random_helper() / RAND_MAX);
+  return SUCCESSFUL_OPERATION;
+}
 
-/* // Generate a random number beetween min and max inclusive */
-/* static ret_codes rpn_calc_randx() { */
-/*   // Make sure there are at least 2 elements on the stack */
-/*   if (get_stack_size() >= 2) { */
-/*     int max = (int)pop(); */
-/*     int min = (int)pop(); */
-/*     push((long double)(random_helper() % (max-min+1) + min)); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+// Generate a random number beetween min and max inclusive
+static ret_codes rpn_calc_randx() {
+  // Make sure there are at least 2 elements on the stack
+  if (get_stack_size() >= 2) {
+    int max = (int)pop();
+    int min = (int)pop();
+    push((long double)(random_helper() % (max-min+1) + min));
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
 // --- BITWISE OPERATIONS ---
 
@@ -694,8 +694,6 @@ const static struct operation_map calc_single_char_operations [] = {
     /* {'avgstack'       , rpn_calc_avgstack           } , */
     {'!'              , rpn_calc_factorial    ,""      } ,
     {'f'              , rpn_calc_fibonacci            ,""      } ,
-    /* {'rand'           , rpn_calc_rand               } , */
-    /* {'randx'          , rpn_calc_randx              } , */
 
     // Bitwise Operations
     {'&'              , rpn_calc_bit_and          ,""  } ,
@@ -748,6 +746,12 @@ static struct operation_map calc_logarithm_operations [] = {
     {'x' , rpn_calc_logx  , "log_x of y"  } ,
   };
 
+// These are ALL of the random related operations available in the calcualtor.
+static struct operation_map calc_random_operations [] = {
+    {'r' , rpn_calc_rand  , "Random number between 0 and 1"  } ,
+    {'x' , rpn_calc_randx , "Random integer between x and y" } ,
+  };
+
 // These are ALL of the trig functions available in the calcualtor.
 static struct operation_map calc_constants [] = {
     // Constants
@@ -761,11 +765,12 @@ const static struct {
   int size;
 
 } calc_operation_types [] = {
-  {'T'  , calc_trig_operations       , (int)sizeof(calc_trig_operations)      } ,
-  {'E'  , calc_exponent_operations   , (int)sizeof(calc_exponent_operations)  } ,
-  {'R'  , calc_radical_operations    , (int)sizeof(calc_radical_operations)   } ,
-  {'L'  , calc_logarithm_operations  , (int)sizeof(calc_logarithm_operations) } ,
   {'C'  , calc_constants             , (int)sizeof(calc_constants)            } ,
+  {'E'  , calc_exponent_operations   , (int)sizeof(calc_exponent_operations)  } ,
+  {'L'  , calc_logarithm_operations  , (int)sizeof(calc_logarithm_operations) } ,
+  {'R'  , calc_radical_operations    , (int)sizeof(calc_radical_operations)   } ,
+  {'T'  , calc_trig_operations       , (int)sizeof(calc_trig_operations)      } ,
+  {'r'  , calc_random_operations  , (int)sizeof(calc_random_operations) } ,
 };
 
 // ****** END OF MULTI-CHAR OPERATIONS ******
