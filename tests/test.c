@@ -55,36 +55,6 @@ static int test_rpn_calc_drop() {
   return 1;
 }
 
-/* static int test_rpn_calc_dropx() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "5.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "6.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "7.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "8.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "2.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "D", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 3 && */
-/*       get_stack_value_at_index(0) == 5.0 && */
-/*       get_stack_value_at_index(1) == 7.0 && */
-/*       get_stack_value_at_index(2) == 8.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
 static int test_rpn_calc_swap() {
   push_number("1.0");
   push_number("2.0");
@@ -109,39 +79,6 @@ static int test_rpn_calc_clear() {
   }
   return 1;
 }
-
-/* static int test_rpn_calc_clearx() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "1.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "2.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "9.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "4.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "5.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "6.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "2.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "C", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 2 && actual_result() == 2.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
 
 // --- MATHEMATICAL OPERATORS ---
 
@@ -293,7 +230,7 @@ static int test_rpn_calc_sin_deg() {
 
 static int test_rpn_calc_sin_rad() {
   // Pi
-  push_command_string("Cp");
+  push_command_string("cp");
   push_number("6");
   push_command('d');
   push_command('/');
@@ -320,7 +257,7 @@ static int test_rpn_calc_cos_deg() {
 
 static int test_rpn_calc_cos_rad() {
   // Pi
-  push_command_string("Cp");
+  push_command_string("cp");
   push_number("3");
   push_command('d');
   push_command('/');
@@ -347,7 +284,7 @@ static int test_rpn_calc_tan_deg() {
 
 static int test_rpn_calc_tan_rad() {
   // Pi
-  push_command_string("Cp");
+  push_command_string("cp");
   push_number("4");
   push_command('d');
   push_command('/');
@@ -442,7 +379,7 @@ static int test_rpn_calc_log() {
 
 static int test_rpn_calc_ln() {
   // e constant
-  push_command_string("Ce");
+  push_command_string("ce");
   push_command_string("Le");
   if (get_stack_size() == 1 && actual_result() > 0.999999 &&
       actual_result() < 1.000001) {
@@ -482,120 +419,59 @@ static int test_rpn_calc_exp() {
   return 1;
 }
 
-/* static int test_rpn_calc_sumstack() { */
-/*   char input[input_size]; */
+static int test_rpn_calc_sumstack() {
+  push_number("5");
+  push_number("10");
+  push_number("7");
+  push_number("3");
+  push_number("5");
+  push_number("2");
+  push_number("4");
+  push_command('d');
+  push_command_string("Cs");
+  if (get_stack_size() == 3 && actual_result() == 20.0 &&
+      get_stack_value_at_index(0) == 5 && get_stack_value_at_index(1) == 5) {
+    return 0;
+  }
+  return 1;
+}
 
-/*   strncpy(input, "5", input_size); */
-/*   processUserInput(input, strlen(input)); */
+static int test_rpn_calc_sum() {
+  push_number("5");
+  push_number("1");
+  push_number("100");
+  push_command('d');
+  push_command_string("CS");
+  if (get_stack_size() == 2 && actual_result() == 5050.0) {
+    return 0;
+  }
+  return 1;
+}
 
-/*   strncpy(input, "10", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "7", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "3", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "5", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "2", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "4", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "sumstack", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-
-/*   if (get_stack_size() == 3 && actual_result() == 20.0 && */
-/*       get_stack_value_at_index(0) == 5 && get_stack_value_at_index(1) == 5) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_sum() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "5", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "1", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "100", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "sum", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 2 && actual_result() == 5050.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_avgstack() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "11", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "3", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "3", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "5", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "7", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "4", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "6", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "8", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "93", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "2", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "5", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "7", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "9", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "2", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "12", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "avgstack", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-
-/*   if (get_stack_size() == 3 && get_stack_value_at_index(0) == 11.0 && */
-/*       get_stack_value_at_index(1) == 9 && get_stack_value_at_index(2) == 13) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
+static int test_rpn_calc_avgstack() {
+  push_number("11");
+  push_number("3");
+  push_number("3");
+  push_number("5");
+  push_number("7");
+  push_number("4");
+  push_number("6");
+  push_number("8");
+  push_number("93");
+  push_number("2");
+  push_number("5");
+  push_number("7");
+  push_number("9");
+  push_number("2");
+  push_number("12");
+  push_command('d');
+  push_command_string("Ca");
+  if (get_stack_size() == 3 && get_stack_value_at_index(0) == 11.0 &&
+      get_stack_value_at_index(1) == 9 && get_stack_value_at_index(2) == 13) {
+    return 0;
+  }
+  return 1;
+}
 
 static int test_rpn_calc_factorial() {
   push_number("7");
@@ -610,7 +486,7 @@ static int test_rpn_calc_factorial() {
 static int test_rpn_calc_fibonacci() {
   push_number("30");
   push_command('d');
-  push_command('f');
+  push_command_string("Cf");
   if (get_stack_size() == 1 && actual_result() == 832040) {
     return 0;
   }
@@ -745,36 +621,6 @@ static int test_rpn_calc_bit_right_shift() {
   return 1;
 }
 
-/* static int test_rpn_calc_bit_left_shift1() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "0b1010", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "<<1", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 1 && actual_result() == 20) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_bit_right_shift1() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "0b1010", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, ">>1", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 1 && actual_result() == 5) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
 // --- HIGHER LEVEL OPERATIONS ---
 
 static int test_rpn_calc_expr() {
@@ -832,9 +678,9 @@ const static struct {
     {"test_rpn_calc_ln"                , test_rpn_calc_ln                } ,
     {"test_rpn_calc_logx"              , test_rpn_calc_logx              } ,
     {"test_rpn_calc_exp"               , test_rpn_calc_exp               } ,
-    /* {"test_rpn_calc_sumstack"          , test_rpn_calc_sumstack          } , */
-    /* {"test_rpn_calc_sum"               , test_rpn_calc_sum               } , */
-    /* {"test_rpn_calc_avgstack"          , test_rpn_calc_avgstack          } , */
+    {"test_rpn_calc_sumstack"          , test_rpn_calc_sumstack          } ,
+    {"test_rpn_calc_sum"               , test_rpn_calc_sum               } ,
+    {"test_rpn_calc_avgstack"          , test_rpn_calc_avgstack          } ,
     {"test_rpn_calc_factorial"         , test_rpn_calc_factorial         } ,
     {"test_rpn_calc_fibonacci"         , test_rpn_calc_fibonacci         } ,
     {"test_rpn_calc_rand"              , test_rpn_calc_rand              } ,

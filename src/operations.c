@@ -356,133 +356,133 @@ static ret_codes rpn_calc_exp() {
   return FAILED_OPERATION;
 }
 
-/* // finds the sum of the numbers on the stack from stack position x to stack */
-/* // position y */
-/* static ret_codes rpn_calc_sumstack() { */
-/*   // Make sure there are at least 2 elements on the stack */
-/*   if (get_stack_size() >= 2) { */
-/*     long double y = pop(); */
-/*     long double x = pop(); */
-/*     ret_codes ret = SUCCESSFUL_OPERATION; */
+// finds the sum of the numbers on the stack from stack position x to stack
+// position y
+static ret_codes rpn_calc_sumstack() {
+  // Make sure there are at least 2 elements on the stack
+  if (get_stack_size() >= 2) {
+    long double y = pop();
+    long double x = pop();
+    ret_codes ret = SUCCESSFUL_OPERATION;
 
-/*     if (y < 1 || y > get_stack_size()) { */
-/*       printf("ERROR: Second Argument was not in the stack\n"); */
-/*       ret = FAILED_OPERATION; */
-/*     } */
-/*     if (x < 1 || x > get_stack_size()) { */
-/*       printf("ERROR: First Argument was not in the stack\n"); */
-/*       ret = FAILED_OPERATION; */
-/*     } */
+    if (y < 1 || y > get_stack_size()) {
+      printf("ERROR: Second Argument was not in the stack\n");
+      ret = FAILED_OPERATION;
+    }
+    if (x < 1 || x > get_stack_size()) {
+      printf("ERROR: First Argument was not in the stack\n");
+      ret = FAILED_OPERATION;
+    }
 
-/*     if (ret != SUCCESSFUL_OPERATION) { */
-/*       return ret; */
-/*     } */
+    if (ret != SUCCESSFUL_OPERATION) {
+      return ret;
+    }
 
-/*     int min, max; */
-/*     long double sum = 0; */
-/*     if (x <= y) { */
-/*       min = x; */
-/*       max = y; */
-/*     } */
-/*     else { */
-/*       min = y; */
-/*       max = x; */
-/*     } */
-/*     // decrement to make it an index */
-/*     min--; */
-/*     for (int i = min; i < max; i++) { */
-/*       sum += get_stack_value_at_index(i); */
-/*     } */
+    int min, max;
+    long double sum = 0;
+    if (x <= y) {
+      min = x;
+      max = y;
+    }
+    else {
+      min = y;
+      max = x;
+    }
+    // decrement to make it an index
+    min--;
+    for (int i = min; i < max; i++) {
+      sum += get_stack_value_at_index(i);
+    }
 
-/*     // now remove all the stack elements that were used in the addition. */
-/*     for (int i = min; i < max; i++) { */
-/*       remove_from_stack_index(min); */
-/*     } */
+    // now remove all the stack elements that were used in the addition.
+    for (int i = min; i < max; i++) {
+      remove_from_stack_index(min);
+    }
 
-/*     push(sum); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+    push(sum);
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
-/* // Finds the sum of all the numbers between x and y. */
-/* // ex: if x = 5 and y = 7, sum = 5+6+7 = 18 */
-/* static ret_codes rpn_calc_sum() { */
-/*   // Make sure there are at least 2 elements on the stack */
-/*   if (get_stack_size() >= 2) { */
-/*     long double y = pop(); */
-/*     long double x = pop(); */
+// Finds the sum of all the numbers between x and y.
+// ex: if x = 5 and y = 7, sum = 5+6+7 = 18
+static ret_codes rpn_calc_sum() {
+  // Make sure there are at least 2 elements on the stack
+  if (get_stack_size() >= 2) {
+    long double y = pop();
+    long double x = pop();
 
-/*     int min, max; */
-/*     long double sum = 0; */
-/*     if (x <= y) { */
-/*       min = x; */
-/*       max = y; */
-/*     } */
-/*     else { */
-/*       min = y; */
-/*       max = x; */
-/*     } */
-/*     for (int i = min; i <= max; i++) { */
-/*       sum += i; */
-/*     } */
-/*     push(sum); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+    int min, max;
+    long double sum = 0;
+    if (x <= y) {
+      min = x;
+      max = y;
+    }
+    else {
+      min = y;
+      max = x;
+    }
+    for (int i = min; i <= max; i++) {
+      sum += i;
+    }
+    push(sum);
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
-/* // finds the avg of the numbers on the stack from stack position x to stack */
-/* // position y */
-/* static ret_codes rpn_calc_avgstack() { */
-/*   // Make sure there are at least 2 elements on the stack */
-/*   if (get_stack_size() >= 2) { */
-/*     long double y = pop(); */
-/*     long double x = pop(); */
-/*     ret_codes ret = SUCCESSFUL_OPERATION; */
+// finds the avg of the numbers on the stack from stack position x to stack
+// position y
+static ret_codes rpn_calc_avgstack() {
+  // Make sure there are at least 2 elements on the stack
+  if (get_stack_size() >= 2) {
+    long double y = pop();
+    long double x = pop();
+    ret_codes ret = SUCCESSFUL_OPERATION;
 
-/*     if (y < 1 || y > get_stack_size()) { */
-/*       printf("ERROR: Second Argument was not in the stack\n"); */
-/*       ret = FAILED_OPERATION; */
-/*     } */
-/*     if (x < 1 || x > get_stack_size()) { */
-/*       printf("ERROR: First Argument was not in the stack\n"); */
-/*       ret = FAILED_OPERATION; */
-/*     } */
+    if (y < 1 || y > get_stack_size()) {
+      printf("ERROR: Second Argument was not in the stack\n");
+      ret = FAILED_OPERATION;
+    }
+    if (x < 1 || x > get_stack_size()) {
+      printf("ERROR: First Argument was not in the stack\n");
+      ret = FAILED_OPERATION;
+    }
 
-/*     if (ret != SUCCESSFUL_OPERATION) { */
-/*       return ret; */
-/*     } */
+    if (ret != SUCCESSFUL_OPERATION) {
+      return ret;
+    }
 
-/*     int min, max; */
-/*     long double sum = 0; */
-/*     if (x <= y) { */
-/*       min = x; */
-/*       max = y; */
-/*     } */
-/*     else { */
-/*       min = y; */
-/*       max = x; */
-/*     } */
-/*     // decrement to make it an index */
-/*     min--; */
-/*     for (int i = min; i < max; i++) { */
-/*       sum += get_stack_value_at_index(i); */
-/*     } */
+    int min, max;
+    long double sum = 0;
+    if (x <= y) {
+      min = x;
+      max = y;
+    }
+    else {
+      min = y;
+      max = x;
+    }
+    // decrement to make it an index
+    min--;
+    for (int i = min; i < max; i++) {
+      sum += get_stack_value_at_index(i);
+    }
 
-/*     // now remove all the stack elements that were used in the addition. */
-/*     for (int i = min; i < max; i++) { */
-/*       remove_from_stack_index(min); */
-/*     } */
+    // now remove all the stack elements that were used in the addition.
+    for (int i = min; i < max; i++) {
+      remove_from_stack_index(min);
+    }
 
-/*     push(sum/(max-min)); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+    push(sum/(max-min));
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
 static ret_codes rpn_calc_factorial() {
   // Make sure there are at least 1 elements on the stack
@@ -689,11 +689,7 @@ const static struct operation_map calc_single_char_operations [] = {
     {'*'              , rpn_calc_multiply     ,""      } ,
     {'/'              , rpn_calc_divide       ,""      } ,
     {'i'              , rpn_calc_inv          ,""      } ,
-    /* {'sumstack'       , rpn_calc_sumstack           } , */
-    /* {'sum'            , rpn_calc_sum                } , */
-    /* {'avgstack'       , rpn_calc_avgstack           } , */
     {'!'              , rpn_calc_factorial    ,""      } ,
-    {'f'              , rpn_calc_fibonacci            ,""      } ,
 
     // Bitwise Operations
     {'&'              , rpn_calc_bit_and          ,""  } ,
@@ -716,35 +712,44 @@ const static struct operation_map calc_single_char_operations [] = {
 
 // These are ALL of the trig functions available in the calcualtor.
 static struct operation_map calc_trig_operations [] = {
-    {'s' , rpn_calc_sin  , "sin"  } ,
-    {'c' , rpn_calc_cos  , "cos"  } ,
-    {'t' , rpn_calc_tan  , "tan"  } ,
-    {'S' , rpn_calc_asin , "asin" } ,
     {'C' , rpn_calc_acos , "acos" } ,
+    {'S' , rpn_calc_asin , "asin" } ,
     {'T' , rpn_calc_atan , "atan" } ,
+    {'c' , rpn_calc_cos  , "cos"  } ,
+    {'s' , rpn_calc_sin  , "sin"  } ,
+    {'t' , rpn_calc_tan  , "tan"  } ,
   };
 
 // These are ALL of the exponent related operations available in the calcualtor.
 static struct operation_map calc_exponent_operations [] = {
-    {'p' , rpn_calc_pow     , "x to the power of y" } ,
-    {'e' , rpn_calc_exp     , "e to the power of x" } ,
     {'2' , rpn_calc_squared , "x Squared"           } ,
     {'3' , rpn_calc_cubed   , "x Cubed"             } ,
+    {'e' , rpn_calc_exp     , "e to the power of x" } ,
+    {'p' , rpn_calc_pow     , "x to the power of y" } ,
   };
 
 // These are ALL of the radical related operations available in the calcualtor.
 static struct operation_map calc_radical_operations [] = {
-    {'r' , rpn_calc_xrt     , "xth root"            } ,
     {'2' , rpn_calc_sqrt    , "square root"         } ,
     {'3' , rpn_calc_cbrt    , "cube root"           } ,
+    {'r' , rpn_calc_xrt     , "xth root"            } ,
   };
 
 // These are ALL of the radical related operations available in the calcualtor.
 static struct operation_map calc_logarithm_operations [] = {
-    {'l' , rpn_calc_log   , "log_10 of x" } ,
     {'e' , rpn_calc_ln    , "log_e of x"  } ,
+    {'l' , rpn_calc_log   , "log_10 of x" } ,
     {'x' , rpn_calc_logx  , "log_x of y"  } ,
   };
+
+// These are ALL of the radical related operations available in the calcualtor.
+static struct operation_map calc_complex_operations [] = {
+    {'S' , rpn_calc_sum       , "Sum from x to y"              } ,
+    {'a' , rpn_calc_avgstack  , "Avg of stack entries x to y"  } ,
+    {'f' , rpn_calc_fibonacci , "Returns the xth Fibonacci"    } ,
+    {'s' , rpn_calc_sumstack  , "Sum of stack entries x to y"  } ,
+  };
+
 
 // These are ALL of the random related operations available in the calcualtor.
 static struct operation_map calc_random_operations [] = {
@@ -755,8 +760,8 @@ static struct operation_map calc_random_operations [] = {
 // These are ALL of the trig functions available in the calcualtor.
 static struct operation_map calc_constants [] = {
     // Constants
-    {'p' , rpn_calc_pi ,"π" } ,
     {'e' , rpn_calc_e  ,"e" } ,
+    {'p' , rpn_calc_pi ,"π" } ,
   };
 
 const static struct {
@@ -765,12 +770,13 @@ const static struct {
   int size;
 
 } calc_operation_types [] = {
-  {'C'  , calc_constants             , (int)sizeof(calc_constants)            } ,
+  {'C'  , calc_complex_operations    , (int)sizeof(calc_complex_operations)   } ,
   {'E'  , calc_exponent_operations   , (int)sizeof(calc_exponent_operations)  } ,
   {'L'  , calc_logarithm_operations  , (int)sizeof(calc_logarithm_operations) } ,
   {'R'  , calc_radical_operations    , (int)sizeof(calc_radical_operations)   } ,
   {'T'  , calc_trig_operations       , (int)sizeof(calc_trig_operations)      } ,
-  {'r'  , calc_random_operations  , (int)sizeof(calc_random_operations) } ,
+  {'c'  , calc_constants             , (int)sizeof(calc_constants)            } ,
+  {'r'  , calc_random_operations     , (int)sizeof(calc_random_operations)    } ,
 };
 
 // ****** END OF MULTI-CHAR OPERATIONS ******
