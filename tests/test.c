@@ -607,21 +607,15 @@ static int test_rpn_calc_factorial() {
   return 1;
 }
 
-/* static int test_rpn_calc_fibonacci() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "30", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "fib", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-
-/*   if (get_stack_size() == 1 && actual_result() == 832040) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
+static int test_rpn_calc_fibonacci() {
+  push_number("30");
+  push_command('d');
+  push_command('f');
+  if (get_stack_size() == 1 && actual_result() == 832040) {
+    return 0;
+  }
+  return 1;
+}
 
 /* static int test_rpn_calc_rand() { */
 /*   char input[input_size]; */
@@ -872,7 +866,7 @@ const static struct {
     /* {"test_rpn_calc_sum"               , test_rpn_calc_sum               } , */
     /* {"test_rpn_calc_avgstack"          , test_rpn_calc_avgstack          } , */
     {"test_rpn_calc_factorial"         , test_rpn_calc_factorial         } ,
-    /* {"test_rpn_calc_fibonacci"         , test_rpn_calc_fibonacci         } , */
+    {"test_rpn_calc_fibonacci"         , test_rpn_calc_fibonacci         } ,
     /* {"test_rpn_calc_rand"              , test_rpn_calc_rand              } , */
     /* {"test_rpn_calc_randx"             , test_rpn_calc_randx             } , */
 
@@ -882,8 +876,6 @@ const static struct {
     {"test_rpn_calc_bit_xor"           , test_rpn_calc_bit_xor           } ,
     {"test_rpn_calc_bit_left_shift"    , test_rpn_calc_bit_left_shift    } ,
     {"test_rpn_calc_bit_right_shift"   , test_rpn_calc_bit_right_shift   } ,
-    /* {"test_rpn_calc_bit_left_shift1"   , test_rpn_calc_bit_left_shift1   } , */
-    /* {"test_rpn_calc_bit_right_shift1"  , test_rpn_calc_bit_right_shift1  } , */
 
     // --- HIGHER LEVEL OPERATIONS ---
     {"test_rpn_calc_expr"  , test_rpn_calc_expr  } ,

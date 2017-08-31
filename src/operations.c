@@ -503,24 +503,24 @@ static ret_codes rpn_calc_factorial() {
   return FAILED_OPERATION;
 }
 
-/* static ret_codes rpn_calc_fibonacci() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double x = pop(); */
-/*     long double ans = fibonacci(x); */
+static ret_codes rpn_calc_fibonacci() {
+  // Make sure there are at least 1 elements on the stack
+  if (get_stack_size() >= 1) {
+    long double x = pop();
+    long double ans = fibonacci(x);
 
-/*     if (ans == -1) { */
-/*       printf("ERROR: Fibonacci is only accurate up to %d!\n", */
-/*               MAX_FIBONACCI_INPUT-1); */
-/*       push(x); */
-/*       return FAILED_OPERATION; */
-/*     } */
-/*     push(ans); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+    if (ans == -1) {
+      printf("ERROR: Fibonacci is only accurate up to %d!\n",
+              MAX_FIBONACCI_INPUT-1);
+      push(x);
+      return FAILED_OPERATION;
+    }
+    push(ans);
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
 /* static int random_helper() { */
 /*   static bool already_seeded = false; */
@@ -612,28 +612,6 @@ static ret_codes rpn_calc_bit_right_shift() {
   return FAILED_OPERATION;
 }
 
-/* static ret_codes rpn_calc_bit_left_shift_1() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double num = pop(); */
-/*     push((int)num << 1); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
-
-/* static ret_codes rpn_calc_bit_right_shift_1() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double num = pop(); */
-/*     push((int)num >> 1); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
-
 // --- CALUCLATOR SETTINGS ---
 
 // Change to radians mode
@@ -715,7 +693,7 @@ const static struct operation_map calc_single_char_operations [] = {
     /* {'sum'            , rpn_calc_sum                } , */
     /* {'avgstack'       , rpn_calc_avgstack           } , */
     {'!'              , rpn_calc_factorial    ,""      } ,
-    /* {'fibonacci'      , rpn_calc_fibonacci          } , */
+    {'f'              , rpn_calc_fibonacci            ,""      } ,
     /* {'rand'           , rpn_calc_rand               } , */
     /* {'randx'          , rpn_calc_randx              } , */
 
@@ -725,8 +703,6 @@ const static struct operation_map calc_single_char_operations [] = {
     {'^'              , rpn_calc_bit_xor          ,""  } ,
     {'<'              , rpn_calc_bit_left_shift   ,""  } ,
     {'>'              , rpn_calc_bit_right_shift  ,""  } ,
-    /* {'<<1'            , rpn_calc_bit_left_shift_1   } , */
-    /* {'>>1'            , rpn_calc_bit_right_shift_1  } , */
 
     // Calculator Settings
     {CTRL_E           , rpn_calc_deg         ,""       } ,
