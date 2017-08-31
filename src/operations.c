@@ -37,27 +37,6 @@ static ret_codes rpn_calc_drop() {
   return FAILED_OPERATION;
 }
 
-/* // Removes the xth entry on the stack */
-/* static ret_codes rpn_calc_dropx() { */
-/*   // Make sure there are at least 1 elements on the stack so I know that I can */
-/*   // pop something. */
-/*   if (get_stack_size() >= 1) { */
-/*     long double entry = pop(); */
-/*     // Make sure that the xth entry actually exists */
-/*     if (get_stack_size() >= entry) { */
-/*       // 1 less than entry to make it an index */
-/*       remove_from_stack_index(entry-1); */
-/*       return SUCCESSFUL_OPERATION; */
-/*     } */
-/*     // Put the last entry back on the stack because of the error */
-/*     push(entry); */
-/*     printf("ERROR: The specified stack entry does not exist\n"); */
-/*     return FAILED_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack to perform \"DropX\"\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
-
 // Swap the order of the last two stack entries
 static ret_codes rpn_calc_swap() {
   // Make sure there are at least 2 elements on the stack
@@ -77,21 +56,6 @@ static ret_codes rpn_calc_clear() {
   set_stack_size(0);
   return SUCCESSFUL_OPERATION;
 }
-
-/* // Clear up to the stack element that is numbered by x */
-/* static ret_codes rpn_calc_clearx() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double num = pop(); */
-/*     set_stack_size(num); */
-/*     if (get_stack_size() < 0) { */
-/*       set_stack_size(0); */
-/*     } */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack to perform \"ClearX\"\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
 
 // --- MATHEMATICAL OPERATORS ---
 
@@ -234,33 +198,17 @@ static ret_codes rpn_calc_xrt() {
   return FAILED_OPERATION;
 }
 
-/* // absolute value of number */
-/* static ret_codes rpn_calc_abs() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double num = pop(); */
-
-/*     if (num < 0) { */
-/*       num *= -1; */
-/*     } */
-/*     push(num); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
-
-/* // invert the value */
-/* static ret_codes rpn_calc_inv() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double num = pop(); */
-/*     push(1.0/num); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+// invert the value
+static ret_codes rpn_calc_inv() {
+  // Make sure there are at least 1 elements on the stack
+  if (get_stack_size() >= 1) {
+    long double num = pop();
+    push(1.0/num);
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
 static ret_codes rpn_calc_sin() {
   // Make sure there are at least 1 elements on the stack
@@ -753,19 +701,16 @@ const static struct operation_map calc_single_char_operations [] = {
   // Stack Manipulations
     {'\n'             , rpn_calc_duplicate    ,""      } ,
     {'d'              , rpn_calc_drop         ,""      } ,
-    /* {'D'              , rpn_calc_dropx          } , */
     {'s'              , rpn_calc_swap         ,""      } ,
     {ESCAPE           , rpn_calc_clear        ,""      } ,
-    /* {'C'              , rpn_calc_clearx             } , */
 
   // Math Operations
     {'+'              , rpn_calc_plus         ,""      } ,
     {'-'              , rpn_calc_minus        ,""      } ,
-    {CTRL_SHIFT_MINUS , rpn_calc_neg          ,""      } ,
+    {'n'              , rpn_calc_neg          ,""      } ,
     {'*'              , rpn_calc_multiply     ,""      } ,
     {'/'              , rpn_calc_divide       ,""      } ,
-    /* {'abs'            , rpn_calc_abs                } , */
-    /* {'inv'            , rpn_calc_inv                } , */
+    {'i'              , rpn_calc_inv          ,""      } ,
     /* {'1/x'            , rpn_calc_inv                } , */
     /* {'log'            , rpn_calc_log                } , */
     /* {'ln'             , rpn_calc_ln                 } , */

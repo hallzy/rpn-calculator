@@ -171,7 +171,7 @@ static int test_rpn_calc_neg() {
   push_number("1.0");
   push_number("2.0");
   push_command('d');
-  push_command(CTRL_SHIFT_MINUS);
+  push_command('n');
   if (get_stack_size() == 2 && actual_result() == -2.0) {
     return 0;
   }
@@ -266,42 +266,17 @@ static int test_rpn_calc_xrt() {
   return 1;
 }
 
-/* static int test_rpn_calc_abs() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "1.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "-2.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "abs", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 2 && actual_result() == 2.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_inv() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "1.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "3.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "inv", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 2 && actual_result() > 0.33332 && */
-/*       actual_result() < 0.33334) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
+static int test_rpn_calc_inv() {
+  push_number("1.0");
+  push_number("3.0");
+  push_command('d');
+  push_command('i');
+  if (get_stack_size() == 2 && actual_result() > 0.33332 &&
+      actual_result() < 0.33334) {
+    return 0;
+  }
+  return 1;
+}
 
 static int test_rpn_calc_sin_deg() {
   // Change to Degrees
@@ -875,10 +850,8 @@ const static struct {
     // --- STACK MANIPULATION FUNCTIONS ---
     {"test_rpn_calc_duplicate"         , test_rpn_calc_duplicate         } ,
     {"test_rpn_calc_drop"              , test_rpn_calc_drop              } ,
-    /* {"test_rpn_calc_dropx"             , test_rpn_calc_dropx             } , */
     {"test_rpn_calc_swap"              , test_rpn_calc_swap              } ,
     {"test_rpn_calc_clear"             , test_rpn_calc_clear             } ,
-    /* {"test_rpn_calc_clearx"            , test_rpn_calc_clearx            } , */
 
     // --- MATHEMATICAL OPERATORS ---
     {"test_rpn_calc_plus"              , test_rpn_calc_plus              } ,
@@ -892,8 +865,7 @@ const static struct {
     {"test_rpn_calc_sqrt"              , test_rpn_calc_sqrt              } ,
     {"test_rpn_calc_cbrt"              , test_rpn_calc_cbrt              } ,
     {"test_rpn_calc_xrt"               , test_rpn_calc_xrt               } ,
-    /* {"test_rpn_calc_abs"               , test_rpn_calc_abs               } , */
-    /* {"test_rpn_calc_inv"               , test_rpn_calc_inv               } , */
+    {"test_rpn_calc_inv"               , test_rpn_calc_inv               } ,
     {"test_rpn_calc_sin_deg"           , test_rpn_calc_sin_deg           } ,
     {"test_rpn_calc_sin_rad"           , test_rpn_calc_sin_rad           } ,
     {"test_rpn_calc_cos_deg"           , test_rpn_calc_cos_deg           } ,
