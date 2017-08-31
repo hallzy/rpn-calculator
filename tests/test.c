@@ -200,113 +200,71 @@ static int test_rpn_calc_divide() {
   return 1;
 }
 
-/* static int test_rpn_calc_pow() { */
-/*   char input[input_size]; */
+static int test_rpn_calc_pow() {
+  push_number("2.0");
+  push_number("4.0");
+  push_command('d');
+  push_command_string("Ep");
+  if (get_stack_size() == 1 && actual_result() == 16.0) {
+    return 0;
+  }
+  return 1;
+}
 
-/*   strncpy(input, "2.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
+static int test_rpn_calc_squared() {
+  push_number("1.0");
+  push_number("3.0");
+  push_command('d');
+  push_command_string("E2");
+  if (get_stack_size() == 2 && actual_result() == 9.0) {
+    return 0;
+  }
+  return 1;
+}
 
-/*   strncpy(input, "4.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
+static int test_rpn_calc_cubed() {
+  push_number("1.0");
+  push_number("2.0");
+  push_command('d');
+  push_command_string("E3");
+  if (get_stack_size() == 2 && actual_result() == 8.0) {
+    return 0;
+  }
+  return 1;
+}
 
-/*   strncpy(input, "**", input_size); */
-/*   processUserInput(input, strlen(input)); */
+static int test_rpn_calc_sqrt() {
+  push_number("1.0");
+  push_number("25.0");
+  push_command('d');
+  push_command_string("R2");
+  if (get_stack_size() == 2 && actual_result() == 5.0) {
+    return 0;
+  }
+  return 1;
+}
 
-/*   if (get_stack_size() == 1 && actual_result() == 16.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
+static int test_rpn_calc_cbrt() {
+  push_number("1.0");
+  push_number("125.0");
+  push_command('d');
+  push_command_string("R3");
+  if (get_stack_size() == 2 && actual_result() == 5.0) {
+    return 0;
+  }
+  return 1;
+}
 
-/* static int test_rpn_calc_squared() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "1.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "3.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "**2", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 2 && actual_result() == 9.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_cubed() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "1.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "2.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "**3", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 2 && actual_result() == 8.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_sqrt() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "1.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "25.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "sqrt", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 2 && actual_result() == 5.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_cbrt() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "1.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "125.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "cbrt", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 2 && actual_result() == 5.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_xrt() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "32.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "5.0", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "//", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 1 && actual_result() == 2.0) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
+static int test_rpn_calc_xrt() {
+  push_number("32.0");
+  push_number("5.0");
+  push_command('d');
+  push_command_string("Rr");
+  if (get_stack_size() == 1 && actual_result() == 2.0) {
+    return 0;
+  }
+  return 1;
+}
 
 /* static int test_rpn_calc_abs() { */
 /*   char input[input_size]; */
@@ -928,12 +886,12 @@ const static struct {
     {"test_rpn_calc_neg"               , test_rpn_calc_neg               } ,
     {"test_rpn_calc_multiply"          , test_rpn_calc_multiply          } ,
     {"test_rpn_calc_divide"            , test_rpn_calc_divide            } ,
-    /* {"test_rpn_calc_pow"               , test_rpn_calc_pow               } , */
-    /* {"test_rpn_calc_squared"           , test_rpn_calc_squared           } , */
-    /* {"test_rpn_calc_cubed"             , test_rpn_calc_cubed             } , */
-    /* {"test_rpn_calc_sqrt"              , test_rpn_calc_sqrt              } , */
-    /* {"test_rpn_calc_cbrt"              , test_rpn_calc_cbrt              } , */
-    /* {"test_rpn_calc_xrt"               , test_rpn_calc_xrt               } , */
+    {"test_rpn_calc_pow"               , test_rpn_calc_pow               } ,
+    {"test_rpn_calc_squared"           , test_rpn_calc_squared           } ,
+    {"test_rpn_calc_cubed"             , test_rpn_calc_cubed             } ,
+    {"test_rpn_calc_sqrt"              , test_rpn_calc_sqrt              } ,
+    {"test_rpn_calc_cbrt"              , test_rpn_calc_cbrt              } ,
+    {"test_rpn_calc_xrt"               , test_rpn_calc_xrt               } ,
     /* {"test_rpn_calc_abs"               , test_rpn_calc_abs               } , */
     /* {"test_rpn_calc_inv"               , test_rpn_calc_inv               } , */
     {"test_rpn_calc_sin_deg"           , test_rpn_calc_sin_deg           } ,

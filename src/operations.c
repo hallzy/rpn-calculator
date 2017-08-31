@@ -197,42 +197,42 @@ static ret_codes rpn_calc_cubed() {
   return FAILED_OPERATION;
 }
 
-/* // Square Roots the last stack entry */
-/* static ret_codes rpn_calc_sqrt() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double num = pop(); */
-/*     push(sqrt(num)); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+// Square Roots the last stack entry
+static ret_codes rpn_calc_sqrt() {
+  // Make sure there are at least 1 elements on the stack
+  if (get_stack_size() >= 1) {
+    long double num = pop();
+    push(sqrt(num));
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
-/* // Cube Roots the last stack entry */
-/* static ret_codes rpn_calc_cbrt() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double num = pop(); */
-/*     push(cbrt(num)); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+// Cube Roots the last stack entry
+static ret_codes rpn_calc_cbrt() {
+  // Make sure there are at least 1 elements on the stack
+  if (get_stack_size() >= 1) {
+    long double num = pop();
+    push(cbrt(num));
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
-/* // xth Root the last stack entry */
-/* static ret_codes rpn_calc_xrt() { */
-/*   // Make sure there are at least 2 elements on the stack */
-/*   if (get_stack_size() >= 2) { */
-/*     long double num2 = pop(); */
-/*     long double num1 = pop(); */
-/*     push(pow(num1, 1.0/num2)); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+// xth Root the last stack entry
+static ret_codes rpn_calc_xrt() {
+  // Make sure there are at least 2 elements on the stack
+  if (get_stack_size() >= 2) {
+    long double num2 = pop();
+    long double num1 = pop();
+    push(pow(num1, 1.0/num2));
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
 /* // absolute value of number */
 /* static ret_codes rpn_calc_abs() { */
@@ -764,12 +764,6 @@ const static struct operation_map calc_single_char_operations [] = {
     {CTRL_SHIFT_MINUS , rpn_calc_neg          ,""      } ,
     {'*'              , rpn_calc_multiply     ,""      } ,
     {'/'              , rpn_calc_divide       ,""      } ,
-    /* {'sqrt'           , rpn_calc_sqrt               } , */
-    /* {'//2'            , rpn_calc_sqrt               } , */
-    /* {'cbrt'           , rpn_calc_cbrt               } , */
-    /* {'//3'            , rpn_calc_cbrt               } , */
-    /* {'xrt'            , rpn_calc_xrt                } , */
-    /* {'//'             , rpn_calc_xrt                } , */
     /* {'abs'            , rpn_calc_abs                } , */
     /* {'inv'            , rpn_calc_inv                } , */
     /* {'1/x'            , rpn_calc_inv                } , */
@@ -824,6 +818,13 @@ static struct operation_map calc_exponent_operations [] = {
     {'3' , rpn_calc_cubed   , "x Cubed"             } ,
   };
 
+// These are ALL of the radical related operations available in the calcualtor.
+static struct operation_map calc_radical_operations [] = {
+    {'r' , rpn_calc_xrt     , "xth root"            } ,
+    {'2' , rpn_calc_sqrt    , "square root"         } ,
+    {'3' , rpn_calc_cbrt    , "cube root"           } ,
+  };
+
 // These are ALL of the trig functions available in the calcualtor.
 static struct operation_map calc_constants [] = {
     // Constants
@@ -839,6 +840,7 @@ const static struct {
 } calc_operation_types [] = {
   {'T'  , calc_trig_operations     , (int)sizeof(calc_trig_operations)      } ,
   {'E'  , calc_exponent_operations , (int)sizeof(calc_exponent_operations)  } ,
+  {'R'  , calc_radical_operations  , (int)sizeof(calc_radical_operations)   } ,
   {'C'  , calc_constants           , (int)sizeof(calc_constants)            } ,
 };
 
