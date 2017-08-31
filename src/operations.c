@@ -306,43 +306,43 @@ static ret_codes rpn_calc_atan() {
   return FAILED_OPERATION;
 }
 
-/* // base 10 logarithms */
-/* static ret_codes rpn_calc_log() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double num = pop(); */
-/*     // log is the natural log normally, so I need to convert it to base 10 */
-/*     push(log(num)/log(10)); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+// base 10 logarithms
+static ret_codes rpn_calc_log() {
+  // Make sure there are at least 1 elements on the stack
+  if (get_stack_size() >= 1) {
+    long double num = pop();
+    // log is the natural log normally, so I need to convert it to base 10
+    push(log(num)/log(10));
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
-/* // Base e logarithms */
-/* static ret_codes rpn_calc_ln() { */
-/*   // Make sure there are at least 1 elements on the stack */
-/*   if (get_stack_size() >= 1) { */
-/*     long double num = pop(); */
-/*     push(log(num)); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+// Base e logarithms
+static ret_codes rpn_calc_ln() {
+  // Make sure there are at least 1 elements on the stack
+  if (get_stack_size() >= 1) {
+    long double num = pop();
+    push(log(num));
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
-/* // Variable Base logarithms */
-/* static ret_codes rpn_calc_logx() { */
-/*   // Make sure there are at least 2 elements on the stack */
-/*   if (get_stack_size() >= 2) { */
-/*     long double base = pop(); */
-/*     long double num = pop(); */
-/*     push(log(num)/log(base)); */
-/*     return SUCCESSFUL_OPERATION; */
-/*   } */
-/*   printf("ERROR: Not enough elements on the stack for this Operation\n"); */
-/*   return FAILED_OPERATION; */
-/* } */
+// Variable Base logarithms
+static ret_codes rpn_calc_logx() {
+  // Make sure there are at least 2 elements on the stack
+  if (get_stack_size() >= 2) {
+    long double num = pop();
+    long double base = pop();
+    push(log(num)/log(base));
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
 
 // e to the power of x
 static ret_codes rpn_calc_exp() {
@@ -711,15 +711,10 @@ const static struct operation_map calc_single_char_operations [] = {
     {'*'              , rpn_calc_multiply     ,""      } ,
     {'/'              , rpn_calc_divide       ,""      } ,
     {'i'              , rpn_calc_inv          ,""      } ,
-    /* {'1/x'            , rpn_calc_inv                } , */
-    /* {'log'            , rpn_calc_log                } , */
-    /* {'ln'             , rpn_calc_ln                 } , */
-    /* {'logx'           , rpn_calc_logx               } , */
     /* {'sumstack'       , rpn_calc_sumstack           } , */
     /* {'sum'            , rpn_calc_sum                } , */
     /* {'avgstack'       , rpn_calc_avgstack           } , */
     {'!'              , rpn_calc_factorial    ,""      } ,
-    /* {'fib'            , rpn_calc_fibonacci          } , */
     /* {'fibonacci'      , rpn_calc_fibonacci          } , */
     /* {'rand'           , rpn_calc_rand               } , */
     /* {'randx'          , rpn_calc_randx              } , */
@@ -770,6 +765,13 @@ static struct operation_map calc_radical_operations [] = {
     {'3' , rpn_calc_cbrt    , "cube root"           } ,
   };
 
+// These are ALL of the radical related operations available in the calcualtor.
+static struct operation_map calc_logarithm_operations [] = {
+    {'l' , rpn_calc_log   , "log_10 of x" } ,
+    {'e' , rpn_calc_ln    , "log_e of x"  } ,
+    {'x' , rpn_calc_logx  , "log_x of y"  } ,
+  };
+
 // These are ALL of the trig functions available in the calcualtor.
 static struct operation_map calc_constants [] = {
     // Constants
@@ -783,10 +785,11 @@ const static struct {
   int size;
 
 } calc_operation_types [] = {
-  {'T'  , calc_trig_operations     , (int)sizeof(calc_trig_operations)      } ,
-  {'E'  , calc_exponent_operations , (int)sizeof(calc_exponent_operations)  } ,
-  {'R'  , calc_radical_operations  , (int)sizeof(calc_radical_operations)   } ,
-  {'C'  , calc_constants           , (int)sizeof(calc_constants)            } ,
+  {'T'  , calc_trig_operations       , (int)sizeof(calc_trig_operations)      } ,
+  {'E'  , calc_exponent_operations   , (int)sizeof(calc_exponent_operations)  } ,
+  {'R'  , calc_radical_operations    , (int)sizeof(calc_radical_operations)   } ,
+  {'L'  , calc_logarithm_operations  , (int)sizeof(calc_logarithm_operations) } ,
+  {'C'  , calc_constants             , (int)sizeof(calc_constants)            } ,
 };
 
 // ****** END OF MULTI-CHAR OPERATIONS ******

@@ -430,71 +430,57 @@ static int test_rpn_calc_atan_rad() {
   return 1;
 }
 
-/* static int test_rpn_calc_log() { */
-/*   char input[input_size]; */
+static int test_rpn_calc_log() {
+  push_number("100");
+  push_command('d');
+  push_command_string("Ll");
+  if (get_stack_size() == 1 && actual_result() == 2) {
+    return 0;
+  }
+  return 1;
+}
 
-/*   strncpy(input, "100", input_size); */
-/*   processUserInput(input, strlen(input)); */
+static int test_rpn_calc_ln() {
+  // e constant
+  push_command_string("Ce");
+  push_command_string("Le");
+  if (get_stack_size() == 1 && actual_result() > 0.999999 &&
+      actual_result() < 1.000001) {
+    return 0;
+  }
+  return 1;
+}
 
-/*   strncpy(input, "log", input_size); */
-/*   processUserInput(input, strlen(input)); */
+static int test_rpn_calc_logx() {
+  push_number("2");
+  push_number("8");
+  push_command('d');
+  push_command_string("Lx");
+  if (get_stack_size() == 1 && actual_result() > 2.999999 &&
+      actual_result() < 3.000001) {
+    return 0;
+  }
+  return 1;
+}
 
-/*   if (get_stack_size() == 1 && actual_result() == 2) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
+static int test_rpn_calc_exp() {
+  push_number("2");
+  push_command('d');
+  push_command_string("Ee");
+  char input[input_size];
 
-/* static int test_rpn_calc_ln() { */
-/*   char input[input_size]; */
+  strncpy(input, "2", input_size);
+  processUserInput(input, strlen(input));
 
-/*   strncpy(input, "e", input_size); */
-/*   processUserInput(input, strlen(input)); */
+  strncpy(input, "exp", input_size);
+  processUserInput(input, strlen(input));
 
-/*   strncpy(input, "ln", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 1 && actual_result() > 0.999999 && */
-/*       actual_result() < 1.000001) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_logx() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "8", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "2", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "logx", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 1 && actual_result() > 2.999999 && */
-/*       actual_result() < 3.000001) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
-
-/* static int test_rpn_calc_exp() { */
-/*   char input[input_size]; */
-
-/*   strncpy(input, "2", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   strncpy(input, "exp", input_size); */
-/*   processUserInput(input, strlen(input)); */
-
-/*   if (get_stack_size() == 1 && actual_result() > 7.389055 && */
-/*       actual_result() < 7.389057) { */
-/*     return 0; */
-/*   } */
-/*   return 1; */
-/* } */
+  if (get_stack_size() == 1 && actual_result() > 7.389055 &&
+      actual_result() < 7.389057) {
+    return 0;
+  }
+  return 1;
+}
 
 /* static int test_rpn_calc_sumstack() { */
 /*   char input[input_size]; */
@@ -878,10 +864,10 @@ const static struct {
     {"test_rpn_calc_acos_rad"          , test_rpn_calc_acos_rad          } ,
     {"test_rpn_calc_atan_deg"          , test_rpn_calc_atan_deg          } ,
     {"test_rpn_calc_atan_rad"          , test_rpn_calc_atan_rad          } ,
-    /* {"test_rpn_calc_log"               , test_rpn_calc_log               } , */
-    /* {"test_rpn_calc_ln"                , test_rpn_calc_ln                } , */
-    /* {"test_rpn_calc_logx"              , test_rpn_calc_logx              } , */
-    /* {"test_rpn_calc_exp"               , test_rpn_calc_exp               } , */
+    {"test_rpn_calc_log"               , test_rpn_calc_log               } ,
+    {"test_rpn_calc_ln"                , test_rpn_calc_ln                } ,
+    {"test_rpn_calc_logx"              , test_rpn_calc_logx              } ,
+    {"test_rpn_calc_exp"               , test_rpn_calc_exp               } ,
     /* {"test_rpn_calc_sumstack"          , test_rpn_calc_sumstack          } , */
     /* {"test_rpn_calc_sum"               , test_rpn_calc_sum               } , */
     /* {"test_rpn_calc_avgstack"          , test_rpn_calc_avgstack          } , */
