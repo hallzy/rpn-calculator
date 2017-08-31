@@ -10,6 +10,9 @@ RPN Calculator for the terminal.
 * [Install](#install)
 * [Run Tests](#run-tests)
 * [Usage](#usage)
+  * [Entering Numbers](#entering-numbers)
+  * [Help Command](#help-command)
+  * [Expression Command](#expression-command)
   * [Entering Hex, Octal, or Binary Numbers](#entering-hex-octal-or-binary-numbers)
     * [Decimal](#decimal)
     * [Hexadecimal](#hexadecimal)
@@ -75,12 +78,25 @@ Run the calculator with:
 ./calc
 ```
 
+Operate as a normal RPN Calculator.
+
+### Entering Numbers
+
+Just type out your number, and press enter.
+
+Since the `-` sign is a command for subtracting numbers it cannot be used to
+create a negative number. If you want to push a `-5` to the stack, type out `5n`
+as `n` is the command to change the sign of the number. The `n` command is
+treated as any other command and therefore, will push the number to the stack.
+
+### Help Command
+
 If you forget a command, you can give the command `?`, which will give a list of
 usable commands. If you select one of the categories at the bottom of the help
 list, it will give you a sub help list for you so you know what commands exist
 within the category.
 
-Operate as a normal RPN Calculator.
+### Expression Command
 
 Alternatively, there is an expression command (`e`) command where you can type
 out an RPN calculation on one line with all the numbers and operators separated
@@ -490,8 +506,89 @@ to enter hex, octal, or binary numbers into the calculator, see [Usage](#usage).
 Features that perform mathematical operations on the numbers on the stack.
 
 #### Basic Arithmetic
+
+Basic Math operations work, such as Plus (+), Minus (-), Multiplication (*), and
+Division (/)
+
+> ##### Example:
+>
+> Starting with this (For each of the 4 commands):
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> 1:  10.000000
+> 2:  20.000000
+> ===============================================================
+> ```
+>
+> Giving the `+` command:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> 1:  30.000000
+> ===============================================================
+> ```
+>
+> Giving the `-` command:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> 1:  -10.000000
+> ===============================================================
+> ```
+>
+> Giving the `multipy` command:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> 1:  200.000000
+> ===============================================================
+> ```
+>
+> Giving the `/` command:
+>
+> ```
+> ===============================================================
+> +---+
+> |RAD|  DEG
+> +---+
+>       +---+
+>  HEX  |DEC|  OCT   BIN
+>       +---+
+>
+> 1:  0.500000
+> ===============================================================
+> ```
+
 #### Exponents and Radicals
-#### Absolute Values
 #### Reciprocation
 #### Trigonometric Functions
 #### Logarithmic Functions
