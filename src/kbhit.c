@@ -1,3 +1,7 @@
+#ifdef WINDOWS
+#include <conio.h>
+#else
+
 #include <stdio.h>
 #include <string.h>
 
@@ -40,4 +44,14 @@ struct termios new_kbd_mode;
   new_kbd_mode.c_cc[VMIN] = 1;
   tcsetattr(0, TCSANOW, &new_kbd_mode);
   atexit(old_attr);
+}
+
+#endif // WINDOWS
+
+char getCharacter() {
+#ifndef WINDOWS
+  return getchar();
+#else
+  return getch();
+#endif // WINDOWS
 }

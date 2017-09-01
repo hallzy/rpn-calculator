@@ -19,16 +19,18 @@ int main() {
   // characters for an input
   char input[128];
 
+#ifndef WINDOWS
   // Set up the terminal so that the program will accept characters as they come
   // instead of after a newline.
   singleCharacterInputInit();
+#endif // WINDOWS
 
   // Keep looking for key presses.
   while(!kbhit()) {
     // Print the initial stack.
     print_stack();
 
-    input[0] = getchar();
+    input[0] = getCharacter();
     input[1] = 0;
     // if the input is the expression char, then this is a one line RPN
     // expression that needs to be evaluated.
@@ -39,8 +41,8 @@ int main() {
       while(!kbhit()) {
         printf("%c", input[i]);
         ++i;
-        input[i] = getchar();
-        if (input[i] == '\n') {
+        input[i] = getCharacter();
+        if (input[i] == ENTER_KEY) {
           input[i] = 0;
           break;
         }

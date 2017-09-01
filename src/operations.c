@@ -4,6 +4,7 @@
 #include "operations.h"
 #include "factorial.h"
 #include "fibonacci.h"
+#include "kbhit.h"
 
 #include <assert.h>
 #include <string.h>
@@ -803,7 +804,7 @@ static ret_codes rpn_calc_help() {
   printf("\n");
 
   // Wait for a character to continue
-  getchar();
+  getCharacter();
 
   return SUCCESSFUL_OPERATION;
 }
@@ -883,7 +884,7 @@ operation_location whichOperation(char *op_string) {
 
     // Since we are doing a multicharacter command, we need to look for the
     // second command.
-    op = getchar();
+    op = getCharacter();
 #else
     op = op_string[1];
 #endif // TEST

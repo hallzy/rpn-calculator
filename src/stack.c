@@ -180,9 +180,9 @@ void get_the_rest_of_the_number_from_user(char *val, operation_location *op) {
     while(!kbhit()) {
       printf("%c", val[i]);
       ++i;
-      c[0] = getchar();
+      c[0] = getCharacter();
       *op = whichOperation(c);
-      if (c[0] == '\n') {
+      if (c[0] == ENTER_KEY) {
         // if we get into this then we need to reset op, because it was just
         // given a new value above.
         op->operation_index = -1;
