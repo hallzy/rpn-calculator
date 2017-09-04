@@ -21,7 +21,6 @@ static void push_number(char *num) {
   processUserInput(input, strlen(input));
 }
 
-/* static void push_command(char command) { */
 static void push_command_string(char *input) {
   processUserInput(input, strlen(input));
 }
@@ -381,8 +380,7 @@ static int test_rpn_calc_ln() {
   // e constant
   push_command_string("ce");
   push_command_string("Le");
-  if (get_stack_size() == 1 && actual_result() > 0.999999 &&
-      actual_result() < 1.000001) {
+  if (get_stack_size() == 1 && actual_result() == 1) {
     return 0;
   }
   return 1;
@@ -393,8 +391,7 @@ static int test_rpn_calc_logx() {
   push_number("8");
   push_command('d');
   push_command_string("Lx");
-  if (get_stack_size() == 1 && actual_result() > 2.999999 &&
-      actual_result() < 3.000001) {
+  if (get_stack_size() == 1 && actual_result() == 3) {
     return 0;
   }
   return 1;
@@ -630,8 +627,18 @@ static int test_rpn_calc_expr() {
   strncpy(input, "e 2 6 + 4 * 2 / 4 +", input_size);
   processUserInput(input, strlen(input));
 
-  if (get_stack_size() == 1 && actual_result() > 19.999999 &&
-      actual_result() < 20.000001) {
+  if (get_stack_size() == 1 && actual_result() == 20) {
+    return 0;
+  }
+  return 1;
+}
+
+// --- REGRESSION ---
+
+static int test_rpn_calc_numbers_hold_precision() {
+  push_number("20.55");
+  push_command('d');
+  if (get_stack_size() == 1 && actual_result() == 20.55) {
     return 0;
   }
   return 1;
@@ -695,6 +702,9 @@ const static struct {
 
     // --- HIGHER LEVEL OPERATIONS ---
     {"test_rpn_calc_expr"  , test_rpn_calc_expr  } ,
+
+    // --- REGRESSION ---
+    {"test_rpn_calc_numbers_hold_precision"  , test_rpn_calc_numbers_hold_precision  } ,
   };
 
 // PERFORM THE TESTS

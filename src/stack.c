@@ -131,8 +131,8 @@ static ret_codes get_binary_number_and_push(char *val) {
 static ret_codes get_decimal_and_hex_numbers_and_push(char *val) {
   char *next;
   long double num;
-  // strtof automatically recognizes "0x" for hex numbers.
-  num = strtof(val, &next);
+  // strtold automatically recognizes "0x" for hex numbers.
+  num = strtold(val, &next);
   if (next == val || *next != '\0') {
     return FAILED_TO_PUSH;
   }
