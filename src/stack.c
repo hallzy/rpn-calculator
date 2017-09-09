@@ -169,6 +169,7 @@ static ret_codes push_the_number(char *val) {
 // run this in order to allow the user to finish typing their number. While
 // getting the data for the number, we are also checking if the user inputs an
 // operation on the end of the number for us to perform.
+#ifndef TEST
 void get_the_rest_of_the_number_from_user(char *val, operation_location *op) {
   // If it is a number, then we will want to wait until the user presses
   // enter before doing anything with it so that we know the user has
@@ -200,12 +201,14 @@ void get_the_rest_of_the_number_from_user(char *val, operation_location *op) {
     }
   }
 }
+#endif // TEST
 
 static ret_codes parseNumber(char *val) {
-  /* operation_location op = {-1,-1}; */
+#ifndef TEST
   operation_location op;
   op.operation_type_index=-1;
   op.operation_index=-1;
+#endif // TEST
   ret_codes ret;
   // If I am entering a number after I JUST entered a number onto the stack,
   // the number is on the stack twice automatically. If I get to this point
@@ -240,6 +243,7 @@ static ret_codes parseNumber(char *val) {
   }
   // If no error happened in the previous step, check if we had an operation
   // on the end of the number and perform it.
+#ifndef TEST
   if (op.operation_index != -1) {
     // If my number ended with an operation, then I have pushed that number
     // twice already. Do get expected results, I need to pop one of the
@@ -248,6 +252,7 @@ static ret_codes parseNumber(char *val) {
     pop();
     return performOperation(op);
   }
+#endif //TEST
   // If anything else, then return ret;
   return ret;
 }

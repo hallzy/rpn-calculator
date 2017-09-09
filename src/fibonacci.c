@@ -10,9 +10,6 @@ static long long fib_helper(int x) {
   if (x == 1) {
     return 1;
   }
-  if (x >= MAX_FIBONACCI_INPUT) {
-    return -1;
-  }
   if (fib_results[x]) {
     return fib_results[x];
   }

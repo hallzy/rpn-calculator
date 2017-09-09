@@ -11,6 +11,7 @@
 
 #include "kbhit.h"
 
+#ifndef TEST
 static struct termios g_old_kbd_mode;
 
 // did somebody press somthing???
@@ -46,8 +47,10 @@ struct termios new_kbd_mode;
   atexit(old_attr);
 }
 
+#endif // TEST
 #endif // WINDOWS
 
+#ifndef TEST
 char getCharacter() {
 #ifndef WINDOWS
   return getchar();
@@ -55,3 +58,4 @@ char getCharacter() {
   return getch();
 #endif // WINDOWS
 }
+#endif // TEST

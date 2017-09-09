@@ -13,7 +13,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+#ifndef TEST
 static ret_codes rpn_calc_help();
+#endif // TEST
 // --- STACK MANIPULATION FUNCTIONS ---
 
 // Blank entry duplicates the last item on the stack
@@ -683,7 +685,9 @@ const static struct operation_map calc_single_char_operations [] = {
     {'d'     , rpn_calc_drop             , "d       : Delete Last Stack Entry"        } ,
     {'s'     , rpn_calc_swap             , "s       : Swap Last 2 Stack Entries"      } ,
     {ESCAPE  , rpn_calc_clear            , "<esc>   : Clear Stack"                    } ,
+#ifndef TEST
     {'?'     , rpn_calc_help             , "?       : Show Help"                      } ,
+#endif // TEST
 
   // Math Operations
     {'+'     , rpn_calc_plus             , "+       : Plus"                           } ,
@@ -785,6 +789,7 @@ const static struct {
 
 // ****** END OF MULTI-CHAR OPERATIONS ******
 
+#ifndef TEST
 static ret_codes rpn_calc_help() {
   int num_iterations = sizeof(calc_single_char_operations)/
                        sizeof(calc_single_char_operations[0]);
@@ -809,7 +814,6 @@ static ret_codes rpn_calc_help() {
   return SUCCESSFUL_OPERATION;
 }
 
-#ifndef TEST
 static void print_operation_type_key(int op_type) {
   int type_size             = calc_operation_types[op_type].size;
   struct operation_map *map = calc_operation_types[op_type].map;
