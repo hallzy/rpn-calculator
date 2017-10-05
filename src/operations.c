@@ -73,7 +73,6 @@ static ret_codes rpn_calc_plus() {
     return SUCCESSFUL_OPERATION;
   }
   printf("ERROR: Not enough elements on the stack to perform \"+\"\n");
-/*   printf("ERROR: Not enough elements on the stack to perform \"ClearX\"\n"); */
   return FAILED_OPERATION;
 }
 
