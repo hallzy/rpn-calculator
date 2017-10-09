@@ -3,7 +3,7 @@ all:
 	gcc -Wall -Werror -Iinclude $(SOURCES) -o calc -lm
 	gcc -Wall -Werror -DTEST -Iinclude -Itests tests/test.c $(SOURCES) -o calc-test -lm
 debug:
-	gcc -Wall -Werror -DNO_CLEAR -Iinclude $(SOURCES) -o calc -lm
+	gcc -g -Wall -Werror -DNO_CLEAR -Iinclude $(SOURCES) -o calc -lm
 test:
 	# Compiling tests
 	gcc -Wall -Werror -DTEST -Iinclude -Itests tests/test.c $(SOURCES) -o calc-test -lm
