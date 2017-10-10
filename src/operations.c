@@ -789,7 +789,7 @@ const static struct {
 // ****** END OF MULTI-CHAR OPERATIONS ******
 
 #ifndef TEST
-static ret_codes rpn_calc_help() {
+ret_codes help() {
   int num_iterations = sizeof(calc_single_char_operations)/
                        sizeof(calc_single_char_operations[0]);
 
@@ -799,7 +799,7 @@ static ret_codes rpn_calc_help() {
   printf("\n");
 
   num_iterations = sizeof(calc_operation_types)/
-                      sizeof(calc_operation_types[0]);
+                   sizeof(calc_operation_types[0]);
 
   for (int i = 0; i < num_iterations; i++) {
     printf("\n%c: ", calc_operation_types[i].name);
@@ -807,10 +807,16 @@ static ret_codes rpn_calc_help() {
   }
   printf("\n");
 
+  return SUCCESSFUL_OPERATION;
+}
+
+static ret_codes rpn_calc_help() {
+  ret_codes ret = help();
+
   // Wait for a character to continue
   getCharacter();
 
-  return SUCCESSFUL_OPERATION;
+  return ret;
 }
 
 static void print_operation_type_key(int op_type) {
