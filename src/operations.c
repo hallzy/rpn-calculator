@@ -540,13 +540,45 @@ static ret_codes rpn_calc_rand() {
   return SUCCESSFUL_OPERATION;
 }
 
-// Generate a random number beetween min and max inclusive
+// Generate a random number between min and max inclusive
 static ret_codes rpn_calc_randx() {
   // Make sure there are at least 2 elements on the stack
   if (get_stack_size() >= 2) {
     int max = (int)pop();
     int min = (int)pop();
     push((long double)(random_helper() % (max-min+1) + min));
+    return SUCCESSFUL_OPERATION;
+  }
+  printf("ERROR: Not enough elements on the stack for this Operation\n");
+  return FAILED_OPERATION;
+}
+
+// Check to see if the value lowest on the stack is prime
+static ret_codes rpn_calc_is_prime() {
+  // Make sure there is at least 1 element on the stack
+  if (get_stack_size() >= 1) {
+    long double x = pop();
+    int x_int = (int)x;
+
+    // If the input is not an integer, then we can't check if it is prime
+    if (x_int != x) {
+        push(x);
+        printf("ERROR: Can't check if a non integer is prime\n");
+        return FAILED_OPERATION;
+    }
+
+    // If the number is negative, 0, or 1 it isn't prime
+    if (x_int < 2) {
+        push(0);
+        return SUCCESSFUL_OPERATION;
+    }
+    for (unsigned int i = 2; i < sqrt(x_int); i++) {
+      if (x_int % i == 0) {
+        push(0);
+        return SUCCESSFUL_OPERATION;
+      }
+    }
+    push(1);
     return SUCCESSFUL_OPERATION;
   }
   printf("ERROR: Not enough elements on the stack for this Operation\n");
@@ -753,6 +785,7 @@ static struct operation_map calc_complex_operations [] = {
     {'S' , rpn_calc_sum       , "Sum from x to y"              } ,
     {'a' , rpn_calc_avgstack  , "Avg of stack entries x to y"  } ,
     {'f' , rpn_calc_fibonacci , "Returns the xth Fibonacci"    } ,
+    {'p' , rpn_calc_is_prime  , "Checks if x is a prime number"} ,
     {'s' , rpn_calc_sumstack  , "Sum of stack entries x to y"  } ,
   };
 

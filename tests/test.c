@@ -602,10 +602,7 @@ static int test_rpn_calc_rand() {
     r -= 1;
   }
 
-  // I only want to return either a 1 or a 0. This operation will return 1 if
-  // this function failed, and 0 otherwise.
-  // Written like this so that there will always be 100% coverage of this test.
-  return (r & 1) | ((r >> 1) & 1) | ((r >> 2) & 1);
+  return r == 0 ? 0 : 1;
 }
 
 static int test_rpn_calc_randx() {
@@ -647,7 +644,49 @@ static int test_rpn_calc_randx() {
     r -= 1;
   }
 
-  return (r & 1) | ((r >> 1) & 1) | ((r >> 2) & 1);
+  return r == 0 ? 0 : 1;
+}
+
+static int test_rpn_calc_is_prime() {
+  int r = 5;
+
+  push_number("100");
+  push_command('d');
+  push_command_string("Cp");
+  if (get_stack_size() == 1 && actual_result() == 0) {
+    r -= 1;
+  }
+
+  push_number("5");
+  push_command('d');
+  push_command_string("Cp");
+  if (get_stack_size() == 2 && actual_result() == 1) {
+    r -= 1;
+  }
+
+  push_number("100");
+  push_command('d');
+  push_command('n');
+  push_command_string("Cp");
+  if (get_stack_size() == 3 && actual_result() == 0) {
+    r -= 1;
+  }
+
+  push_number("1");
+  push_command('d');
+  push_command_string("Cp");
+  if (get_stack_size() == 4 && actual_result() == 0) {
+    r -= 1;
+  }
+
+  push_number("0");
+  push_command('d');
+  push_command_string("Cp");
+  if (get_stack_size() == 5 && actual_result() == 0) {
+    r -= 1;
+  }
+
+  return r == 0 ? 0 : 1;
 }
 
 // --- BITWISE OPERATIONS ---
@@ -835,6 +874,7 @@ const static struct {
     {"test_rpn_calc_fibonacci_over_max", test_rpn_calc_fibonacci_over_max} ,
     {"test_rpn_calc_rand"              , test_rpn_calc_rand              } ,
     {"test_rpn_calc_randx"             , test_rpn_calc_randx             } ,
+    {"Test_rpn_calc_is_prime"          , test_rpn_calc_is_prime          } ,
 
     // --- BITWISE OPERATIONS ---
     {"test_rpn_calc_bit_and"           , test_rpn_calc_bit_and           } ,
@@ -880,6 +920,5 @@ int performTests() {
     stack_init();
   }
   printf("\nNumber of Failed Tests: %d\n", total_ret);
-  /* return total_ret; */
-  return 0;
+  return total_ret;
 }
