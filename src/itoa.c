@@ -11,7 +11,6 @@ char* itoa(int value, char* result, int base) {
 
   char *ptr = result;
   char *ptr1 = result;
-  char tmp_char;
   int tmp_value;
 
   do {
@@ -28,6 +27,7 @@ char* itoa(int value, char* result, int base) {
   }
   *ptr-- = '\0';
   while(ptr1 < ptr) {
+    char tmp_char;
     tmp_char = *ptr;
     *ptr--= *ptr1;
     *ptr1++ = tmp_char;
