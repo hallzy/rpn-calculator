@@ -21,7 +21,7 @@ static long long fib_helper(int x) {
 // double so that we can check it before casting it. This will help to prevent
 // overflows.
 long double fibonacci(long double x) {
-  if (x >= MAX_FIBONACCI_INPUT) {
+  if (x > MAX_FIBONACCI_INPUT) {
     return -1;
   }
   return fib_helper((int)x);

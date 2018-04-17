@@ -566,10 +566,10 @@ static int test_rpn_calc_fibonacci() {
 
 static int test_rpn_calc_fibonacci_over_max() {
   int ret = 1;
-  push_number("93");
+  push_number("94");
   push_command('d');
   push_command_string("Cf");
-  if (get_stack_size() == 1 && actual_result() == 93) {
+  if (get_stack_size() == 1 && actual_result() == 94) {
     ret = 0;
   }
   return ret;

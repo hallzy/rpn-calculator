@@ -17,7 +17,7 @@ static long double factorial_helper(int x) {
 }
 
 long double factorial(long double x) {
-  if (x >= MAX_FACTORIAL_INPUT) {
+  if (x > MAX_FACTORIAL_INPUT) {
     return -1;
   }
   return factorial_helper((int)x);
