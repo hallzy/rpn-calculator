@@ -2,7 +2,7 @@
 
 // Calculating more than 25! is no longer precise, so limit to 25!
 
-// Store Calcuated values here to recall answers quicker.
+// Store Calculated values here to recall answers quicker.
 static long double fact_results[MAX_FACTORIAL_INPUT];
 
 static long double factorial_helper(int x) {

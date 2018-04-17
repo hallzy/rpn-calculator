@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
       // q will be used to quit the calculator
       if (strcmp(input, "q") ==0) return 0;
 
-      // Give the user input to the calcualtor, and let it do its thing
+      // Give the user input to the calculator, and let it do its thing
       processUserInput(input, strlen(input));
     }
     return 0;

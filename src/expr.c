@@ -24,9 +24,9 @@ ret_codes parseExpression(char *val) {
     a[strlen(p)+1] = 0;
     // For every result, send it to get processed
     ret_codes ret = processUserInput(a, strlen(a));
-    // The way that this works is that with the epression, it is effectively
+    // The way that this works is that with the expression, it is effectively
     // entering a number, then pressing enter, then entering another number and
-    // pressing enter, etc. This would result in mutiple duplicates to be left
+    // pressing enter, etc. This would result in multiple duplicates to be left
     // on the stack and will produce an incorrect answer. Therefore, if we get
     // here, we should pop the duplicate number off.
     // Therefore, if we pushed a number, pop one of the numbers

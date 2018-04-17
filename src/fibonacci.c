@@ -1,6 +1,6 @@
 #include "fibonacci.h"
 
-// Store Calcuated values here to recall answers quicker.
+// Store Calculated values here to recall answers quicker.
 static long double fib_results[MAX_FIBONACCI_INPUT];
 
 static long long fib_helper(int x) {

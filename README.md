@@ -68,7 +68,7 @@ you can run:
 make test
 ```
 
-which just does the same thing but also runs valgrind to check for memory leaks.
+Which just does the same thing but also runs valgrind to check for memory leaks.
 
 ## Usage
 
@@ -558,7 +558,7 @@ Division (/)
 > ===============================================================
 > ```
 >
-> Giving the `multipy` command:
+> Giving the `multiply` command:
 >
 > ```
 > ===============================================================

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// Define THE stack here and static so that it can't be accesssed anywhere else,
+// Define THE stack here and static so that it can't be accessed anywhere else,
 // thus forcing everyone to use the below functions to interact with the stack
 // and make the code more readable.
 static stack s;
@@ -43,7 +43,7 @@ long double get_stack_value_at_index(int i) {
   return s.stk[i];
 }
 
-// s.top is -1 for emtpy, and 0 for a stack with 1 element. This function will
+// s.top is -1 for empty, and 0 for a stack with 1 element. This function will
 // make it easier to use when I need to determine the size of the stack.
 int get_stack_size() {
   return s.top + 1;
@@ -159,7 +159,7 @@ static ret_codes push_the_number(char *val) {
   }
   else {
     // this will recognize decimal or hex values.
-    // This is the last chance for the input to be a number. if it isn't, then
+    // This is the last chance for the input to be a number. If it isn't, then
     // it fails silently here and doesn't do anything to the stack.
     return get_decimal_and_hex_numbers_and_push(val);
   }

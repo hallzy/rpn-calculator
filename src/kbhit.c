@@ -14,7 +14,7 @@
 #ifndef TEST
 static struct termios g_old_kbd_mode;
 
-// did somebody press somthing???
+// did somebody press something???
 int kbhit(void){
   struct timeval timeout;
   fd_set read_handles;
@@ -28,7 +28,7 @@ int kbhit(void){
   return status;
 }
 
-// put the things as they were befor leave..!!!
+// put the things as they were before leave..!!!
 static void old_attr(void){
   tcsetattr(0, TCSANOW, &g_old_kbd_mode);
 }

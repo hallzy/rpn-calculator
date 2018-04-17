@@ -647,7 +647,7 @@ static ret_codes rpn_calc_bit_right_shift() {
   return FAILED_OPERATION;
 }
 
-// --- CALUCLATOR SETTINGS ---
+// --- CALCULATOR SETTINGS ---
 
 // Change to radians mode
 static ret_codes rpn_calc_rad() {
@@ -701,7 +701,7 @@ static ret_codes rpn_calc_e() {
 
 // Here I am mapping the user input string associated with an operation to the
 // operations function name. In this way, I can accept the user input and
-// directly map it to a funciton to execute using a function pointer. Makes it
+// directly map it to a function to execute using a function pointer. Makes it
 // less for me to do in order to add more operations later.
 struct operation_map {
   const char name;
@@ -748,7 +748,7 @@ const static struct operation_map calc_single_char_operations [] = {
 
 // ****** BEGINNING OF MULTI-CHAR OPERATIONS ******
 
-// These are ALL of the trig functions available in the calcualtor.
+// These are ALL of the trig functions available in the calculator.
 static struct operation_map calc_trig_operations [] = {
     {'C' , rpn_calc_acos , "acos" } ,
     {'S' , rpn_calc_asin , "asin" } ,
@@ -758,7 +758,7 @@ static struct operation_map calc_trig_operations [] = {
     {'t' , rpn_calc_tan  , "tan"  } ,
   };
 
-// These are ALL of the exponent related operations available in the calcualtor.
+// These are ALL of the exponent related operations available in the calculator.
 static struct operation_map calc_exponent_operations [] = {
     {'2' , rpn_calc_squared , "x Squared"           } ,
     {'3' , rpn_calc_cubed   , "x Cubed"             } ,
@@ -766,21 +766,21 @@ static struct operation_map calc_exponent_operations [] = {
     {'p' , rpn_calc_pow     , "x to the power of y" } ,
   };
 
-// These are ALL of the radical related operations available in the calcualtor.
+// These are ALL of the radical related operations available in the calculator.
 static struct operation_map calc_radical_operations [] = {
     {'2' , rpn_calc_sqrt    , "square root"         } ,
     {'3' , rpn_calc_cbrt    , "cube root"           } ,
     {'r' , rpn_calc_xrt     , "xth root"            } ,
   };
 
-// These are ALL of the radical related operations available in the calcualtor.
+// These are ALL of the radical related operations available in the calculator.
 static struct operation_map calc_logarithm_operations [] = {
     {'e' , rpn_calc_ln    , "log_e of x"  } ,
     {'l' , rpn_calc_log   , "log_10 of x" } ,
     {'x' , rpn_calc_logx  , "log_x of y"  } ,
   };
 
-// These are ALL of the radical related operations available in the calcualtor.
+// These are ALL of the radical related operations available in the calculator.
 static struct operation_map calc_complex_operations [] = {
     {'S' , rpn_calc_sum       , "Sum from x to y"              } ,
     {'a' , rpn_calc_avgstack  , "Avg of stack entries x to y"  } ,
@@ -790,13 +790,13 @@ static struct operation_map calc_complex_operations [] = {
   };
 
 
-// These are ALL of the random related operations available in the calcualtor.
+// These are ALL of the random related operations available in the calculator.
 static struct operation_map calc_random_operations [] = {
     {'r' , rpn_calc_rand  , "Random number between 0 and 1"  } ,
     {'x' , rpn_calc_randx , "Random integer between x and y" } ,
   };
 
-// These are ALL of the trig functions available in the calcualtor.
+// These are ALL of the trig functions available in the calculator.
 static struct operation_map calc_constants [] = {
     // Constants
     {'e' , rpn_calc_e  ,"e" } ,
@@ -924,7 +924,7 @@ operation_location whichOperation(char *op_string) {
 #ifndef TEST
     print_operation_type_key(op_type);
 
-    // Since we are doing a multicharacter command, we need to look for the
+    // Since we are doing a multi character command, we need to look for the
     // second command.
     op = getCharacter();
 #else

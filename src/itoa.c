@@ -1,6 +1,6 @@
 #include "itoa.h"
 
-// int to ascii -- I use it to display binary data in the stack, but it can be
+// int to ASCII -- I use it to display binary data in the stack, but it can be
 // used for many other bases
 char* itoa(int value, char* result, int base) {
   // check that the base is valid

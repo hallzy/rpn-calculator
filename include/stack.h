@@ -45,7 +45,7 @@ typedef struct {
   base_modes base_mode;
 } stack;
 
-// This is a high level function that sends a user inputed string to be parsed.
+// This is a high level function that sends a user inputted string to be parsed.
 // If the string is found to be a number, it is pushed to the stack, otherwise
 // it finds the operation that was specified, or fails.
 ret_codes processUserInput(char *val, int val_size);
