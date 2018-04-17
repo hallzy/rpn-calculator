@@ -176,9 +176,9 @@ void get_the_rest_of_the_number_from_user(char *val, operation_location *op) {
   // finished entering their number.
   char c[2];
   c[1] = 0;
-  int i = 0;
   if (isdigit(val[0])) {
     while(!kbhit()) {
+      int i = 0;
       printf("%c", val[i]);
       ++i;
       c[0] = getCharacter();
